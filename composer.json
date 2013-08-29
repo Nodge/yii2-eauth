@@ -1,0 +1,25 @@
+{
+	"name": "nodge/yii2-eauth",
+	"description": "Yii2 EAuth Extension",
+	"keywords": ["yii2", "extension", "eauth"],
+	"homepage": "https://github.com/schmunk42/yii2-extension-skeleton.git",
+	"type": "library",
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Tobias Munk",
+			"email": "schmunk@usrbin.de",
+			"homepage": "http://www.usrbin.de"
+		}
+	],
+	"autoload": {
+		"psr-0": {
+			"yii\\eauth\\": "src/"
+		}
+	},
+	"require": {
+		"yiisoft/yii2": "dev-master",
+		"fp/lightopenid": "dev-master",
+		"lusitanian/oauth": "~0.1"
+	}
+}
