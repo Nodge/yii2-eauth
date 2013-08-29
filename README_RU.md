@@ -44,8 +44,6 @@ Yii2 EAuth extension
 * [OpenID](http://openid.net/)
 * [OAuth](http://oauth.net/)
 * [OAuth 2.0](http://oauth.net/2/)
-* [loid extension](http://www.yiiframework.com/extension/loid)
-* [EOAuth extension](http://www.yiiframework.com/extension/eoauth)
 
 
 ### Системные требования
