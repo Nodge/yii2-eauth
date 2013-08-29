@@ -12,7 +12,6 @@ namespace yii\eauth\services\extended;
 class TwitterOAuth1Service extends \yii\eauth\services\TwitterOAuth1Service {
 
 	protected function fetchAttributes() {
-		/** @var $info \stdClass */
 		$info = $this->makeSignedRequest('account/verify_credentials.json');
 
 		$this->attributes['id'] = $info['id'];
