@@ -2,14 +2,14 @@
 	"name": "nodge/yii2-eauth",
 	"description": "Yii2 EAuth Extension",
 	"keywords": ["yii2", "extension", "eauth"],
-	"homepage": "https://github.com/schmunk42/yii2-extension-skeleton.git",
+	"homepage": "https://github.com/Nodge/yii2-eauth",
 	"type": "library",
-	"license": "BSD-3-Clause",
+	"license": "New BSD License",
 	"authors": [
 		{
-			"name": "Tobias Munk",
-			"email": "schmunk@usrbin.de",
-			"homepage": "http://www.usrbin.de"
+			"name": "Maxim Zemskov",
+			"email": "nodge@yandex.ru",
+			"homepage": "http://nodge.ru/"
 		}
 	],
 	"autoload": {
