@@ -1,7 +1,7 @@
 {
 	"name": "nodge/yii2-eauth",
 	"description": "Yii2 EAuth Extension",
-	"keywords": ["yii2", "extension", "eauth"],
+	"keywords": ["yii2", "extension", "eauth", "openid", "oauth", "authentication"],
 	"homepage": "https://github.com/Nodge/yii2-eauth",
 	"type": "library",
 	"license": "New BSD License",
@@ -19,7 +19,7 @@
 	},
 	"require": {
 		"yiisoft/yii2": "dev-master",
-		"fp/lightopenid": "dev-master",
-		"lusitanian/oauth": "~0.1"
+		"lusitanian/oauth": "~0.1",
+		"nodge/lightopenid": "dev-master"
 	}
 }
