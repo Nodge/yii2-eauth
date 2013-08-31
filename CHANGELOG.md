@@ -12,6 +12,7 @@ Yii2 EAuth Change Log
 * Added GoogleOAuth2Service.
 * Added GoogleOAuth2Service.
 * Added YandexOAuth2Service.
+* Added session token storage using Yii session.
 
 
 * Fix typos in OAuth services.

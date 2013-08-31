@@ -31,7 +31,7 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 */
 	public function __construct($componentName = 'session') {
 		$this->componentName = $componentName;
-    }
+	}
 
 	/**
 	 * @param string $service
@@ -39,29 +39,29 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @throws TokenNotFoundException
 	 */
 	public function retrieveAccessToken($service) {
-        if ($this->hasAccessToken($service)) {
-            return Yii::$app->getSession()->get(self::SESSION_PREFIX.$service);
-        }
-        throw new TokenNotFoundException('Token not found in session, are you sure you stored it?');
-    }
+		if ($this->hasAccessToken($service)) {
+			return Yii::$app->getSession()->get(self::SESSION_PREFIX . $service);
+		}
+		throw new TokenNotFoundException('Token not found in session, are you sure you stored it?');
+	}
 
 	/**
 	 * @param string $service
 	 * @param TokenInterface $token
 	 * @return TokenInterface
 	 */
-    public function storeAccessToken($service, TokenInterface $token) {
-		Yii::$app->getSession()->set(self::SESSION_PREFIX.$service, $token);
+	public function storeAccessToken($service, TokenInterface $token) {
+		Yii::$app->getSession()->set(self::SESSION_PREFIX . $service, $token);
 		return $token;
-    }
+	}
 
 	/**
 	 * @param string $service
 	 * @return bool
 	 */
-    public function hasAccessToken($service) {
-        return Yii::$app->getSession()->has(self::SESSION_PREFIX.$service);
-    }
+	public function hasAccessToken($service) {
+		return Yii::$app->getSession()->has(self::SESSION_PREFIX . $service);
+	}
 
 	/**
 	 * Delete the users token. Aka, log out.
@@ -69,24 +69,24 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @param string $service
 	 * @return TokenStorageInterface
 	 */
-    public function clearToken($service) {
-		Yii::$app->getSession()->remove(self::SESSION_PREFIX.$service);
-        return $this;
-    }
+	public function clearToken($service) {
+		Yii::$app->getSession()->remove(self::SESSION_PREFIX . $service);
+		return $this;
+	}
 
 	/**
 	 * Delete *ALL* user tokens.
 	 *
 	 * @return TokenStorageInterface
 	 */
-    public function clearAllTokens() {
+	public function clearAllTokens() {
 		$session = Yii::$app->getSession();
 		foreach ($session as $key => $value) {
 			if (strpos($key, self::SESSION_PREFIX) === 0) {
 				$session->remove($key);
 			}
 		}
-        return $this;
-    }
+		return $this;
+	}
 
 }
