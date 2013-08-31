@@ -43,7 +43,8 @@ abstract class OAuthService extends ServiceBase implements IAuthService {
 	 * @return string the current url
 	 */
 	protected function getCallbackUrl() {
-		return Yii::$app->getRequest()->getAbsoluteUrl();
+		$request = Yii::$app->getRequest();
+		return $request->getHostInfo().$request->getBaseUrl().'/'.$request->getPathInfo();
 	}
 
 	protected function getStorage() {
@@ -54,6 +55,7 @@ abstract class OAuthService extends ServiceBase implements IAuthService {
 
 	protected function getHttpClient() {
 		// todo: cache instance?
+		// todo: own client with logging
 		return new StreamClient();
 	}
 
@@ -142,5 +144,22 @@ abstract class OAuthService extends ServiceBase implements IAuthService {
 			);
 		}
 		return null;
+	}
+
+	/**
+	 * @return array|null An array with valid access_token information.
+	 */
+	protected function getAccessTokenData() {
+		if (!$this->getIsAuthenticated()) {
+			return null;
+		}
+
+		$token = $this->proxy->getAccessToken();
+		return array(
+			'access_token' => $token->getAccessToken(),
+			'refresh_token' => $token->getRefreshToken(),
+			'expires' => $token->getEndOfLife(),
+			'params' => $token->getExtraParams(),
+		);
 	}
 }

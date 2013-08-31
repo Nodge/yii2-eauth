@@ -154,6 +154,8 @@ abstract class OAuth2Service extends OAuthService implements IAuthService {
 		return $this->getIsAuthenticated();
 	}
 
+	// todo: getIsAuthenticated() should check an existing access_token
+
 	/**
 	 * Check request params for error code and message.
 	 * @return bool

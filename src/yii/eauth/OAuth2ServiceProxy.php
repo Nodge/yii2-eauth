@@ -12,6 +12,7 @@ namespace yii\eauth;
 use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Uri\UriInterface;
+use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth2\Service\AbstractService;
 use OAuth\OAuth2\Token\StdOAuth2Token;
 
@@ -38,7 +39,7 @@ class OAuth2ServiceProxy extends AbstractService {
 	}
 
 	/**
-	 *
+	 * @return bool
 	 */
 	public function hasValidAccessToken() {
 		$serviceName = $this->service();
@@ -52,6 +53,18 @@ class OAuth2ServiceProxy extends AbstractService {
 		/** @var $token StdOAuth2Token */
 		$token = $this->storage->retrieveAccessToken($serviceName);
 		return $token->getEndOfLife() > time();
+	}
+
+	/**
+	 * @return null|TokenInterface
+	 */
+	public function getAccessToken() {
+		if (!$this->hasValidAccessToken()) {
+			return null;
+		}
+
+		$serviceName = $this->service();
+		return $this->storage->retrieveAccessToken($serviceName);
 	}
 
 	/**
