@@ -12,6 +12,9 @@ namespace yii\eauth;
 use Yii;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Client\StreamClient;
+use OAuth\Common\Http\Client\ClientInterface;
+use OAuth\Common\Token\TokenInterface;
+use OAuth\Common\Storage\TokenStorageInterface;
 
 /**
  * EOAuthService is a base class for all OAuth providers.
@@ -28,6 +31,10 @@ abstract class OAuthService extends ServiceBase implements IAuthService {
 	 */
 	protected $baseApiUrl;
 
+	/**
+	 * @var int Default token lifetime. Used when service wont provide expires_in param.
+	 */
+	protected $tokenDefaultLifetime = TokenInterface::EOL_UNKNOWN;
 
 	/**
 	 * Initialize the component.
@@ -47,16 +54,29 @@ abstract class OAuthService extends ServiceBase implements IAuthService {
 		return $request->getHostInfo().$request->getBaseUrl().'/'.$request->getPathInfo();
 	}
 
+	/**
+	 * @return TokenStorageInterface
+	 */
 	protected function getStorage() {
 		// todo: cache instance?
 		// todo: use Yii adapter
 		return new \OAuth\Common\Storage\Session();
 	}
 
+	/**
+	 * @return ClientInterface
+	 */
 	protected function getHttpClient() {
 		// todo: cache instance?
 		// todo: own client with logging
 		return new StreamClient();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getTokenDefaultLifetime() {
+		return $this->tokenDefaultLifetime;
 	}
 
 	/**

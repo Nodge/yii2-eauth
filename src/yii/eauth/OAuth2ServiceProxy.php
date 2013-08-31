@@ -100,7 +100,13 @@ class OAuth2ServiceProxy extends AbstractService {
 		$names = $this->service->getAccessTokenArgumentNames();
 
 		$token->setAccessToken($data[$names['access_token']]);
-		$token->setLifeTime($data[$names['expires_in']]);
+
+		if (isset($data[$names['expires_in']])) {
+			$token->setLifeTime($data[$names['expires_in']]);
+		}
+		else {
+			$token->setLifetime($this->service->getTokenDefaultLifetime());
+		}
 
 		if (isset($data[$names['refresh_token']])) {
 			$token->setRefreshToken($data[$names['refresh_token']]);
