@@ -9,14 +9,14 @@
 
 namespace yii\eauth\services;
 
-use yii\eauth\OpenIDService;
+use yii\eauth\OpenID\Service;
 
 /**
  * Google provider class.
  *
  * @package application.extensions.eauth.services
  */
-class GoogleOpenIDService extends OpenIDService {
+class GoogleOpenIDService extends Service {
 
 	protected $name = 'google';
 	protected $title = 'Google';

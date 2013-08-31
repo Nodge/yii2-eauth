@@ -7,21 +7,25 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth;
+namespace yii\eauth\OAuth2;
 
 use Yii;
 use OAuth\Common\Exception\Exception as OAuthException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Consumer\Credentials;
+use yii\eauth\EAuth;
+use yii\eauth\ErrorException;
+use yii\eauth\IAuthService;
+use yii\eauth\OAuthServiceBase;
 
 /**
  * EOAuthService is a base class for all OAuth providers.
  *
  * @package application.extensions.eauth
  */
-abstract class OAuth2Service extends OAuthService implements IAuthService {
+abstract class Service extends OAuthServiceBase implements IAuthService{
 
-	/** @var OAuth2ServiceProxy */
+	/** @var ServiceProxy */
 	protected $proxy;
 
 	/**
@@ -133,7 +137,7 @@ abstract class OAuth2Service extends OAuthService implements IAuthService {
 			$storage = $this->getStorage();
 			$httpClient = $this->getHttpClient();
 			$credentials = new Credentials($this->clientId, $this->clientSecret, $this->getCallbackUrl());
-			$proxy = new OAuth2ServiceProxy($credentials, $httpClient, $storage, $this->scopes);
+			$proxy = new ServiceProxy($credentials, $httpClient, $storage, $this->scopes);
 			$proxy->setService($this);
 			$this->proxy = $proxy;
 

@@ -9,14 +9,14 @@
 
 namespace yii\eauth\services;
 
-use yii\eauth\OpenIDService;
+use yii\eauth\OpenID\Service;
 
 /**
  * Yandex provider class.
  *
  * @package application.extensions.eauth.services
  */
-class YandexOpenIDService extends OpenIDService {
+class YandexOpenIDService extends Service {
 
 	protected $name = 'yandex';
 	protected $title = 'Yandex';

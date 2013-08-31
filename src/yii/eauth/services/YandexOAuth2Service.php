@@ -12,14 +12,14 @@
 namespace yii\eauth\services;
 
 use OAuth\Common\Token\TokenInterface;
-use yii\eauth\OAuth2Service;
+use yii\eauth\OAuth2\Service;
 
 /**
  * Yandex OAuth provider class.
  *
  * @package application.extensions.eauth.services
  */
-class YandexOAuth2Service extends OAuth2Service {
+class YandexOAuth2Service extends Service {
 
 	protected $name = 'yandex_oauth';
 	protected $title = 'Yandex';

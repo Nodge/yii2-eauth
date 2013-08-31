@@ -11,14 +11,14 @@
 
 namespace yii\eauth\services;
 
-use yii\eauth\OAuth2Service;
+use yii\eauth\OAuth2\Service;
 
 /**
  * VKontakte provider class.
  *
  * @package application.extensions.eauth.services
  */
-class VKontakteOAuth2Service extends OAuth2Service {
+class VKontakteOAuth2Service extends Service {
 
 	const SCOPE_FRIENDS = 'friends';
 

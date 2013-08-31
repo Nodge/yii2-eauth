@@ -11,14 +11,14 @@
 
 namespace yii\eauth\services;
 
-use yii\eauth\OAuth2Service;
+use yii\eauth\OAuth2\Service;
 
 /**
  * Facebook provider class.
  *
  * @package application.extensions.eauth.services
  */
-class FacebookOAuth2Service extends OAuth2Service {
+class FacebookOAuth2Service extends Service {
 
 	/**
 	 * Full list of scopes may be found here:

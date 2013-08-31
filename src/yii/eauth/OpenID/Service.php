@@ -7,18 +7,21 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth;
+namespace yii\eauth\OpenID;
 
 use \Yii;
 use \LightOpenID;
 use yii\web\HttpException;
+use yii\eauth\ServiceBase;
+use yii\eauth\IAuthService;
+use yii\eauth\ErrorException;
 
 /**
  * EOpenIDService is a base class for all OpenID providers.
  *
  * @package application.extensions.eauth
  */
-abstract class OpenIDService extends ServiceBase implements IAuthService {
+abstract class Service extends ServiceBase implements IAuthService {
 
 	/**
 	 * @var string a pattern that represents the part of URL-space for which an OpenID Authentication request is valid.

@@ -21,9 +21,9 @@ use OAuth\Common\Storage\TokenStorageInterface;
  *
  * @package application.extensions.eauth
  */
-abstract class OAuthService extends ServiceBase implements IAuthService {
+abstract class OAuthServiceBase extends ServiceBase implements IAuthService {
 
-	/** @var OAuth1ServiceProxy|OAuth2ServiceProxy */
+	/** @var \yii\eauth\OAuth1\ServiceProxy|\yii\eauth\OAuth2\ServiceProxy */
 	protected $proxy;
 
 	/**

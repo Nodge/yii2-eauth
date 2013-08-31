@@ -11,7 +11,7 @@
 
 namespace yii\eauth\services;
 
-use yii\eauth\OAuth1Service;
+use yii\eauth\OAuth1\Service;
 
 
 /**
@@ -19,7 +19,7 @@ use yii\eauth\OAuth1Service;
  *
  * @package application.extensions.eauth.services
  */
-class TwitterOAuth1Service extends OAuth1Service {
+class TwitterOAuth1Service extends Service {
 
 	protected $name = 'twitter';
 	protected $title = 'Twitter';

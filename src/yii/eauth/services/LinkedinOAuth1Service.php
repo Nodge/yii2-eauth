@@ -12,14 +12,14 @@
 
 namespace yii\eauth\services;
 
-use yii\eauth\OAuth1Service;
+use yii\eauth\OAuth1\Service;
 
 /**
  * LinkedIn provider class.
  *
  * @package application.extensions.eauth.services
  */
-class LinkedinOAuth1Service extends OAuth1Service {
+class LinkedinOAuth1Service extends Service {
 
 	protected $name = 'linkedin';
 	protected $title = 'LinkedIn';

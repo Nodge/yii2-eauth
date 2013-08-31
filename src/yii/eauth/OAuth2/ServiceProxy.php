@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth;
+namespace yii\eauth\OAuth2;
 
 use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\Uri;
@@ -16,17 +16,17 @@ use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth2\Service\AbstractService;
 use OAuth\OAuth2\Token\StdOAuth2Token;
 
-class OAuth2ServiceProxy extends AbstractService {
+class ServiceProxy extends AbstractService {
 
 	/**
-	 * @var OAuth2Service the currently used service class
+	 * @var Service the currently used service class
 	 */
 	protected $service;
 
 	/**
-	 * @param OAuth2Service $service
+	 * @param Service $service
 	 */
-	public function setService(OAuth2Service $service) {
+	public function setService(Service $service) {
 		$this->service = $service;
 	}
 
