@@ -16,14 +16,14 @@ use OAuth\Common\Consumer\Credentials;
 use yii\eauth\EAuth;
 use yii\eauth\ErrorException;
 use yii\eauth\IAuthService;
-use yii\eauth\OAuthServiceBase;
+use yii\eauth\OAuth\ServiceBase;
 
 /**
  * EOAuthService is a base class for all OAuth providers.
  *
  * @package application.extensions.eauth
  */
-abstract class Service extends OAuthServiceBase implements IAuthService{
+abstract class Service extends ServiceBase implements IAuthService{
 
 	/** @var ServiceProxy */
 	protected $proxy;

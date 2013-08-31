@@ -7,21 +7,23 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth;
+namespace yii\eauth\OAuth;
 
 use Yii;
 use OAuth\Common\Http\Uri\Uri;
-use OAuth\Common\Http\Client\StreamClient;
 use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Token\TokenInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
+use yii\eauth\EAuth;
+use yii\eauth\IAuthService;
+use yii\eauth\ErrorException;
 
 /**
  * EOAuthService is a base class for all OAuth providers.
  *
  * @package application.extensions.eauth
  */
-abstract class OAuthServiceBase extends ServiceBase implements IAuthService {
+abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthService {
 
 	/** @var \yii\eauth\OAuth1\ServiceProxy|\yii\eauth\OAuth2\ServiceProxy */
 	protected $proxy;
@@ -35,6 +37,31 @@ abstract class OAuthServiceBase extends ServiceBase implements IAuthService {
 	 * @var int Default token lifetime. Used when service wont provide expires_in param.
 	 */
 	protected $tokenDefaultLifetime = TokenInterface::EOL_UNKNOWN;
+
+	/**
+	 * @var array TokenStorage class.
+	 */
+	protected $tokenStorage = array(
+		'class' => 'yii\eauth\OAuth\SessionTokenStorage',
+	);
+
+	/**
+	 * @var array HttpClient class.
+	 */
+	protected $httpClient = array(
+		// todo: own client with logging?
+		'class' => 'OAuth\Common\Http\Client\StreamClient',
+	);
+
+	/**
+	 * @var TokenStorageInterface
+	 */
+	private $_tokenStorage;
+
+	/**
+	 * @var ClientInterface
+	 */
+	private $_httpClient;
 
 	/**
 	 * Initialize the component.
@@ -58,18 +85,20 @@ abstract class OAuthServiceBase extends ServiceBase implements IAuthService {
 	 * @return TokenStorageInterface
 	 */
 	protected function getTokenStorage() {
-		// todo: cache instance?
-		// todo: use Yii adapter
-		return new \OAuth\Common\Storage\Session();
+		if (!isset($this->_tokenStorage)) {
+			$this->_tokenStorage = Yii::createObject($this->tokenStorage);
+		}
+		return $this->_tokenStorage;
 	}
 
 	/**
 	 * @return ClientInterface
 	 */
 	protected function getHttpClient() {
-		// todo: cache instance?
-		// todo: own client with logging
-		return new StreamClient();
+		if (!isset($this->_httpClient)) {
+			$this->_httpClient = Yii::createObject($this->httpClient);
+		}
+		return $this->_httpClient;
 	}
 
 	/**
