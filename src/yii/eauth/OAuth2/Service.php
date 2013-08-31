@@ -134,11 +134,13 @@ abstract class Service extends OAuthServiceBase implements IAuthService{
 		}
 
 		try {
-			$storage = $this->getStorage();
+			$tokenStorage = $this->getTokenStorage();
+			$stateStorage = $this->getStateStorage();
 			$httpClient = $this->getHttpClient();
 			$credentials = new Credentials($this->clientId, $this->clientSecret, $this->getCallbackUrl());
-			$proxy = new ServiceProxy($credentials, $httpClient, $storage, $this->scopes);
+			$proxy = new ServiceProxy($credentials, $httpClient, $tokenStorage, $this->scopes);
 			$proxy->setService($this);
+			$proxy->setStateStorage($stateStorage);
 			$this->proxy = $proxy;
 
 			if (!empty($_GET['code'])) {
@@ -163,6 +165,14 @@ abstract class Service extends OAuthServiceBase implements IAuthService{
 	}
 
 	// todo: getIsAuthenticated() should check an existing access_token
+
+	/**
+	 * @return State\SessionStateStorage
+	 */
+	protected function getStateStorage() {
+		// todo: cache instance
+		return new State\SessionStateStorage();
+	}
 
 	/**
 	 * Check request params for error code and message.

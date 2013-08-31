@@ -57,7 +57,7 @@ abstract class OAuthServiceBase extends ServiceBase implements IAuthService {
 	/**
 	 * @return TokenStorageInterface
 	 */
-	protected function getStorage() {
+	protected function getTokenStorage() {
 		// todo: cache instance?
 		// todo: use Yii adapter
 		return new \OAuth\Common\Storage\Session();

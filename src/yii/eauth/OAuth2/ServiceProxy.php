@@ -15,6 +15,9 @@ use OAuth\Common\Http\Uri\UriInterface;
 use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth2\Service\AbstractService;
 use OAuth\OAuth2\Token\StdOAuth2Token;
+use yii\eauth\ErrorException;
+use yii\eauth\OAuth2\State\InvalidStateException;
+use yii\eauth\OAuth2\State\StateStorageInterface;
 
 class ServiceProxy extends AbstractService {
 
@@ -24,10 +27,22 @@ class ServiceProxy extends AbstractService {
 	protected $service;
 
 	/**
+	 * @var StateStorageInterface
+	 */
+	protected $state;
+
+	/**
 	 * @param Service $service
 	 */
 	public function setService(Service $service) {
 		$this->service = $service;
+	}
+
+	/**
+	 * @param StateStorageInterface $storage
+	 */
+	public function setStateStorage(StateStorageInterface $storage) {
+		$this->state = $storage;
 	}
 
 	/**
@@ -71,7 +86,9 @@ class ServiceProxy extends AbstractService {
 	 * @return UriInterface
 	 */
 	public function getAuthorizationEndpoint() {
-		return new Uri($this->service->getAuthorizationEndpoint());
+		$url = new Uri($this->service->getAuthorizationEndpoint());
+		$url->addToQuery('state', $this->state->generateId());
+		return $url;
 	}
 
 	/**
@@ -79,6 +96,22 @@ class ServiceProxy extends AbstractService {
 	 */
 	public function getAccessTokenEndpoint() {
 		return new Uri($this->service->getAccessTokenEndpoint());
+	}
+
+	/**
+	 * Retrieves and stores the OAuth2 access token after a successful authorization.
+	 *
+	 * @param string $code The access code from the callback.
+	 * @return TokenInterface $token
+	 * @throws TokenResponseException
+	 * @throws ErrorException
+	 * @throws InvalidStateException
+	 */
+	public function requestAccessToken($code) {
+		if (!isset($_GET['state']) || !$this->state->validateId($_GET['state'])) {
+			throw new InvalidStateException('The valid "state" argument required.');
+		}
+		return parent::requestAccessToken($code);
 	}
 
 	/**

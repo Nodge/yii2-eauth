@@ -80,7 +80,7 @@ abstract class Service extends OAuthServiceBase implements IAuthService {
 	 */
 	public function authenticate() {
 		try {
-			$storage = $this->getStorage();
+			$storage = $this->getTokenStorage();
 			$httpClient = $this->getHttpClient();
 			$credentials = new Credentials($this->key, $this->secret, $this->getCallbackUrl());
 			$signature = new Signature($credentials);
