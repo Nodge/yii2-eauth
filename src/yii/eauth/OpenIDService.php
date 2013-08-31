@@ -112,12 +112,9 @@ abstract class OpenIDService extends ServiceBase implements IAuthService {
 	 */
 	protected function loadOptionalAttributes() {
 		$attributes = $this->auth->getAttributes();
-		foreach ($this->requiredAttributes as $key => $attr) {
+		foreach ($this->optionalAttributes as $key => $attr) {
 			if (isset($attributes[$attr[1]])) {
 				$this->attributes[$key] = $attributes[$attr[1]];
-			}
-			else {
-				throw new ErrorException(Yii::t('eauth', 'Unable to complete the authentication because the required data was not received.', array('{provider}' => $this->getServiceTitle())));
 			}
 		}
 	}
@@ -127,9 +124,12 @@ abstract class OpenIDService extends ServiceBase implements IAuthService {
 	 */
 	protected function loadRequiredAttributes() {
 		$attributes = $this->auth->getAttributes();
-		foreach ($this->optionalAttributes as $key => $attr) {
+		foreach ($this->requiredAttributes as $key => $attr) {
 			if (isset($attributes[$attr[1]])) {
 				$this->attributes[$key] = $attributes[$attr[1]];
+			}
+			else {
+				throw new ErrorException(Yii::t('eauth', 'Unable to complete the authentication because the required data was not received.', array('{provider}' => $this->getServiceTitle())));
 			}
 		}
 	}

@@ -9,6 +9,6 @@
 
 namespace yii\eauth;
 
-class ErrorException extends \yii\base\ErrorException{
+class ErrorException extends \yii\base\ErrorException {
 
 }
