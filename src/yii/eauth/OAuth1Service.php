@@ -10,7 +10,6 @@
 namespace yii\eauth;
 
 use Yii;
-use yii\base\ErrorException;
 use OAuth\Common\Exception\Exception as OAuthException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Consumer\Credentials;

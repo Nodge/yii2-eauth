@@ -10,7 +10,6 @@
 namespace yii\eauth;
 
 use Yii;
-use yii\base\ErrorException;
 use OAuth\Common\Exception\Exception as OAuthException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Consumer\Credentials;
@@ -62,6 +61,11 @@ abstract class OAuth2Service extends OAuthService implements IAuthService {
 	 * @var string Error code for access_denied response.
 	 */
 	protected $errorAccessDeniedCode = 'access_denied';
+
+	/**
+	 * @var string The display name for popup window. False to disable display mode.
+	 */
+	protected $popupDisplayName = 'popup';
 
 	/**
 	 * Initialize the component.
@@ -185,7 +189,13 @@ abstract class OAuth2Service extends OAuthService implements IAuthService {
 	 * @return string
 	 */
 	public function getAuthorizationEndpoint() {
-		return $this->providerOptions['authorize'];
+		$url = $this->providerOptions['authorize'];
+		if ($this->popupDisplayName !== false && $this->getIsInsidePopup()) {
+			$url = new Uri($url);
+			$url->addToQuery('display', $this->popupDisplayName);
+			$url = $url->getAbsoluteUri();
+		}
+		return $url;
 	}
 
 	/**

@@ -33,7 +33,7 @@ class OAuth2ServiceProxy extends AbstractService {
 	/**
 	 * @return string
 	 */
-	protected function service() {
+	public function service() {
 		// todo: check service is set
 		return $this->service->getServiceName();
 	}

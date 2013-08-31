@@ -35,7 +35,7 @@ class FacebookOAuth2Service extends OAuth2Service {
 	protected $type = 'OAuth2';
 	protected $jsArguments = array('popup' => array('width' => 585, 'height' => 290));
 
-	protected $scope = '';
+	protected $scopes = array();
 	protected $providerOptions = array(
 		'authorize' => 'https://www.facebook.com/dialog/oauth',
 		'access_token' => 'https://graph.facebook.com/oauth/access_token',
@@ -53,17 +53,6 @@ class FacebookOAuth2Service extends OAuth2Service {
 		$this->attributes['url'] = $info['link'];
 
 		return true;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getAuthorizationEndpoint() {
-		$url = $this->providerOptions['authorize'];
-		if ($this->getIsInsidePopup()) {
-			$url .= '?display=popup';
-		}
-		return $url;
 	}
 
 	/**

@@ -27,7 +27,7 @@ class VKontakteOAuth2Service extends OAuth2Service {
 	protected $type = 'OAuth2';
 	protected $jsArguments = array('popup' => array('width' => 585, 'height' => 350));
 
-	protected $scope = array(self::SCOPE_FRIENDS);
+	protected $scopes = array(self::SCOPE_FRIENDS);
 	protected $providerOptions = array(
 		'authorize' => 'http://api.vk.com/oauth/authorize',
 		'access_token' => 'https://api.vk.com/oauth/access_token',
@@ -66,17 +66,6 @@ class VKontakteOAuth2Service extends OAuth2Service {
 		$this->attributes['photo_medium'] = $info['photo_medium'];
 		$this->attributes['photo_big'] = $info['photo_big'];
 		$this->attributes['photo_rec'] = $info['photo_rec'];*/
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getAuthorizationEndpoint() {
-		$url = $this->providerOptions['authorize'];
-		if ($this->getIsInsidePopup()) {
-			$url .= '?display=popup';
-		}
-		return $url;
 	}
 
 	// todo:
