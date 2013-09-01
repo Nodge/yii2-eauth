@@ -1,13 +1,13 @@
 <?php
 /**
- * OAuth2ServiceProxy class file.
+ * OAuth2 ServiceProxy class file.
  *
  * @author Maxim Zemskov <nodge@yandex.ru>
  * @link http://github.com/Nodge/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\OAuth2;
+namespace yii\eauth\oauth2;
 
 use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\Uri;
@@ -16,8 +16,8 @@ use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth2\Service\AbstractService;
 use OAuth\OAuth2\Token\StdOAuth2Token;
 use yii\eauth\ErrorException;
-use yii\eauth\OAuth2\State\InvalidStateException;
-use yii\eauth\OAuth2\State\StateStorageInterface;
+use yii\eauth\oauth2\state\InvalidStateException;
+use yii\eauth\oauth2\state\StateStorageInterface;
 
 class ServiceProxy extends AbstractService {
 

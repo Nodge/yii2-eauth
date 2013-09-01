@@ -9,7 +9,7 @@
 
 namespace yii\eauth\services;
 
-use yii\eauth\OpenID\Service;
+use yii\eauth\openid\Service;
 
 /**
  * Google provider class.

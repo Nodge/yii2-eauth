@@ -1,13 +1,13 @@
 <?php
 /**
- * OAuth1Service class file.
+ * OAuth1 Service class file.
  *
  * @author Maxim Zemskov <nodge@yandex.ru>
  * @link http://github.com/Nodge/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\OAuth1;
+namespace yii\eauth\oauth1;
 
 use Yii;
 use OAuth\Common\Exception\Exception as OAuthException;
@@ -17,7 +17,7 @@ use OAuth\OAuth1\Signature\Signature;
 use yii\eauth\EAuth;
 use yii\eauth\ErrorException;
 use yii\eauth\IAuthService;
-use yii\eauth\OAuth\ServiceBase;
+use yii\eauth\oauth\ServiceBase;
 
 /**
  * EOAuthService is a base class for all OAuth providers.

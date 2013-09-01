@@ -12,7 +12,7 @@
 
 namespace yii\eauth\services;
 
-use yii\eauth\OAuth1\Service;
+use yii\eauth\oauth1\Service;
 
 /**
  * LinkedIn provider class.

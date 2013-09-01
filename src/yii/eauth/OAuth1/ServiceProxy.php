@@ -1,13 +1,13 @@
 <?php
 /**
- * OAuth1ServiceProxy class file.
+ * OAuth1 ServiceProxy class file.
  *
  * @author Maxim Zemskov <nodge@yandex.ru>
  * @link http://github.com/Nodge/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\OAuth1;
+namespace yii\eauth\oauth1;
 
 use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\Uri;

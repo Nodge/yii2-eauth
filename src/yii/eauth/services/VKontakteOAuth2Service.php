@@ -11,7 +11,7 @@
 
 namespace yii\eauth\services;
 
-use yii\eauth\OAuth2\Service;
+use yii\eauth\oauth2\Service;
 
 /**
  * VKontakte provider class.

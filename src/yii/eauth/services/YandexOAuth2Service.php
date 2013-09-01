@@ -12,7 +12,7 @@
 namespace yii\eauth\services;
 
 use OAuth\Common\Token\TokenInterface;
-use yii\eauth\OAuth2\Service;
+use yii\eauth\oauth2\Service;
 
 /**
  * Yandex OAuth provider class.

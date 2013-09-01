@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\OAuth2\State;
+namespace yii\eauth\oauth2\state;
 
 use \Yii;
 

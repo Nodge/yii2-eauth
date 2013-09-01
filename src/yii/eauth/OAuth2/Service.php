@@ -1,13 +1,13 @@
 <?php
 /**
- * OAuth2Service class file.
+ * OAuth2 Service class file.
  *
  * @author Maxim Zemskov <nodge@yandex.ru>
  * @link http://github.com/Nodge/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\OAuth2;
+namespace yii\eauth\oauth2;
 
 use Yii;
 use OAuth\Common\Exception\Exception as OAuthException;
@@ -16,7 +16,8 @@ use OAuth\Common\Consumer\Credentials;
 use yii\eauth\EAuth;
 use yii\eauth\ErrorException;
 use yii\eauth\IAuthService;
-use yii\eauth\OAuth\ServiceBase;
+use yii\eauth\oauth\ServiceBase;
+use yii\eauth\oauth2\state\StateStorageInterface;
 
 /**
  * EOAuthService is a base class for all OAuth providers.
@@ -70,6 +71,18 @@ abstract class Service extends ServiceBase implements IAuthService{
 	 * @var string The display name for popup window. False to disable display mode.
 	 */
 	protected $popupDisplayName = 'popup';
+
+	/**
+	 * @var string
+	 */
+	protected $stateStorage = array(
+		'class' => 'yii\eauth\oauth2\state\SessionStateStorage',
+	);
+
+	/**
+	 * @var StateStorageInterface
+	 */
+	private $_stateStorage;
 
 	/**
 	 * Initialize the component.
@@ -167,11 +180,13 @@ abstract class Service extends ServiceBase implements IAuthService{
 	// todo: getIsAuthenticated() should check an existing access_token
 
 	/**
-	 * @return State\SessionStateStorage
+	 * @return StateStorageInterface
 	 */
 	protected function getStateStorage() {
-		// todo: cache instance
-		return new State\SessionStateStorage();
+		if (!isset($this->_stateStorage)) {
+			$this->_stateStorage = Yii::createObject($this->stateStorage);
+		}
+		return $this->_stateStorage;
 	}
 
 	/**

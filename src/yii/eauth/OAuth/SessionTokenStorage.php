@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\OAuth;
+namespace yii\eauth\oauth;
 
 use Yii;
 use OAuth\Common\Storage\TokenStorageInterface;

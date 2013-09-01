@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\OAuth;
+namespace yii\eauth\oauth;
 
 use Yii;
 use OAuth\Common\Http\Uri\Uri;
@@ -25,7 +25,7 @@ use yii\eauth\ErrorException;
  */
 abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthService {
 
-	/** @var \yii\eauth\OAuth1\ServiceProxy|\yii\eauth\OAuth2\ServiceProxy */
+	/** @var \yii\eauth\oauth1\ServiceProxy|\yii\eauth\oauth2\ServiceProxy */
 	protected $proxy;
 
 	/**
@@ -42,7 +42,7 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 	 * @var array TokenStorage class.
 	 */
 	protected $tokenStorage = array(
-		'class' => 'yii\eauth\OAuth\SessionTokenStorage',
+		'class' => 'yii\eauth\oauth\SessionTokenStorage',
 	);
 
 	/**
