@@ -68,9 +68,6 @@ class VKontakteOAuth2Service extends Service {
 		$this->attributes['photo_rec'] = $info['photo_rec'];*/
 	}
 
-	// todo:
-	// $this->setState('uid', $token->user_id);
-
 	/**
 	 * Returns the error array.
 	 * @param array $response
