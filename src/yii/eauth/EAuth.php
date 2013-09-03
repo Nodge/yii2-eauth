@@ -11,6 +11,7 @@ namespace yii\eauth;
 
 use Yii;
 use yii\base\Object;
+use yii\caching\Cache;
 use yii\helpers\Html;
 
 /**
@@ -21,35 +22,33 @@ use yii\helpers\Html;
 class EAuth extends Object {
 
 	/**
-	 * todo: get/set
 	 * @var array Authorization services and their settings.
 	 */
-	public $services = array();
+	protected $services = array();
 
 	/**
-	 * todo: get/set
 	 * @var boolean Whether to use popup window for the authorization dialog.
 	 */
-	public $popup = true;
+	protected $popup = true;
 
 	/**
-	 * todo: get/set
-	 * @var mixed Cache component name to use. False to disable cache.
+	 * @var string|bool Cache component name to use. False to disable cache.
 	 */
 	public $cache = null;
 
 	/**
-	 * todo: get/set
 	 * @var integer the number of seconds in which the cached value will expire. 0 means never expire.
 	 */
 	public $cacheExpire = 0;
 
 	/**
-	 * todo: get/set
 	 * @var string popup redirect view with custom js code
 	 */
 	protected $redirectWidget = '\\yii\\eauth\\RedirectWidget';
 
+	/**
+	 * Initialize the component.
+	 */
 	public function init() {
 		parent::init();
 
@@ -59,6 +58,13 @@ class EAuth extends Object {
 		}
 
 		Yii::setAlias('@eauth', __DIR__);
+	}
+
+	/**
+	 * @param array $services
+	 */
+	public function setServices($services) {
+		$this->services = $services;
 	}
 
 	/**
@@ -92,6 +98,62 @@ class EAuth extends Object {
 			}
 		}
 		return $services;
+	}
+
+	/**
+	 * @param bool $usePopup
+	 */
+	public function setPopup($usePopup) {
+		$this->popup = $usePopup;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getPopup() {
+		return $this->popup;
+	}
+
+	/**
+	 * @param string|bool $cache
+	 */
+	public function setCache($cache) {
+		$this->cache = $cache;
+	}
+
+	/**
+	 * @return string|bool
+	 */
+	public function getCache() {
+		return $this->cache;
+	}
+
+	/**
+	 * @param int $cacheExpire
+	 */
+	public function setCacheExpire($cacheExpire) {
+		$this->cacheExpire = $cacheExpire;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCacheExpire() {
+		return $this->cacheExpire;
+	}
+
+	/**
+	 * @param string $redirectWidget
+	 */
+	public function setRedirectWidget($redirectWidget) {
+		$this->redirectWidget = $redirectWidget;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getRedirectWidget() {
+		return $this->redirectWidget;
 	}
 
 	/**
@@ -182,4 +244,5 @@ class EAuth extends Object {
 	public function fromString($identity) {
 		return unserialize($identity);
 	}
+
 }
