@@ -26,9 +26,6 @@ use yii\eauth\oauth\ServiceBase;
  */
 abstract class Service extends ServiceBase implements IAuthService {
 
-	/** @var ServiceProxy */
-	protected $proxy;
-
 	/**
 	 * @var string OAuth2 client id.
 	 */
@@ -47,6 +44,11 @@ abstract class Service extends ServiceBase implements IAuthService {
 		'authorize' => '',
 		'access' => '',
 	);
+
+	/**
+	 * @var ServiceProxy
+	 */
+	private $_proxy;
 
 	/**
 	 * Initialize the component.
@@ -73,6 +75,21 @@ abstract class Service extends ServiceBase implements IAuthService {
 	}
 
 	/**
+	 * @return ServiceProxy
+	 */
+	protected function getProxy() {
+		if (!isset($this->_proxy)) {
+			$storage = $this->getTokenStorage();
+			$httpClient = $this->getHttpClient();
+			$credentials = new Credentials($this->key, $this->secret, $this->getCallbackUrl());
+			$signature = new Signature($credentials);
+			// todo: baseUrl?
+			$this->_proxy = new ServiceProxy($credentials, $httpClient, $storage, $signature, null, $this);
+		}
+		return $this->_proxy;
+	}
+
+	/**
 	 * Authenticate the user.
 	 *
 	 * @return boolean whether user was successfuly authenticated.
@@ -80,28 +97,24 @@ abstract class Service extends ServiceBase implements IAuthService {
 	 */
 	public function authenticate() {
 		try {
-			$storage = $this->getTokenStorage();
-			$httpClient = $this->getHttpClient();
-			$credentials = new Credentials($this->key, $this->secret, $this->getCallbackUrl());
-			$signature = new Signature($credentials);
-			$this->proxy = new ServiceProxy($credentials, $httpClient, $storage, $signature, null, $this);
+			$proxy = $this->getProxy();
 
 			if (!empty($_GET['oauth_token'])) {
-				$token = $this->proxy->retrieveAccessToken();
+				$token = $proxy->retrieveAccessToken();
 
 				// This was a callback request, get the token now
-				$this->proxy->requestAccessToken($_GET['oauth_token'], $_GET['oauth_verifier'], $token->getRequestTokenSecret());
+				$proxy->requestAccessToken($_GET['oauth_token'], $_GET['oauth_verifier'], $token->getRequestTokenSecret());
 
 				$this->authenticated = true;
 			}
-			else if ($this->proxy->hasValidAccessToken()) {
+			else if ($proxy->hasValidAccessToken()) {
 				$this->authenticated = true;
 			}
 			else {
 				// extra request needed for oauth1 to request a request token :-)
-				$token = $this->proxy->requestRequestToken();
+				$token = $proxy->requestRequestToken();
 				/** @var $url Uri */
-				$url = $this->proxy->getAuthorizationUri(array('oauth_token' => $token->getRequestToken()));
+				$url = $proxy->getAuthorizationUri(array('oauth_token' => $token->getRequestToken()));
 				Yii::$app->getResponse()->redirect($url->getAbsoluteUri())->send();
 			}
 		}

@@ -162,6 +162,7 @@ class ServiceProxy extends AbstractService {
 		$token->setAccessToken( $data['oauth_token'] );
 		$token->setAccessTokenSecret( $data['oauth_token_secret'] );
 
+		// todo: check oauth_expires_in (linkedin)
 		$token->setEndOfLife(StdOAuth1Token::EOL_NEVER_EXPIRES);
 		unset( $data['oauth_token'], $data['oauth_token_secret'] );
 		$token->setExtraParams( $data );

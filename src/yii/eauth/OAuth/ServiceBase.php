@@ -14,6 +14,7 @@ use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Token\TokenInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
+use yii\base\Exception;
 use yii\eauth\EAuth;
 use yii\eauth\IAuthService;
 use yii\eauth\ErrorException;
@@ -24,9 +25,6 @@ use yii\eauth\ErrorException;
  * @package application.extensions.eauth
  */
 abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthService {
-
-	/** @var \yii\eauth\oauth1\ServiceProxy|\yii\eauth\oauth2\ServiceProxy */
-	protected $proxy;
 
 	/**
 	 * @var string Base url for API calls.
@@ -46,11 +44,13 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 	);
 
 	/**
+	 * todo: use own httpClient with logging support?
 	 * @var array HttpClient class.
 	 */
 	protected $httpClient = array(
-		// todo: own client with logging?
-		'class' => 'OAuth\Common\Http\Client\StreamClient',
+		'class' => 'OAuth\Common\Http\Client\CurlClient',
+		// use StreamClient if you you are using safe_mode or open_base_dir.
+//		'class' => 'OAuth\Common\Http\Client\StreamClient',
 	);
 
 	/**
@@ -72,6 +72,30 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 //	public function init($component, $options = array()) {
 //		parent::init($component, $options);
 //	}
+
+	/**
+	 * For OAuth we can check existing access token.
+	 * Useful for API calls.
+	 * @return bool
+	 * @throws ErrorException
+	 */
+	public function getIsAuthenticated() {
+		if (!$this->authenticated) {
+			try {
+				$proxy = $this->getProxy();
+				$this->authenticated = $proxy->hasValidAccessToken();
+			}
+			catch (\OAuth\Common\Exception\Exception $e) {
+				throw new ErrorException($e->getMessage(), $e->getCode(), 1, $e->getFile(), $e->getLine(), $e);
+			}
+		}
+		return parent::getIsAuthenticated();
+	}
+
+	/**
+	 * @return \yii\eauth\oauth1\ServiceProxy|\yii\eauth\oauth2\ServiceProxy
+	 */
+	abstract protected function getProxy();
 
 	/**
 	 * @return string the current url
@@ -137,7 +161,7 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 		$method = !empty($data) ? 'POST' : 'GET';
 		$headers = isset($options['headers']) ? $options['headers'] : array();
 
-		$response = $this->proxy->request($url, $method, $data, $headers);
+		$response = $this->getProxy()->request($url, $method, $data, $headers);
 
 		if ($parseResponse) {
 			$response = $this->parseResponseInternal($response);
@@ -203,7 +227,7 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 			return null;
 		}
 
-		$token = $this->proxy->getAccessToken();
+		$token = $this->getProxy()->getAccessToken();
 		return array(
 			'access_token' => $token->getAccessToken(),
 			'refresh_token' => $token->getRefreshToken(),
