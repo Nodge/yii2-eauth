@@ -9,9 +9,12 @@
 
 namespace yii\eauth\oauth2;
 
+use OAuth\Common\Consumer\Credentials;
+use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Uri\UriInterface;
+use OAuth\Common\Storage\TokenStorageInterface;
 use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth2\Service\AbstractService;
 use OAuth\OAuth2\Token\StdOAuth2Token;
@@ -32,10 +35,24 @@ class ServiceProxy extends AbstractService {
 	protected $state;
 
 	/**
+	 * @param Credentials $credentials
+	 * @param ClientInterface $httpClient
+	 * @param TokenStorageInterface $storage
+	 * @param array $scopes
+	 * @param UriInterface $baseApiUri
 	 * @param Service $service
+	 * @param StateStorageInterface $stateStorage
+	 * @throws ErrorException
 	 */
-	public function setService(Service $service) {
+	public function __construct(Credentials $credentials, ClientInterface $httpClient, TokenStorageInterface $storage, $scopes = array(), UriInterface $baseApiUri = null, Service $service = null, StateStorageInterface $stateStorage = null) {
+		parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);
+
+		if (!isset($service)) {
+			throw new ErrorException('Service argument is required.');
+		}
+
 		$this->service = $service;
+		$this->state = $stateStorage;
 	}
 
 	/**
@@ -46,10 +63,16 @@ class ServiceProxy extends AbstractService {
 	}
 
 	/**
+	 * @return StateStorageInterface
+	 */
+	public function getStateStorage() {
+		return $this->state;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function service() {
-		// todo: check service is set
 		return $this->service->getServiceName();
 	}
 
@@ -63,11 +86,29 @@ class ServiceProxy extends AbstractService {
 			return false;
 		}
 
-		// todo: check refresh token
-
 		/** @var $token StdOAuth2Token */
 		$token = $this->storage->retrieveAccessToken($serviceName);
-		return $token->getEndOfLife() > time();
+		$valid = $this->checkTokenLifetime($token);
+
+		if (!$valid) {
+			$refreshToken = $token->getRefreshToken();
+			if (isset($refreshToken)) {
+				$token = $this->refreshAccessToken($token);
+				return $this->checkTokenLifetime($token);
+			}
+		}
+
+		return $valid;
+	}
+
+	/**
+	 * @param TokenInterface $token
+	 * @return bool
+	 */
+	protected function checkTokenLifetime($token) {
+		// assume that we have at least a minute to execute a queries.
+		return $token->getEndOfLife() - 60 > time()
+			|| $token->getEndOfLife() === TokenInterface::EOL_NEVER_EXPIRES;
 	}
 
 	/**
@@ -87,7 +128,7 @@ class ServiceProxy extends AbstractService {
 	 */
 	public function getAuthorizationEndpoint() {
 		$url = new Uri($this->service->getAuthorizationEndpoint());
-		if ($this->service->getValidateState()) {
+		if (isset($this->state) && $this->service->getValidateState()) {
 			$url->addToQuery('state', $this->state->generateId());
 		}
 		return $url;
@@ -110,7 +151,7 @@ class ServiceProxy extends AbstractService {
 	 * @throws InvalidStateException
 	 */
 	public function requestAccessToken($code) {
-		if ($this->service->getValidateState()) {
+		if (isset($this->state) && $this->service->getValidateState()) {
 			if (!isset($_GET['state']) || !$this->state->validateId($_GET['state'])) {
 				throw new InvalidStateException('The valid "state" argument required.');
 			}

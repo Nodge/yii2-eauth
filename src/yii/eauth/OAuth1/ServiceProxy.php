@@ -9,12 +9,17 @@
 
 namespace yii\eauth\oauth1;
 
+use OAuth\Common\Consumer\Credentials;
+use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Uri\UriInterface;
+use OAuth\Common\Storage\TokenStorageInterface;
 use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth1\Service\AbstractService;
+use OAuth\OAuth1\Signature\SignatureInterface;
 use OAuth\OAuth1\Token\StdOAuth1Token;
+use yii\eauth\ErrorException;
 
 class ServiceProxy extends AbstractService {
 
@@ -24,9 +29,21 @@ class ServiceProxy extends AbstractService {
 	protected $service;
 
 	/**
+	 * @param Credentials $credentials
+	 * @param ClientInterface $httpClient
+	 * @param TokenStorageInterface $storage
+	 * @param SignatureInterface $signature
+	 * @param UriInterface $baseApiUri
 	 * @param Service $service
+	 * @throws ErrorException
 	 */
-	public function setService(Service $service) {
+	public function __construct(Credentials $credentials, ClientInterface $httpClient, TokenStorageInterface $storage, SignatureInterface $signature, UriInterface $baseApiUri = null, Service $service = null) {
+		parent::__construct($credentials, $httpClient, $storage, $signature, $baseApiUri);
+
+		if (!isset($service)) {
+			throw new ErrorException('Service argument is required.');
+		}
+
 		$this->service = $service;
 	}
 
@@ -34,7 +51,6 @@ class ServiceProxy extends AbstractService {
 	 * @return string
 	 */
 	public function service() {
-		// todo: check service is set
 		return $this->service->getServiceName();
 	}
 
@@ -57,7 +73,17 @@ class ServiceProxy extends AbstractService {
 
 		/** @var $token StdOAuth1Token */
 		$token = $this->storage->retrieveAccessToken($serviceName);
-		return $token->getEndOfLife() > time();
+		return $this->checkTokenLifetime($token);
+	}
+
+	/**
+	 * @param TokenInterface $token
+	 * @return bool
+	 */
+	protected function checkTokenLifetime($token) {
+		// assume that we have at least a minute to execute a queries.
+		return $token->getEndOfLife() - 60 > time()
+			|| $token->getEndOfLife() === TokenInterface::EOL_NEVER_EXPIRES;
 	}
 
 	/**

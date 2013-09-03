@@ -170,22 +170,19 @@ abstract class Service extends ServiceBase implements IAuthService{
 			$stateStorage = $this->getStateStorage();
 			$httpClient = $this->getHttpClient();
 			$credentials = new Credentials($this->clientId, $this->clientSecret, $this->getCallbackUrl());
-			$proxy = new ServiceProxy($credentials, $httpClient, $tokenStorage, $this->scopes);
-			$proxy->setService($this);
-			$proxy->setStateStorage($stateStorage);
-			$this->proxy = $proxy;
+			$this->proxy = new ServiceProxy($credentials, $httpClient, $tokenStorage, $this->scopes, null, $this, $stateStorage);
 
 			if (!empty($_GET['code'])) {
 				// This was a callback request from a service, get the token
-				$proxy->requestAccessToken($_GET['code']);
+				$this->proxy->requestAccessToken($_GET['code']);
 				$this->authenticated = true;
 			}
-			else if ($proxy->hasValidAccessToken()) {
+			else if ($this->proxy->hasValidAccessToken()) {
 				$this->authenticated = true;
 			}
 			else {
 				/** @var $url Uri */
-				$url = $proxy->getAuthorizationUri();
+				$url = $this->proxy->getAuthorizationUri();
 				Yii::$app->getResponse()->redirect($url->getAbsoluteUri())->send();
 			}
 		}
