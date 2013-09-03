@@ -83,7 +83,6 @@ abstract class Service extends ServiceBase implements IAuthService {
 			$httpClient = $this->getHttpClient();
 			$credentials = new Credentials($this->key, $this->secret, $this->getCallbackUrl());
 			$signature = new Signature($credentials);
-			// todo: baseUrl?
 			$this->_proxy = new ServiceProxy($credentials, $httpClient, $storage, $signature, null, $this);
 		}
 		return $this->_proxy;
@@ -144,5 +143,16 @@ abstract class Service extends ServiceBase implements IAuthService {
 	 */
 	public function getAccessTokenEndpoint() {
 		return $this->providerOptions['access'];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getAccessTokenArgumentNames() {
+		return array(
+			'oauth_token' => 'oauth_token',
+			'oauth_token_secret' => 'oauth_token_secret',
+			'oauth_expires_in' => 'oauth_expires_in',
+		);
 	}
 }

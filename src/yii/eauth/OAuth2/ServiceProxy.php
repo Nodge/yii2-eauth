@@ -178,9 +178,11 @@ class ServiceProxy extends AbstractService {
 		$names = $this->service->getAccessTokenArgumentNames();
 
 		$token->setAccessToken($data[$names['access_token']]);
+		unset($data[$names['access_token']]);
 
 		if (isset($data[$names['expires_in']])) {
 			$token->setLifeTime($data[$names['expires_in']]);
+			unset($data[$names['expires_in']]);
 		}
 		else {
 			$token->setLifetime($this->service->getTokenDefaultLifetime());
@@ -191,8 +193,6 @@ class ServiceProxy extends AbstractService {
 			unset($data[$names['refresh_token']]);
 		}
 
-		unset($data[$names['access_token']]);
-		unset($data[$names['expires_in']]);
 		$token->setExtraParams($data);
 
 		return $token;

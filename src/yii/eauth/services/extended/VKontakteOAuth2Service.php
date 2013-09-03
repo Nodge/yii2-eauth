@@ -15,7 +15,7 @@ class VKontakteOAuth2Service extends \yii\eauth\services\VKontakteOAuth2Service 
 
 	protected function fetchAttributes() {
 		$tokenData = $this->getAccessTokenData();
-		$info = $this->makeSignedRequest('https://api.vk.com/method/users.get.json', array(
+		$info = $this->makeSignedRequest('users.get.json', array(
 			'query' => array(
 				'uids' => $tokenData['params']['user_id'],
 				//'fields' => '', // uid, first_name and last_name is always available

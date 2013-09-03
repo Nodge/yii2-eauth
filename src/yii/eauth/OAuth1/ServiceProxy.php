@@ -156,16 +156,23 @@ class ServiceProxy extends AbstractService {
 		}
 
 		$token = new StdOAuth1Token();
+		$names = $this->service->getAccessTokenArgumentNames();
 
-		$token->setRequestToken( $data['oauth_token'] );
-		$token->setRequestTokenSecret( $data['oauth_token_secret'] );
-		$token->setAccessToken( $data['oauth_token'] );
-		$token->setAccessTokenSecret( $data['oauth_token_secret'] );
+		$token->setRequestToken($data[$names['oauth_token']]);
+		$token->setRequestTokenSecret($data[$names['oauth_token_secret']]);
+		$token->setAccessToken($data[$names['oauth_token']]);
+		$token->setAccessTokenSecret($data[$names['oauth_token_secret']]);
+		unset($data[$names['oauth_token']], $data[$names['oauth_token_secret']]);
 
-		// todo: check oauth_expires_in (linkedin)
-		$token->setEndOfLife(StdOAuth1Token::EOL_NEVER_EXPIRES);
-		unset( $data['oauth_token'], $data['oauth_token_secret'] );
-		$token->setExtraParams( $data );
+		if (isset($data[$names['oauth_expires_in']])) {
+			$token->setLifeTime($data[$names['oauth_expires_in']]);
+			unset($data[$names['oauth_expires_in']]);
+		}
+		else {
+			$token->setLifetime($this->service->getTokenDefaultLifetime());
+		}
+
+		$token->setExtraParams($data);
 
 		return $token;
 	}

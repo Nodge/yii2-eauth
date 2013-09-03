@@ -11,6 +11,7 @@
 
 namespace yii\eauth\services;
 
+use OAuth\OAuth1\Token\TokenInterface;
 use yii\eauth\oauth1\Service;
 
 
@@ -32,6 +33,7 @@ class TwitterOAuth1Service extends Service {
 		'access' => 'https://api.twitter.com/oauth/access_token',
 	);
 	protected $baseApiUrl = 'https://api.twitter.com/1.1/';
+	protected $tokenDefaultLifetime = TokenInterface::EOL_NEVER_EXPIRES;
 
 	/**
 	 * @return bool
