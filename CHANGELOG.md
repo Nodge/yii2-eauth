@@ -1,7 +1,7 @@
 Yii2 EAuth Change Log
 =====================
 
-### 03.09.2013
+### Version 2.0.0 (03.09.2013)
 * Use curl for http requests by default.
 * getIsAuthenticated() function now looks up for existing access token for all OAuth services.
 * Added support for oauth_expires_in to OAuth1 services.
@@ -25,5 +25,5 @@ Yii2 EAuth Change Log
 * Added YandexOAuth2Service.
 * Added session token storage using Yii session.
 
-### Version 2.0 (30.08.2013)
+### 30.08.2013
 * Initial release for Yii2.
