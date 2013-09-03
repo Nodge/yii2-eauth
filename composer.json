@@ -18,6 +18,8 @@
 		}
 	},
 	"require": {
+		"php": ">=5.3",
+		"lib-curl": "*",
 		"yiisoft/yii2": "dev-master",
 		"lusitanian/oauth": "~0.1",
 		"nodge/lightopenid": "dev-master"
