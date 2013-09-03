@@ -11,7 +11,6 @@ namespace yii\eauth;
 
 use Yii;
 use yii\base\Object;
-use yii\caching\Cache;
 use yii\helpers\Html;
 
 /**

@@ -37,6 +37,7 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 	protected $tokenDefaultLifetime = TokenInterface::EOL_UNKNOWN;
 
 	/**
+	 * todo: add get/set to change it through config
 	 * @var array TokenStorage class.
 	 */
 	protected $tokenStorage = array(
@@ -44,6 +45,7 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 	);
 
 	/**
+	 * todo: add get/set to change it through config
 	 * todo: use own httpClient with logging support?
 	 * @var array HttpClient class.
 	 */

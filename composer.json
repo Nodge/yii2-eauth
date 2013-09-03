@@ -1,6 +1,6 @@
 {
 	"name": "nodge/yii2-eauth",
-	"description": "Yii2 EAuth Extension",
+	"description": "Yii2 EAuth Extension. EAuth allows to authenticate users with accounts on other websites (Google, Facebook, Twitter, etc).",
 	"keywords": ["yii2", "extension", "eauth", "openid", "oauth", "authentication"],
 	"homepage": "https://github.com/Nodge/yii2-eauth",
 	"type": "library",
@@ -21,7 +21,7 @@
 		"php": ">=5.3",
 		"lib-curl": "*",
 		"yiisoft/yii2": "dev-master",
-		"lusitanian/oauth": "~0.1",
+		"lusitanian/oauth": "~0.2",
 		"nodge/lightopenid": "dev-master"
 	}
 }
