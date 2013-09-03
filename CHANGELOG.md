@@ -1,6 +1,14 @@
 Yii2 EAuth Change Log
 =====================
 
+### 03.09.2013
+* Use curl for http requests by default.
+* getIsAuthenticated() function now looks up for existing access token for all OAuth services.
+* Added support for oauth_expires_in to OAuth1 services.
+* Added error handlers to OAuth1 services.
+* Added support for refresh tokens to OAuth2 ServiceProxy.
+* Added an option to disable OAuth2 state validation.
+
 ### 31.08.2013
 * Reorganize directories. Separate root directory by service type.
 * Fixed OAuthService::getCallbackUrl(). Now returns url without GET arguments.
