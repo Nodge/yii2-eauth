@@ -67,4 +67,19 @@ class LinkedinOAuth1Service extends Service {
 		}
 		return $array;
 	}
+
+	/**
+	 * Returns the error array.
+	 * @param array $response
+	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
+	 */
+	protected function fetchResponseError($response) {
+		if (isset($response['error-code'])) {
+			return array(
+				'code' => $response['error-code'],
+				'message' => $response['message'],
+			);
+		}
+		return null;
+	}
 }

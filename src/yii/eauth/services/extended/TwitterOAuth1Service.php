@@ -25,4 +25,20 @@ class TwitterOAuth1Service extends \yii\eauth\services\TwitterOAuth1Service {
 
 		return true;
 	}
+
+	/**
+	 * Returns the error array.
+	 * @param array $response
+	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
+	 */
+	protected function fetchResponseError($response) {
+		if (isset($response['errors'])) {
+			$first = reset($response['errors']);
+			return array(
+				'code' => $first['code'],
+				'message' => $first['message'],
+			);
+		}
+		return null;
+	}
 }
