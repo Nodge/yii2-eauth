@@ -9,8 +9,6 @@
 
 namespace yii\eauth\oauth2\state;
 
-use yii\helpers\Security;
-
 /**
  * Base token implementation for any StateStorage version.
  */
@@ -20,18 +18,21 @@ abstract class AbstractStateStorage implements StateStorageInterface {
 	 * @return string
 	 */
 	public function generateId() {
-		$id = Security::generateRandomKey();
+		$id = md5(uniqid('eauth-state'));
 		$this->save($id);
 		return $id;
 	}
 
 	/**
 	 * @param string $id
+	 * @param bool $remove
 	 * @return bool
 	 */
-	public function validateId($id) {
+	public function validateId($id, $remove = true) {
 		if ($this->has($id)) {
-			$this->remove($id);
+			if ($remove) {
+				$this->remove($id);
+			}
 			return true;
 		}
 		else {

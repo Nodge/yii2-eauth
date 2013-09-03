@@ -87,7 +87,9 @@ class ServiceProxy extends AbstractService {
 	 */
 	public function getAuthorizationEndpoint() {
 		$url = new Uri($this->service->getAuthorizationEndpoint());
-		$url->addToQuery('state', $this->state->generateId());
+		if ($this->service->getValidateState()) {
+			$url->addToQuery('state', $this->state->generateId());
+		}
 		return $url;
 	}
 
@@ -108,8 +110,10 @@ class ServiceProxy extends AbstractService {
 	 * @throws InvalidStateException
 	 */
 	public function requestAccessToken($code) {
-		if (!isset($_GET['state']) || !$this->state->validateId($_GET['state'])) {
-			throw new InvalidStateException('The valid "state" argument required.');
+		if ($this->service->getValidateState()) {
+			if (!isset($_GET['state']) || !$this->state->validateId($_GET['state'])) {
+				throw new InvalidStateException('The valid "state" argument required.');
+			}
 		}
 		return parent::requestAccessToken($code);
 	}

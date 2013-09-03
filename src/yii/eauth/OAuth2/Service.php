@@ -73,6 +73,11 @@ abstract class Service extends ServiceBase implements IAuthService{
 	protected $popupDisplayName = 'popup';
 
 	/**
+	 * @var bool Whether to use the State param to improve security.
+	 */
+	protected $validateState = true;
+
+	/**
 	 * @var string
 	 */
 	protected $stateStorage = array(
@@ -133,6 +138,20 @@ abstract class Service extends ServiceBase implements IAuthService{
 		}
 
 		$this->scopes = $resolvedScopes;
+	}
+
+	/**
+	 * @param bool $validate
+	 */
+	public function setValidateState($validate) {
+		$this->validateState = $validate;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getValidateState() {
+		return $this->validateState;
 	}
 
 	/**
