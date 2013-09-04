@@ -1,73 +1,94 @@
 <?php
 /**
- * GitHubOAuthService class file.
+ * GithubOAuth2Service class file.
  *
  * Register application: https://github.com/settings/applications
  *
- * @author Alexander Shkarpetin <ashkarpetin@gmail.com>
- * @link https://github.com/Nodge/yii-eauth/
+ * @author Maxim Zemskov <nodge@yandex.ru>
+ * @link http://github.com/Nodge/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-require_once dirname(dirname(__FILE__)) . '/EOAuth2Service.php';
+namespace yii\eauth\services;
+
+use OAuth\Common\Token\TokenInterface;
+use OAuth\OAuth2\Service\ServiceInterface;
+use yii\eauth\oauth2\Service;
 
 /**
  * GitHub provider class.
  *
  * @package application.extensions.eauth.services
  */
-class GitHubOAuthService extends EOAuth2Service {
+class GithubOAuth2Service extends Service {
+
+	/**
+	 * Defined scopes, see http://developer.github.com/v3/oauth/ for definitions
+	 */
+	const SCOPE_USER = 'user';
+	const SCOPE_PUBLIC_REPO = 'public_repo';
+	const SCOPE_REPO = 'repo';
+	const SCOPE_DELETE_REPO = 'delete_repo';
+	const SCOPE_GIST = 'gist';
 
 	protected $name = 'github';
 	protected $title = 'GitHub';
-	protected $type = 'OAuth';
-	protected $jsArguments = array('popup' => array('width' => 900, 'height' => 450));
+	protected $type = 'OAuth2';
+	protected $jsArguments = array('popup' => array('width' => 600, 'height' => 450));
 
-	protected $client_id = '';
-	protected $client_secret = '';
-	protected $scope = '';
+	protected $scopes = array();
 	protected $providerOptions = array(
 		'authorize' => 'https://github.com/login/oauth/authorize',
 		'access_token' => 'https://github.com/login/oauth/access_token',
 	);
+	protected $baseApiUrl = 'https://api.github.com/';
 
+	protected $tokenDefaultLifetime = TokenInterface::EOL_NEVER_EXPIRES;
 	protected $errorAccessDeniedCode = 'user_denied';
 
 	protected function fetchAttributes() {
-		$info = (object)$this->makeSignedRequest('https://api.github.com/user');
+		$info = $this->makeSignedRequest('user');
 
-		$this->attributes['id'] = $info->id;
-		$this->attributes['name'] = $info->login;
-		$this->attributes['url'] = $info->html_url;
-	}
+		$this->attributes['id'] = $info['id'];
+		$this->attributes['name'] = $info['login'];
+		$this->attributes['url'] = $info['html_url'];
 
-	protected function getTokenUrl($code) {
-		return $this->providerOptions['access_token'];
-	}
-
-	protected function getAccessToken($code) {
-		$params = array(
-			'client_id' => $this->client_id,
-			'client_secret' => $this->client_secret,
-			'code' => $code,
-		);
-
-		$response = $this->makeRequest($this->getTokenUrl($code), array('data' => $params), false);
-		parse_str($response, $result);
-		return $result['access_token'];
+		return true;
 	}
 
 	/**
-	 * Returns the error info from json.
-	 *
-	 * @param stdClass $json the json response.
+	 * Used to configure response type -- we want JSON from github, default is query string format
+	 * @return array
+	 */
+	public function getExtraOAuthHeaders() {
+		return array('Accept' => 'application/json');
+	}
+
+	/**
+	 * Required for GitHub API calls.
+	 * @return array
+	 */
+	public function getExtraApiHeaders() {
+		return array('Accept' => 'application/vnd.github.beta+json');
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getAuthorizationMethod() {
+		return ServiceInterface::AUTHORIZATION_METHOD_QUERY_STRING;
+	}
+
+	/**
+	 * Returns the error array.
+	 * @param array $response
 	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
 	 */
-	protected function fetchJsonError($json) {
-		if (isset($json->error)) {
+	protected function fetchResponseError($response) {
+		if (isset($response['message'])) {
 			return array(
-				'code' => $json->error->code,
-				'message' => $json->error->message,
+				'code' => isset($response['error']) ? $response['code'] : 0,
+				'message' => $response['message'],
 			);
 		}
 		else {
@@ -75,16 +96,4 @@ class GitHubOAuthService extends EOAuth2Service {
 		}
 	}
 
-	/**
-	 * Add User-Agent header
-	 *
-	 * @param string $url
-	 * @param array $options
-	 * @return cURL
-	 */
-	protected function initRequest($url, $options = array()) {
-		$ch = parent::initRequest($url, $options);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'yii-eauth extension');
-		return $ch;
-	}
 }
