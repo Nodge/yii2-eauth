@@ -197,4 +197,29 @@ class ServiceProxy extends AbstractService {
 
 		return $token;
 	}
+
+	/**
+	 * Return any additional headers always needed for this service implementation's OAuth calls.
+	 * @return array
+	 */
+	protected function getExtraOAuthHeaders() {
+		return $this->service->getExtraOAuthHeaders();
+	}
+
+	/**
+	 * Return any additional headers always needed for this service implementation's API calls.
+	 * @return array
+	 */
+	protected function getExtraApiHeaders() {
+		return $this->service->getExtraApiHeaders();
+	}
+
+	/**
+	 * Returns a class constant from ServiceInterface defining the authorization method used for the API
+	 * Header is the sane default.
+	 * @return int
+	 */
+	protected function getAuthorizationMethod() {
+		return $this->service->getAuthorizationMethod();
+	}
 }

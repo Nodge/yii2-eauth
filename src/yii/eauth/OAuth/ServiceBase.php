@@ -230,6 +230,10 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 		}
 
 		$token = $this->getProxy()->getAccessToken();
+		if (!isset($token)) {
+			return null;
+		}
+
 		return array(
 			'access_token' => $token->getAccessToken(),
 			'refresh_token' => $token->getRefreshToken(),

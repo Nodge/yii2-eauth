@@ -13,6 +13,7 @@ use Yii;
 use OAuth\Common\Exception\Exception as OAuthException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Consumer\Credentials;
+use OAuth\OAuth2\Service\ServiceInterface;
 use yii\eauth\EAuth;
 use yii\eauth\ErrorException;
 use yii\eauth\IAuthService;
@@ -277,5 +278,30 @@ abstract class Service extends ServiceBase implements IAuthService{
 			'expires_in' => 'expires_in',
 			'refresh_token' => 'refresh_token',
 		);
+	}
+
+	/**
+	 * Return any additional headers always needed for this service implementation's OAuth calls.
+	 * @return array
+	 */
+	public function getExtraOAuthHeaders() {
+		return array();
+	}
+
+	/**
+	 * Return any additional headers always needed for this service implementation's API calls.
+	 * @return array
+	 */
+	public function getExtraApiHeaders() {
+		return array();
+	}
+
+	/**
+	 * Returns a class constant from ServiceInterface defining the authorization method used for the API
+	 * Header is the sane default.
+	 * @return int
+	 */
+	public function getAuthorizationMethod() {
+		return ServiceInterface::AUTHORIZATION_METHOD_HEADER_OAUTH;
 	}
 }
