@@ -42,11 +42,12 @@ class VKontakteOAuth2Service extends \yii\eauth\services\VKontakteOAuth2Service 
 		$this->attributes['country'] = $info['country'];
 
 		$this->attributes['timezone'] = timezone_name_from_abbr('', $info['timezone'] * 3600, date('I'));
-		;
 
 		$this->attributes['photo'] = $info['photo'];
 		$this->attributes['photo_medium'] = $info['photo_medium'];
 		$this->attributes['photo_big'] = $info['photo_big'];
 		$this->attributes['photo_rec'] = $info['photo_rec'];
+
+		return true;
 	}
 }

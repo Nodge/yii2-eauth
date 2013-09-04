@@ -39,5 +39,7 @@ class YandexOpenIDService extends Service {
 
 		//if (isset($this->attributes['birthDate']) && !empty($this->attributes['birthDate']))
 		//$this->attributes['birthDate'] = strtotime($this->attributes['birthDate']);
+
+		return true;
 	}
 }

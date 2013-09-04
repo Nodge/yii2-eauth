@@ -29,5 +29,7 @@ class YandexOpenIDService extends \yii\eauth\services\YandexOpenIDService {
 		if (isset($this->attributes['birthDate']) && !empty($this->attributes['birthDate'])) {
 			$this->attributes['birthDate'] = strtotime($this->attributes['birthDate']);
 		}
+
+		return true;
 	}
 }

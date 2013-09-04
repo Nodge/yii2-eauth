@@ -42,6 +42,8 @@ class YandexOAuth2Service extends Service {
 		//$this->attributes['email'] = $info['emails'][0];
 		//$this->attributes['email'] = $info['default_email'];
 		$this->attributes['gender'] = ($info['sex'] == 'male') ? 'M' : 'F';
+
+		return true;
 	}
 
 }

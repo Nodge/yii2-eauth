@@ -66,6 +66,8 @@ class VKontakteOAuth2Service extends Service {
 		$this->attributes['photo_medium'] = $info['photo_medium'];
 		$this->attributes['photo_big'] = $info['photo_big'];
 		$this->attributes['photo_rec'] = $info['photo_rec'];*/
+
+		return true;
 	}
 
 	/**

@@ -22,5 +22,6 @@ class GoogleOpenIDService extends \yii\eauth\services\GoogleOpenIDService {
 
 	protected function fetchAttributes() {
 		$this->attributes['fullname'] = $this->attributes['name'] . ' ' . $this->attributes['lastname'];
+		return true;
 	}
 }

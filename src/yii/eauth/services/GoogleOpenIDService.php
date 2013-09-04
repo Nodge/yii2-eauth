@@ -33,5 +33,6 @@ class GoogleOpenIDService extends Service {
 
 	/*protected function fetchAttributes() {
 		$this->attributes['fullname'] = $this->attributes['name'].' '.$this->attributes['lastname'];
+		return true;
 	}*/
 }
