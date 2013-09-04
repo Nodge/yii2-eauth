@@ -20,8 +20,8 @@
 	"require": {
 		"php": ">=5.3",
 		"lib-curl": "*",
-		"yiisoft/yii2": "dev-master",
+		"yiisoft/yii2": "dev-master@dev",
 		"lusitanian/oauth": "~0.2",
-		"nodge/lightopenid": "dev-master"
+		"nodge/lightopenid": "~1.1"
 	}
 }
