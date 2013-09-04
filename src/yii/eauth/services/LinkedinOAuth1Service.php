@@ -34,38 +34,17 @@ class LinkedinOAuth1Service extends Service {
 	protected $baseApiUrl = 'http://api.linkedin.com/v1/';
 
 	protected function fetchAttributes() {
-		$info = $this->makeSignedRequest('people/~:(id,first-name,last-name,public-profile-url)');
+		$info = $this->makeSignedRequest('people/~:(id,first-name,last-name,public-profile-url)', array(
+			'query' => array(
+				'format' => 'json',
+			),
+		));
 
 		$this->attributes['id'] = $info['id'];
-		$this->attributes['name'] = $info['first-name'] . ' ' . $info['last-name'];
-		$this->attributes['url'] = $info['public-profile-url'];
+		$this->attributes['name'] = $info['firstName'] . ' ' . $info['lastName'];
+		$this->attributes['url'] = $info['publicProfileUrl'];
 
 		return true;
-	}
-
-	/**
-	 * @param string $response
-	 * @return array
-	 */
-	protected function parseResponse($response) {
-		/* @var $simplexml \SimpleXMLElement */
-		$simplexml = simplexml_load_string($response);
-		return $this->xmlToArray($simplexml);
-	}
-
-	/**
-	 *
-	 * @param \SimpleXMLElement $element
-	 * @return array
-	 */
-	protected function xmlToArray($element) {
-		$array = (array)$element;
-		foreach ($array as $key => $value) {
-			if (is_object($value)) {
-				$array[$key] = $this->xmlToArray($value);
-			}
-		}
-		return $array;
 	}
 
 	/**

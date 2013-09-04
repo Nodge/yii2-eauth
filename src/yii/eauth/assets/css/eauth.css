@@ -80,7 +80,8 @@
 	background-position: 0 -272px;
 }
 
-.eauth-service-id-linkedin .eauth-service-link:before {
+.eauth-service-id-linkedin .eauth-service-link:before,
+.eauth-service-id-linkedin_oauth2 .eauth-service-link:before {
 	background-position: 0 -306px;
 }
 
