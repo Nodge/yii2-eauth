@@ -49,12 +49,12 @@ The implementation of the authorization on your own server has several advantage
 	* Google
 	* Facebook
 	* Live `in progress...`
-	* GitHub `in progress...`
-	* LinkedIn `in progress...`
+	* GitHub
+	* LinkedIn
 	* Yandex (ru)
 	* VKontake (ru)
-	* Mail.ru (ru) `in progress...`
-	* Odnoklassniki (ru) `in progress...`
+	* Mail.ru (ru)
+	* Odnoklassniki (ru)
 
 
 ### Resources

@@ -3,6 +3,12 @@ Yii2 EAuth Change Log
 
 ### dev (04.09.2013)
 * Fixed package versions in the composer.json.
+* Added support for custom scope separator in OAuth2 services.
+* Added support for additional headers for OAuth2 requests.
+* Added GitHubOAuth2Service.
+* Added LinkedinOAuth2Service.
+* Added MailruOAuth2Service.
+* Added OdnoklassnikiOAuth2Service.
 
 ### Version 2.0.0 (03.09.2013)
 * Use curl for http requests by default.
