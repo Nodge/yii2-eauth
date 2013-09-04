@@ -141,22 +141,22 @@ Add the following in your config:
 				'google_oauth' => array(
 					// register your app here: https://code.google.com/apis/console/
 					'class' => 'yii\eauth\services\GoogleOAuth2Service',
-					'client_id' => '...',
-					'client_secret' => '...',
+					'clientId' => '...',
+					'clientSecret' => '...',
 					'title' => 'Google (OAuth)',
 				),
 				'yandex_oauth' => array(
 					// register your app here: https://oauth.yandex.ru/client/my
 					'class' => 'yii\eauth\services\YandexOAuth2Service',
-					'client_id' => '...',
-					'client_secret' => '...',
+					'clientId' => '...',
+					'clientSecret' => '...',
 					'title' => 'Yandex (OAuth)',
 				),
 				'facebook' => array(
 					// register your app here: https://developers.facebook.com/apps/
 					'class' => 'yii\eauth\services\FacebookOAuth2Service',
-					'client_id' => '...',
-					'client_secret' => '...',
+					'clientId' => '...',
+					'clientSecret' => '...',
 				),
 				'linkedin' => array(
 					// register your app here: https://www.linkedin.com/secure/developer
@@ -168,42 +168,42 @@ Add the following in your config:
 				'linkedin_oauth2' => array(
 					// register your app here: https://www.linkedin.com/secure/developer
 					'class' => 'yii\eauth\services\LinkedinOAuth2Service',
-					'client_id' => '...',
-					'client_secret' => '...',
+					'clientId' => '...',
+					'clientSecret' => '...',
 					'title' => 'LinkedIn (OAuth2)',
 				),
 				'github' => array(
 					// register your app here: https://github.com/settings/applications
 					'class' => 'yii\eauth\services\GithubOAuth2Service',
-					'client_id' => '...',
-					'client_secret' => '...',
+					'clientId' => '...',
+					'clientSecret' => '...',
 				),
 				'live' => array(
 					// register your app here: https://manage.dev.live.com/Applications/Index
 					'class' => 'yii\eauth\services\LiveOAuth2Service',
-					'client_id' => '...',
-					'client_secret' => '...',
+					'clientId' => '...',
+					'clientSecret' => '...',
 				),
 				'vkontakte' => array(
 					// register your app here: https://vk.com/editapp?act=create&site=1
 					'class' => 'yii\eauth\services\VKontakteOAuth2Service',
-					'client_id' => '...',
-					'client_secret' => '...',
+					'clientId' => '...',
+					'clientSecret' => '...',
 				),
 				'mailru' => array(
 					// register your app here: http://api.mail.ru/sites/my/add
 					'class' => 'yii\eauth\services\MailruOAuth2Service',
-					'client_id' => '...',
-					'client_secret' => '...',
+					'clientId' => '...',
+					'clientSecret' => '...',
 				),
 				'odnoklassniki' => array(
 					// register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
 					// ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
 					'class' => 'yii\eauth\services\OdnoklassnikiOAuth2Service',
-					'client_id' => '...',
-					'client_public' => '...',
-					'client_secret' => '...',
-					'title' => 'Odnokl.',
+					'clientId' => '...',
+					'clientSecret' => '...',
+					'clientPublic' => '...',
+					'title' => 'Odnoklas.',
 				),
 			),
 		),
