@@ -43,6 +43,11 @@ abstract class Service extends ServiceBase implements IAuthService{
 	protected $scopes = array();
 
 	/**
+	 * @var string
+	 */
+	protected $scopeSeparator = ' ';
+
+	/**
 	 * @var array Provider options. Must contain the keys: authorize, access_token.
 	 */
 	protected $providerOptions = array(
@@ -303,5 +308,12 @@ abstract class Service extends ServiceBase implements IAuthService{
 	 */
 	public function getAuthorizationMethod() {
 		return ServiceInterface::AUTHORIZATION_METHOD_HEADER_OAUTH;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getScopeSeparator() {
+		return $this->scopeSeparator;
 	}
 }

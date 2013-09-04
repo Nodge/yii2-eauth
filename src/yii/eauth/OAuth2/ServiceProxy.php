@@ -222,4 +222,28 @@ class ServiceProxy extends AbstractService {
 	protected function getAuthorizationMethod() {
 		return $this->service->getAuthorizationMethod();
 	}
+
+	/**
+	 * Returns the url to redirect to for authorization purposes.
+	 * @param array $additionalParameters
+	 * @return Uri
+	 */
+	public function getAuthorizationUri(array $additionalParameters = array()) {
+		$parameters = array_merge($additionalParameters, array(
+			'type'          => 'web_server',
+			'client_id'     => $this->credentials->getConsumerId(),
+			'redirect_uri'  => $this->credentials->getCallbackUrl(),
+			'response_type' => 'code',
+		));
+
+		$parameters['scope'] = implode($this->service->getScopeSeparator(), $this->scopes);
+
+		// Build the url
+		$url = clone $this->getAuthorizationEndpoint();
+		foreach($parameters as $key => $val) {
+			$url->addToQuery($key, $val);
+		}
+
+		return $url;
+	}
 }
