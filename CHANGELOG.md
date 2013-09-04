@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### dev (04.09.2013)
+* Fixed package versions in the composer.json.
+
 ### Version 2.0.0 (03.09.2013)
 * Use curl for http requests by default.
 * getIsAuthenticated() function now looks up for existing access token for all OAuth services.

@@ -6,7 +6,10 @@ Supported protocols: OpenID, OAuth 1.0 and OAuth 2.0.
 
 EAuth is a extension for provide a unified (does not depend on the selected service) method to authenticate the user. So, the extension itself does not perform login, does not register the user and does not bind the user accounts from different providers.
 
-[Demo](http://nodge.ru/yii-eauth/demo2/).
+* [Demo](http://nodge.ru/yii-eauth/demo2/)
+* Demo project sources. `in progress...`
+* [Installation](#installation)
+* [Version for yii 1.1](https://github.com/Nodge/yii-eauth/)
 
 ### Why own extension and not a third-party service?
 The implementation of the authorization on your own server has several advantages:
@@ -75,7 +78,7 @@ The implementation of the authorization on your own server has several advantage
 * PHPoAuthLib
 
 
-## Installation
+# Installation
 
 This library can be found on [Packagist](https://packagist.org/packages/nodge/yii2-eauth).
 The recommended way to install this is through [composer](http://getcomposer.org).
@@ -97,11 +100,13 @@ $ curl -sS https://getcomposer.org/installer | php
 $ php composer.phar install
 ```
 
+
 # Usage
 
 ## Demo project
 
 The source code of the [demo](http://nodge.ru/yii-eauth/demo2/) will be available soon...
+
 
 ## Basic setup
 
@@ -320,12 +325,9 @@ Add the following to your Login action:
 ...
 <p class="lead">Do you already have an account on one of these sites? Click the logo to log in with it here:</p>
 <?php echo \yii\eauth\Widget::widget(array('action' => 'site/login')); ?>
-<h2>Do you already have an account on one of these sites? Click the logo to log in with it here:</h2>
-<?php
-	$this->widget('ext.eauth.EAuthWidget', array('action' => 'site/login'));
-?>
 ...
 ```
+
 
 ## Extending
 
@@ -334,6 +336,7 @@ Base classes are stored in `@eauth/src/yii/eauth/services`.
 Examples of extended classes can be found in `@eauth/src/yii/eauth/services/extended/`.
 
 After overriding the base class, you need to update your configuration file with a new class name.
+
 
 ## Working with OAuth API
 
@@ -350,6 +353,7 @@ You can extend base classes with necessary methods and then write something like
 ```
 
 API calls are performed if the current user has a valid access token (saved during the authentication).
+
 
 ## Translation
 
@@ -374,6 +378,7 @@ To use translations add the following in your config:
 
 Available translations can be found in `@eauth/src/yii/eauth/messages`.
 
-## License
+
+# License
 
 The extension was released under the [New BSD License](http://www.opensource.org/licenses/bsd-license.php), so you'll find the latest version on [GitHub](https://github.com/Nodge/yii2-eauth).
