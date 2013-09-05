@@ -48,7 +48,7 @@ The implementation of the authorization on your own server has several advantage
 * OAuth2:
 	* Google
 	* Facebook
-	* Live `in progress...`
+	* Live
 	* GitHub
 	* LinkedIn
 	* Yandex (ru)
@@ -179,7 +179,7 @@ Add the following in your config:
 					'clientSecret' => '...',
 				),
 				'live' => array(
-					// register your app here: https://manage.dev.live.com/Applications/Index
+					// register your app here: https://account.live.com/developers/applications/index
 					'class' => 'yii\eauth\services\LiveOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
