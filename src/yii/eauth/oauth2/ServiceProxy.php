@@ -170,8 +170,10 @@ class ServiceProxy extends AbstractService {
 		if (!isset($data) || !is_array($data)) {
 			throw new TokenResponseException('Unable to parse response.');
 		}
-		else if (isset($data['error'])) {
-			throw new TokenResponseException('Error in retrieving token: "' . $data['error'] . '"');
+
+		$error = $this->service->getAccessTokenResponseError($data);
+		if (isset($error)) {
+			throw new TokenResponseException('Error in retrieving token: "' . $error . '"');
 		}
 
 		$token = new StdOAuth2Token();

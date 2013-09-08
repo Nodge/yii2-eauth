@@ -241,4 +241,12 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 			'params' => $token->getExtraParams(),
 		);
 	}
+
+	/**
+	 * @param array $data
+	 * @return string|null
+	 */
+	public function getAccessTokenResponseError($data) {
+		return isset($data['error']) ? $data['error'] : null;
+	}
 }
