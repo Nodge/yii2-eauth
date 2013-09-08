@@ -41,6 +41,7 @@ The implementation of the authorization on your own server has several advantage
 
 * OpenID:
 	* Google
+	* Yahoo
 	* Yandex (ru)
 * OAuth1:
 	* Twitter
@@ -157,6 +158,9 @@ Add the following in your config:
 					'class' => 'yii\eauth\services\FacebookOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
+				),
+				'yahoo' => array(
+					'class' => 'yii\eauth\services\YahooOpenIDService',
 				),
 				'linkedin' => array(
 					// register your app here: https://www.linkedin.com/secure/developer
