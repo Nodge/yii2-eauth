@@ -1,18 +1,18 @@
 
 .eauth {
-
+	overflow: hidden;
 }
 
 .eauth-list {
-	margin: 0;
+	margin: -1em 0 0;
 	padding: 0;
 	list-style: none;
-	overflow: auto;
 }
 
 .eauth-service {
-	float: left;
-	margin: 0 1em 0 0;
+	display: inline-block;
+	vertical-align: top;
+	margin: 1em 1em 0 0;
 }
 
 .eauth-service-link {
@@ -91,4 +91,8 @@
 
 .eauth-service-id-live .eauth-service-link:before {
 	background-position: 0 -372px;
+}
+
+.eauth-service-id-yahoo .eauth-service-link:before {
+	background-position: 0 -406px;
 }
