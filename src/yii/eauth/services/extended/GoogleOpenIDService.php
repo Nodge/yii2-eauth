@@ -15,9 +15,11 @@ class GoogleOpenIDService extends \yii\eauth\services\GoogleOpenIDService {
 
 	protected $requiredAttributes = array(
 		'name' => array('firstname', 'namePerson/first'),
-		'lastname' => array('lastname', 'namePerson/last'),
 		'email' => array('email', 'contact/email'),
+	);
+	protected $optionalAttributes = array(
 		'language' => array('language', 'pref/language'),
+		'lastname' => array('lastname', 'namePerson/last'),
 	);
 
 	protected function fetchAttributes() {

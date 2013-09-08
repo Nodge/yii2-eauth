@@ -17,6 +17,8 @@ class YandexOpenIDService extends \yii\eauth\services\YandexOpenIDService {
 		'name' => array('fullname', 'namePerson'),
 		'username' => array('nickname', 'namePerson/friendly'),
 		'email' => array('email', 'contact/email'),
+	);
+	protected $optionalAttributes = array(
 		'gender' => array('gender', 'person/gender'),
 		'birthDate' => array('dob', 'birthDate'),
 	);

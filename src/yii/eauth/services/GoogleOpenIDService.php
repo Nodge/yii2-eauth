@@ -26,8 +26,10 @@ class GoogleOpenIDService extends Service {
 	protected $url = 'https://www.google.com/accounts/o8/id';
 	protected $requiredAttributes = array(
 		'name' => array('firstname', 'namePerson/first'),
-		//'lastname' => array('lastname', 'namePerson/last'),
 		//'email' => array('email', 'contact/email'),
+	);
+	protected $optionalAttributes = array(
+		//'lastname' => array('lastname', 'namePerson/last'),
 		//'language' => array('language', 'pref/language'),
 	);
 
