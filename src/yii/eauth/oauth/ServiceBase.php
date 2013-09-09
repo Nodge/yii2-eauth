@@ -18,6 +18,7 @@ use yii\base\Exception;
 use yii\eauth\EAuth;
 use yii\eauth\IAuthService;
 use yii\eauth\ErrorException;
+use yii\helpers\ArrayHelper;
 
 /**
  * EOAuthService is a base class for all OAuth providers.
@@ -37,23 +38,14 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 	protected $tokenDefaultLifetime = TokenInterface::EOL_UNKNOWN;
 
 	/**
-	 * todo: add get/set to change it through config
-	 * @var array TokenStorage class.
+	 * @var array TokenStorage class. Null means default value from EAuth component config.
 	 */
-	protected $tokenStorage = array(
-		'class' => 'yii\eauth\oauth\SessionTokenStorage',
-	);
+	protected $tokenStorage;
 
 	/**
-	 * todo: add get/set to change it through config
-	 * todo: use own httpClient with logging support?
-	 * @var array HttpClient class.
+	 * @var array HttpClient class. Null means default value from EAuth component config.
 	 */
-	protected $httpClient = array(
-		'class' => 'OAuth\Common\Http\Client\CurlClient',
-		// use StreamClient if you you are using safe_mode or open_base_dir.
-//		'class' => 'OAuth\Common\Http\Client\StreamClient',
-	);
+	protected $httpClient;
 
 	/**
 	 * @var TokenStorageInterface
@@ -108,13 +100,31 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 	}
 
 	/**
+	 * @param array $config
+	 */
+	public function setTokenStorage(array $config) {
+		$this->tokenStorage = ArrayHelper::merge($this->tokenStorage, $config);
+	}
+
+	/**
 	 * @return TokenStorageInterface
 	 */
 	protected function getTokenStorage() {
 		if (!isset($this->_tokenStorage)) {
-			$this->_tokenStorage = Yii::createObject($this->tokenStorage);
+			$config = $this->tokenStorage;
+			if (!isset($config)) {
+				$config = $this->getComponent()->getTokenStorage();
+			}
+			$this->_tokenStorage = Yii::createObject($config);
 		}
 		return $this->_tokenStorage;
+	}
+
+	/**
+	 * @param array $config
+	 */
+	public function setHttpClient(array $config) {
+		$this->httpClient = ArrayHelper::merge($this->httpClient, $config);
 	}
 
 	/**
@@ -122,7 +132,11 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 	 */
 	protected function getHttpClient() {
 		if (!isset($this->_httpClient)) {
-			$this->_httpClient = Yii::createObject($this->httpClient);
+			$config = $this->httpClient;
+			if (!isset($config)) {
+				$config = $this->getComponent()->getHttpClient();
+			}
+			$this->_httpClient = Yii::createObject($config);
 		}
 		return $this->_httpClient;
 	}

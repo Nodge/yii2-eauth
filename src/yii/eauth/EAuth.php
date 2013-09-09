@@ -11,6 +11,7 @@ namespace yii\eauth;
 
 use Yii;
 use yii\base\Object;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
@@ -44,6 +45,21 @@ class EAuth extends Object {
 	 * @var string popup redirect view with custom js code
 	 */
 	protected $redirectWidget = '\\yii\\eauth\\RedirectWidget';
+
+	/**
+	 * @var array TokenStorage class.
+	 */
+	protected $tokenStorage = array(
+		'class' => 'yii\eauth\oauth\SessionTokenStorage',
+	);
+
+	/**
+	 * @var array HttpClient class.
+	 */
+	protected $httpClient = array(
+		'class' => 'yii\eauth\oauth\HttpClient',
+//		'useStreamsFallback' => false,
+	);
 
 	/**
 	 * Initialize the component.
@@ -153,6 +169,34 @@ class EAuth extends Object {
 	 */
 	public function getRedirectWidget() {
 		return $this->redirectWidget;
+	}
+
+	/**
+	 * @param array $config
+	 */
+	public function setTokenStorage(array $config) {
+		$this->tokenStorage = ArrayHelper::merge($this->tokenStorage, $config);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getTokenStorage() {
+		return $this->tokenStorage;
+	}
+
+	/**
+	 * @param array $config
+	 */
+	public function setHttpClient(array $config) {
+		$this->httpClient = ArrayHelper::merge($this->httpClient, $config);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getHttpClient() {
+		return $this->httpClient;
 	}
 
 	/**
