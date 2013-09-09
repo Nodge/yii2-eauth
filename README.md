@@ -382,6 +382,22 @@ You can extend base classes with necessary methods and then write something like
 ```
 
 API calls are performed if the current user has a valid access token (saved during the authentication).
+You can save access_token to your database by using custom token storage in your config:
+
+```php
+<?php
+...
+	'components'=>array(
+		'eauth' => array(
+			'class' => 'yii\eauth\EAuth',
+			'tokenStorage' => array(
+				'class' => '@app\eauth\DatabaseTokenStorage',
+			),
+		),
+		...
+	),
+...
+```
 
 
 ## Translation
