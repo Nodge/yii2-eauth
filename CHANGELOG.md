@@ -1,6 +1,10 @@
 Yii2 EAuth Change Log
 =====================
 
+### dev (09.09.2013)
+* Added HttpClient with logging support and curl/streams fallback.
+* TokenStorage and HttpClient are configurable now.
+
 ### 2.0.1 (08.09.2013)
 * Fixed package versions in the composer.json.
 * Fixed directories names.
