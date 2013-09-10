@@ -7,7 +7,7 @@ Supported protocols: OpenID, OAuth 1.0 and OAuth 2.0.
 EAuth is a extension for provide a unified (does not depend on the selected service) method to authenticate the user. So, the extension itself does not perform login, does not register the user and does not bind the user accounts from different providers.
 
 * [Demo](http://nodge.ru/yii-eauth/demo2/)
-* Demo project sources. `in progress...`
+* [Demo project](https://github.com/Nodge/yii2-eauth-demo/)
 * [Installation](#installation)
 * [Version for yii 1.1](https://github.com/Nodge/yii-eauth/)
 
@@ -62,7 +62,7 @@ The implementation of the authorization on your own server has several advantage
 
 * [Yii EAuth](https://github.com/Nodge/yii2-eauth)
 * [Demo](http://nodge.ru/yii-eauth/demo2/)
-* Demo project sources `in progress...`
+* [Demo project](https://github.com/Nodge/yii2-eauth-demo/)
 * [Yii Framework](http://yiiframework.com/)
 * [OpenID](http://openid.net/)
 * [OAuth](http://oauth.net/)
@@ -106,7 +106,7 @@ $ php composer.phar install
 
 ## Demo project
 
-The source code of the [demo](http://nodge.ru/yii-eauth/demo2/) will be available soon...
+The source code of the [demo](http://nodge.ru/yii-eauth/demo2/) is available [here](https://github.com/Nodge/yii2-eauth-demo/).
 
 
 ## Basic setup
