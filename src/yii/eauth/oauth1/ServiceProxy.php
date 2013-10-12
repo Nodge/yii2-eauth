@@ -29,21 +29,9 @@ class ServiceProxy extends AbstractService {
 	protected $service;
 
 	/**
-	 * @param Credentials $credentials
-	 * @param ClientInterface $httpClient
-	 * @param TokenStorageInterface $storage
-	 * @param SignatureInterface $signature
-	 * @param UriInterface $baseApiUri
 	 * @param Service $service
-	 * @throws ErrorException
 	 */
-	public function __construct(Credentials $credentials, ClientInterface $httpClient, TokenStorageInterface $storage, SignatureInterface $signature, UriInterface $baseApiUri = null, Service $service = null) {
-		parent::__construct($credentials, $httpClient, $storage, $signature, $baseApiUri);
-
-		if (!isset($service)) {
-			throw new ErrorException('Service argument is required.');
-		}
-
+	public function init(Service $service) {
 		$this->service = $service;
 	}
 

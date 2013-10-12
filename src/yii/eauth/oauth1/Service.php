@@ -83,7 +83,8 @@ abstract class Service extends ServiceBase implements IAuthService {
 			$httpClient = $this->getHttpClient();
 			$credentials = new Credentials($this->key, $this->secret, $this->getCallbackUrl());
 			$signature = new Signature($credentials);
-			$this->_proxy = new ServiceProxy($credentials, $httpClient, $storage, $signature, null, $this);
+			$this->_proxy = new ServiceProxy($credentials, $httpClient, $storage, $signature, null);
+			$this->_proxy->init($this);
 		}
 		return $this->_proxy;
 	}

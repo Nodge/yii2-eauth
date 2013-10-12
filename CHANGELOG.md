@@ -1,7 +1,8 @@
 Yii2 EAuth Change Log
 =====================
 
-### dev (09.09.2013)
+### 2.0.2 (12.10.2013)
+* Fixed ServiceProxy constructor to match its interface (#1).
 * Added HttpClient with logging support and curl/streams fallback.
 * TokenStorage and HttpClient are configurable now.
 
