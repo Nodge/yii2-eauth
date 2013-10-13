@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### dev
+* Fixed redirect_uri when not using url rule (#2).
+
 ### 2.0.2 (12.10.2013)
 * Fixed ServiceProxy constructor to match its interface (#1).
 * Added HttpClient with logging support and curl/streams fallback.
