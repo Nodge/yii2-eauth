@@ -264,7 +264,10 @@ class EAuth extends Object {
 			'redirect' => $jsRedirect,
 			'params' => $params
 		));
+		ob_start();
 		$widget->run();
+		$output = ob_get_clean();
+		Yii::$app->getResponse()->content = $output;
 		Yii::$app->getResponse()->send();
 	}
 
