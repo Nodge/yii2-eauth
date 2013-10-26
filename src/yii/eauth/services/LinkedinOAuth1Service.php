@@ -59,6 +59,12 @@ class LinkedinOAuth1Service extends Service {
 				'message' => $response['message'],
 			);
 		}
+		else if (isset($response['errorCode'])) {
+			return array(
+				'code' => $response['errorCode'],
+				'message' => $response['message'],
+			);
+		}
 		return null;
 	}
 }

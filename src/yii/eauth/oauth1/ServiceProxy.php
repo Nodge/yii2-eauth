@@ -61,6 +61,12 @@ class ServiceProxy extends AbstractService {
 
 		/** @var $token StdOAuth1Token */
 		$token = $this->storage->retrieveAccessToken($serviceName);
+
+		$params = $token->getExtraParams();
+		if (isset($params['is_request_token'])) {
+			return false;
+		}
+
 		return $this->checkTokenLifetime($token);
 	}
 
@@ -125,19 +131,25 @@ class ServiceProxy extends AbstractService {
 			throw new TokenResponseException('Error in retrieving token.');
 		}
 
-		return $this->parseAccessTokenResponse($responseBody);
+		$data['is_request_token'] = true;
+		return $this->parseAccessTokenResponse($data);
 	}
 
 	/**
-	 * @param string $responseBody
+	 * @param string|array $responseBody
 	 * @return StdOAuth1Token
 	 * @throws TokenResponseException
 	 */
 	protected function parseAccessTokenResponse($responseBody) {
-		parse_str($responseBody, $data);
+		if (!is_array($responseBody)) {
+			parse_str($responseBody, $data);
 
-		if (!isset($data) || !is_array($data)) {
-			throw new TokenResponseException('Unable to parse response.');
+			if (!isset($data) || !is_array($data)) {
+				throw new TokenResponseException('Unable to parse response.');
+			}
+		}
+		else {
+			$data = $responseBody;
 		}
 
 		$error = $this->service->getAccessTokenResponseError($data);

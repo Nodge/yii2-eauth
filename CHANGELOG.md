@@ -1,8 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
-### dev
+### 2.0.3 (26.10.2013)
 * Fixed redirect_uri when not using url rule (#2).
+* Fixed hasValidAccessToken() method for OAuth1 services (#3).
 
 ### 2.0.2 (12.10.2013)
 * Fixed ServiceProxy constructor to match its interface (#1).
