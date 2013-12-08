@@ -9,10 +9,10 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services;
+namespace yii2eauth\services;
 
 use OAuth\OAuth1\Token\TokenInterface;
-use yii\eauth\oauth1\Service;
+use yii2eauth\oauth1\Service;
 
 
 /**

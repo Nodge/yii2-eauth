@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services\extended;
+namespace yii2eauth\services\extended;
 
-class YandexOpenIDService extends \yii\eauth\services\YandexOpenIDService {
+class YandexOpenIDService extends \yii2eauth\services\YandexOpenIDService {
 
 	protected $jsArguments = array('popup' => array('width' => 900, 'height' => 620));
 

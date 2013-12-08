@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services\extended;
+namespace yii2eauth\services\extended;
 
-class TwitterOAuth1Service extends \yii\eauth\services\TwitterOAuth1Service {
+class TwitterOAuth1Service extends \yii2eauth\services\TwitterOAuth1Service {
 
 	protected function fetchAttributes() {
 		$info = $this->makeSignedRequest('account/verify_credentials.json');

@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services\extended;
+namespace yii2eauth\services\extended;
 
-class FacebookOAuth2Service extends \yii\eauth\services\FacebookOAuth2Service {
+class FacebookOAuth2Service extends \yii2eauth\services\FacebookOAuth2Service {
 
 	protected $scope = array(
 		self::SCOPE_EMAIL,

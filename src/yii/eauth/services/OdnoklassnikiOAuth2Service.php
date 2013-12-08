@@ -11,9 +11,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services;
+namespace yii2eauth\services;
 
-use yii\eauth\oauth2\Service;
+use yii2eauth\oauth2\Service;
 
 /**
  * Odnoklassniki.Ru provider class.

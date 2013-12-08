@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\oauth1;
+namespace yii2eauth\oauth1;
 
 use OAuth\Common\Consumer\Credentials;
 use OAuth\Common\Http\Client\ClientInterface;
@@ -19,7 +19,7 @@ use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth1\Service\AbstractService;
 use OAuth\OAuth1\Signature\SignatureInterface;
 use OAuth\OAuth1\Token\StdOAuth1Token;
-use yii\eauth\ErrorException;
+use yii2eauth\ErrorException;
 
 class ServiceProxy extends AbstractService {
 

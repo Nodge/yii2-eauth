@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth;
+namespace yii2eauth;
 
 /**
  * IAuthService is the interface for all service types and providers.

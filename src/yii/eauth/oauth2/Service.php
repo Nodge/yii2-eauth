@@ -7,18 +7,18 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\oauth2;
+namespace yii2eauth\oauth2;
 
 use Yii;
 use OAuth\Common\Exception\Exception as OAuthException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\OAuth2\Service\ServiceInterface;
-use yii\eauth\EAuth;
-use yii\eauth\ErrorException;
-use yii\eauth\IAuthService;
-use yii\eauth\oauth\ServiceBase;
-use yii\eauth\oauth2\state\StateStorageInterface;
+use yii2eauth\EAuth;
+use yii2eauth\ErrorException;
+use yii2eauth\IAuthService;
+use yii2eauth\oauth\ServiceBase;
+use yii2eauth\oauth2\state\StateStorageInterface;
 
 /**
  * EOAuthService is a base class for all OAuth providers.
@@ -84,7 +84,7 @@ abstract class Service extends ServiceBase implements IAuthService{
 	 * @var string
 	 */
 	protected $stateStorage = array(
-		'class' => 'yii\eauth\oauth2\state\SessionStateStorage',
+		'class' => 'yii2eauth\oauth2\state\SessionStateStorage',
 	);
 
 	/**

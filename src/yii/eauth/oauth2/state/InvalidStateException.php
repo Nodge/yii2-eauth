@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\oauth2\state;
+namespace yii2eauth\oauth2\state;
 
-use yii\eauth\ErrorException;
+use yii2eauth\ErrorException;
 
 /**
  * Exception thrown when a state id is not validated.

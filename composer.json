@@ -3,7 +3,7 @@
 	"description": "Yii2 EAuth Extension. EAuth allows to authenticate users with accounts on other websites (Google, Facebook, Twitter, etc).",
 	"keywords": ["yii2", "extension", "eauth", "openid", "oauth", "authentication"],
 	"homepage": "https://github.com/Nodge/yii2-eauth",
-	"type": "library",
+	"type": "yii2-extension",
 	"license": "New BSD License",
 	"authors": [
 		{
@@ -12,16 +12,22 @@
 			"homepage": "http://nodge.ru/"
 		}
 	],
+	"support": {
+		"source": "https://github.com/nodge/yii2-eauth"
+	},
 	"autoload": {
 		"psr-0": {
-			"yii\\eauth\\": "src/"
+			"yii2eauth\\": "src/"
 		}
 	},
 	"require": {
-		"php": ">=5.3",
+		"php": ">=5.4.0",
 		"lib-curl": "*",
 		"yiisoft/yii2": "dev-master@dev",
 		"lusitanian/oauth": "~0.2",
 		"nodge/lightopenid": "~1.1"
+	},
+	"extra": {
+		"bootstrap": "yii2eauth\\Extension"
 	}
 }

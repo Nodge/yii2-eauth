@@ -7,14 +7,14 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\openid;
+namespace yii2eauth\openid;
 
 use \Yii;
 use \LightOpenID;
 use yii\web\HttpException;
-use yii\eauth\ServiceBase;
-use yii\eauth\IAuthService;
-use yii\eauth\ErrorException;
+use yii2eauth\ServiceBase;
+use yii2eauth\IAuthService;
+use yii2eauth\ErrorException;
 
 /**
  * EOpenIDService is a base class for all OpenID providers.

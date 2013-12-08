@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\oauth2\state;
+namespace yii2eauth\oauth2\state;
 
 /**
  * Base token interface for any OAuth version.

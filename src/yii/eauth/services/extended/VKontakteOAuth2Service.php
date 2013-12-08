@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services\extended;
+namespace yii2eauth\services\extended;
 
-class VKontakteOAuth2Service extends \yii\eauth\services\VKontakteOAuth2Service {
+class VKontakteOAuth2Service extends \yii2eauth\services\VKontakteOAuth2Service {
 
 	// protected $scope = 'friends';
 

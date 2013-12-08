@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\oauth;
+namespace yii2eauth\oauth;
 
 use Yii;
 use OAuth\Common\Http\Uri\Uri;
@@ -15,9 +15,9 @@ use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Token\TokenInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
 use yii\base\Exception;
-use yii\eauth\EAuth;
-use yii\eauth\IAuthService;
-use yii\eauth\ErrorException;
+use yii2eauth\EAuth;
+use yii2eauth\IAuthService;
+use yii2eauth\ErrorException;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -25,7 +25,7 @@ use yii\helpers\ArrayHelper;
  *
  * @package application.extensions.eauth
  */
-abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthService {
+abstract class ServiceBase extends \yii2eauth\ServiceBase implements IAuthService {
 
 	/**
 	 * @var string Base url for API calls.
@@ -87,7 +87,7 @@ abstract class ServiceBase extends \yii\eauth\ServiceBase implements IAuthServic
 	}
 
 	/**
-	 * @return \yii\eauth\oauth1\ServiceProxy|\yii\eauth\oauth2\ServiceProxy
+	 * @return \yii2eauth\oauth1\ServiceProxy|\yii2eauth\oauth2\ServiceProxy
 	 */
 	abstract protected function getProxy();
 

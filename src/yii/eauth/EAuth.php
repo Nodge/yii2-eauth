@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth;
+namespace yii2eauth;
 
 use Yii;
 use yii\base\Object;
@@ -44,20 +44,20 @@ class EAuth extends Object {
 	/**
 	 * @var string popup redirect view with custom js code
 	 */
-	protected $redirectWidget = '\\yii\\eauth\\RedirectWidget';
+	protected $redirectWidget = '\\yii2eauth\\RedirectWidget';
 
 	/**
 	 * @var array TokenStorage class.
 	 */
 	protected $tokenStorage = array(
-		'class' => 'yii\eauth\oauth\SessionTokenStorage',
+		'class' => 'yii2eauth\oauth\SessionTokenStorage',
 	);
 
 	/**
 	 * @var array HttpClient class.
 	 */
 	protected $httpClient = array(
-		'class' => 'yii\eauth\oauth\HttpClient',
+		'class' => 'yii2eauth\oauth\HttpClient',
 //		'useStreamsFallback' => false,
 	);
 

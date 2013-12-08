@@ -7,17 +7,17 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\oauth1;
+namespace yii2eauth\oauth1;
 
 use Yii;
 use OAuth\Common\Exception\Exception as OAuthException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\OAuth1\Signature\Signature;
-use yii\eauth\EAuth;
-use yii\eauth\ErrorException;
-use yii\eauth\IAuthService;
-use yii\eauth\oauth\ServiceBase;
+use yii2eauth\EAuth;
+use yii2eauth\ErrorException;
+use yii2eauth\IAuthService;
+use yii2eauth\oauth\ServiceBase;
 
 /**
  * EOAuthService is a base class for all OAuth providers.

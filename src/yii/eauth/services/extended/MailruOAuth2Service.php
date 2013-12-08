@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services\extended;
+namespace yii2eauth\services\extended;
 
-class MailruOAuth2Service extends \yii\eauth\services\MailruOAuth2Service {
+class MailruOAuth2Service extends \yii2eauth\services\MailruOAuth2Service {
 
 	protected function fetchAttributes() {
 		$tokenData = $this->getAccessTokenData();

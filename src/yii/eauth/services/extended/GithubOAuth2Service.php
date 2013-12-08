@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services\extended;
+namespace yii2eauth\services\extended;
 
-class GithubOAuth2Service extends \yii\eauth\services\GithubOAuth2Service {
+class GithubOAuth2Service extends \yii2eauth\services\GithubOAuth2Service {
 
 	protected function fetchAttributes() {
 		$info = $this->makeSignedRequest('user');

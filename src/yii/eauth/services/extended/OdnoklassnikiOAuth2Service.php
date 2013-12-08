@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services\extended;
+namespace yii2eauth\services\extended;
 
-class OdnoklassnikiOAuth2Service extends \yii\eauth\services\OdnoklassnikiOAuth2Service {
+class OdnoklassnikiOAuth2Service extends \yii2eauth\services\OdnoklassnikiOAuth2Service {
 
 	protected $scopes = array(self::SCOPE_VALUABLE_ACCESS);
 

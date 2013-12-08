@@ -120,7 +120,7 @@ Add the following in your config:
 ...
 	'components'=>array(
 		'eauth' => array(
-			'class' => 'yii\eauth\EAuth',
+			'class' => 'yii2eauth\EAuth',
 			'popup' => true, // Use the popup window instead of redirecting.
 			'cache' => false, // Cache component name or false to disable cache. Defaults to 'cache' on production environments.
 			'cacheExpire' => 0, // Cache lifetime. Defaults to 0 - means unlimited.
@@ -130,84 +130,84 @@ Add the following in your config:
 			),
 			'services' => array( // You can change the providers and their classes.
 				'google' => array(
-					'class' => 'yii\eauth\services\GoogleOpenIDService',
+					'class' => 'yii2eauth\services\GoogleOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
 				),
 				'yandex' => array(
-					'class' => 'yii\eauth\services\YandexOpenIDService',
+					'class' => 'yii2eauth\services\YandexOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
 				),
 				'twitter' => array(
 					// register your app here: https://dev.twitter.com/apps/new
-					'class' => 'yii\eauth\services\TwitterOAuth1Service',
+					'class' => 'yii2eauth\services\TwitterOAuth1Service',
 					'key' => '...',
 					'secret' => '...',
 				),
 				'google_oauth' => array(
 					// register your app here: https://code.google.com/apis/console/
-					'class' => 'yii\eauth\services\GoogleOAuth2Service',
+					'class' => 'yii2eauth\services\GoogleOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'title' => 'Google (OAuth)',
 				),
 				'yandex_oauth' => array(
 					// register your app here: https://oauth.yandex.ru/client/my
-					'class' => 'yii\eauth\services\YandexOAuth2Service',
+					'class' => 'yii2eauth\services\YandexOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'title' => 'Yandex (OAuth)',
 				),
 				'facebook' => array(
 					// register your app here: https://developers.facebook.com/apps/
-					'class' => 'yii\eauth\services\FacebookOAuth2Service',
+					'class' => 'yii2eauth\services\FacebookOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				),
 				'yahoo' => array(
-					'class' => 'yii\eauth\services\YahooOpenIDService',
+					'class' => 'yii2eauth\services\YahooOpenIDService',
 				),
 				'linkedin' => array(
 					// register your app here: https://www.linkedin.com/secure/developer
-					'class' => 'yii\eauth\services\LinkedinOAuth1Service',
+					'class' => 'yii2eauth\services\LinkedinOAuth1Service',
 					'key' => '...',
 					'secret' => '...',
 					'title' => 'LinkedIn (OAuth1)',
 				),
 				'linkedin_oauth2' => array(
 					// register your app here: https://www.linkedin.com/secure/developer
-					'class' => 'yii\eauth\services\LinkedinOAuth2Service',
+					'class' => 'yii2eauth\services\LinkedinOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'title' => 'LinkedIn (OAuth2)',
 				),
 				'github' => array(
 					// register your app here: https://github.com/settings/applications
-					'class' => 'yii\eauth\services\GithubOAuth2Service',
+					'class' => 'yii2eauth\services\GithubOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				),
 				'live' => array(
 					// register your app here: https://account.live.com/developers/applications/index
-					'class' => 'yii\eauth\services\LiveOAuth2Service',
+					'class' => 'yii2eauth\services\LiveOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				),
 				'vkontakte' => array(
 					// register your app here: https://vk.com/editapp?act=create&site=1
-					'class' => 'yii\eauth\services\VKontakteOAuth2Service',
+					'class' => 'yii2eauth\services\VKontakteOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				),
 				'mailru' => array(
 					// register your app here: http://api.mail.ru/sites/my/add
-					'class' => 'yii\eauth\services\MailruOAuth2Service',
+					'class' => 'yii2eauth\services\MailruOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				),
 				'odnoklassniki' => array(
 					// register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
 					// ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
-					'class' => 'yii\eauth\services\OdnoklassnikiOAuth2Service',
+					'class' => 'yii2eauth\services\OdnoklassnikiOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'clientPublic' => '...',
@@ -231,7 +231,7 @@ Add the following in your config:
 				array(
 					'class' => 'yii\log\FileTarget',
 					'logFile' => '@app/runtime/logs/eauth.log',
-					'categories' => array('yii\eauth\*'),
+					'categories' => array('yii2eauth\*'),
 					'logVars' => array(),
 				),
 			),
@@ -264,7 +264,7 @@ Example from demo project:
 	}
 
 	/**
-	 * @param \yii\eauth\ServiceBase $service
+	 * @param \yii2eauth\ServiceBase $service
 	 * @return User
 	 * @throws ErrorException
 	 */
@@ -307,7 +307,7 @@ Add the following to your Login action:
 	public function actionLogin() {
 		$serviceName = Yii::$app->getRequest()->get('service');
 		if (isset($serviceName)) {
-			/** @var $eauth \yii\eauth\ServiceBase */
+			/** @var $eauth \yii2eauth\ServiceBase */
 			$eauth = Yii::$app->getComponent('eauth')->getIdentity($serviceName);
 			$eauth->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
 			$eauth->setCancelUrl(Yii::$app->getUrlManager()->createAbsoluteUrl('site/login'));
@@ -327,7 +327,7 @@ Add the following to your Login action:
 					$eauth->cancel();
 				}
 			}
-			catch (\yii\eauth\ErrorException $e) {
+			catch (\yii2eauth\ErrorException $e) {
 				// save error to show it later
 				Yii::$app->getSession()->setFlash('error', 'EAuthException: '.$e->getMessage());
 
@@ -353,7 +353,7 @@ Add the following to your Login action:
 ?>
 ...
 <p class="lead">Do you already have an account on one of these sites? Click the logo to log in with it here:</p>
-<?php echo \yii\eauth\Widget::widget(array('action' => 'site/login')); ?>
+<?php echo \yii2eauth\Widget::widget(array('action' => 'site/login')); ?>
 ...
 ```
 
@@ -389,7 +389,7 @@ You can save access_token to your database by using custom token storage in your
 ...
 	'components'=>array(
 		'eauth' => array(
-			'class' => 'yii\eauth\EAuth',
+			'class' => 'yii2eauth\EAuth',
 			'tokenStorage' => array(
 				'class' => '@app\eauth\DatabaseTokenStorage',
 			),

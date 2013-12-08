@@ -9,11 +9,11 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services;
+namespace yii2eauth\services;
 
 use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth2\Service\ServiceInterface;
-use yii\eauth\oauth2\Service;
+use yii2eauth\oauth2\Service;
 
 /**
  * GitHub provider class.

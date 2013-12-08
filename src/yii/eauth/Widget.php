@@ -7,7 +7,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth;
+namespace yii2eauth;
 
 use Yii;
 
@@ -48,7 +48,7 @@ class Widget extends \yii\base\Widget {
 	 * @var boolean include the CSS file. Default is true.
 	 * If this is set false, you are responsible to explicitly include the necessary CSS file in your page.
 	 */
-	public $assetBundle = 'yii\\eauth\\WidgetAssetBundle';
+	public $assetBundle = 'yii2eauth\\WidgetAssetBundle';
 
 	/**
 	 * Initializes the widget.
@@ -60,7 +60,7 @@ class Widget extends \yii\base\Widget {
 		parent::init();
 
 		// EAuth component
-		/** @var $component \yii\eauth\EAuth */
+		/** @var $component \yii2eauth\EAuth */
 		$component = Yii::$app->getComponent($this->component);
 
 		// Some default properties from component configuration

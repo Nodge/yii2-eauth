@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services\extended;
+namespace yii2eauth\services\extended;
 
-class GoogleOpenIDService extends \yii\eauth\services\GoogleOpenIDService {
+class GoogleOpenIDService extends \yii2eauth\services\GoogleOpenIDService {
 
 	//protected $jsArguments = array('popup' => array('width' => 450, 'height' => 450));
 

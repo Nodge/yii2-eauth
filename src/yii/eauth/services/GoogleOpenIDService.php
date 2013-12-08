@@ -7,9 +7,9 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace yii\eauth\services;
+namespace yii2eauth\services;
 
-use yii\eauth\openid\Service;
+use yii2eauth\openid\Service;
 
 /**
  * Google provider class.
