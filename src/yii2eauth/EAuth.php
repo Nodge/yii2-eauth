@@ -71,8 +71,6 @@ class EAuth extends Object {
 		if (!isset($this->cache) && YII_ENV_PROD) {
 			$this->cache = 'cache';
 		}
-
-		Yii::setAlias('@eauth', __DIR__);
 	}
 
 	/**

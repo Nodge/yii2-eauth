@@ -12,10 +12,7 @@ namespace yii2eauth;
 use Yii;
 
 /**
- * This is the bootstrap class for the Yii JUI extension.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
+ * This is the bootstrap class for the yii2-eauth extension.
  */
 class Extension extends \yii\base\Extension {
 	/**

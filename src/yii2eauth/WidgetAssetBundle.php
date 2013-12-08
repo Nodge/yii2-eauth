@@ -15,7 +15,7 @@ use yii\web\AssetBundle;
  */
 class WidgetAssetBundle extends AssetBundle
 {
-	public $sourcePath = '@eauth/assets';
+	public $sourcePath = '@yii2eauth/assets';
 	public $css = array(
 		'css/eauth.css',
 	);
