@@ -1,6 +1,10 @@
 Yii2 EAuth Change Log
 =====================
 
+### dev (08.12.2013)
+* Reorganize project with new namespace.
+* Assets bundle has been moved.
+
 ### 2.0.3 (26.10.2013)
 * Fixed redirect_uri when not using url rule (#2).
 * Fixed hasValidAccessToken() method for OAuth1 services (#3).
