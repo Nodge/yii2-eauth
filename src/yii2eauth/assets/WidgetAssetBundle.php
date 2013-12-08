@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii2eauth;
+namespace yii2eauth\assets;
 
 use yii\web\AssetBundle;
 
