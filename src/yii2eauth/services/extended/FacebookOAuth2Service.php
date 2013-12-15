@@ -11,7 +11,7 @@ namespace yii2eauth\services\extended;
 
 class FacebookOAuth2Service extends \yii2eauth\services\FacebookOAuth2Service {
 
-	protected $scope = array(
+	protected $scopes = array(
 		self::SCOPE_EMAIL,
 		self::SCOPE_USER_BIRTHDAY,
 		self::SCOPE_USER_HOMETOWN,
