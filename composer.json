@@ -17,7 +17,7 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"yii2eauth\\": "src/"
+			"nodge\\eauth\\": "src/"
 		}
 	},
 	"require": {
@@ -28,6 +28,6 @@
 		"nodge/lightopenid": "~1.1"
 	},
 	"extra": {
-		"bootstrap": "yii2eauth\\Extension"
+		"bootstrap": "nodge\\eauth\\Extension"
 	}
 }

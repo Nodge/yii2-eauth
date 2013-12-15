@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### dev (15.12.2013)
+* Reorganize project with new namespace (again).
+
 ### dev (08.12.2013)
 * Reorganize project with new namespace.
 * Assets bundle has been moved.
