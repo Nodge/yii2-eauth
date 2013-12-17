@@ -20,7 +20,7 @@ use nodge\eauth\oauth2\Service;
  *
  * @package application.extensions.eauth.services
  */
-class GithubOAuth2Service extends Service {
+class GitHubOAuth2Service extends Service {
 
 	/**
 	 * Defined scopes, see http://developer.github.com/v3/oauth/ for definitions
