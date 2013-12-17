@@ -182,7 +182,7 @@ Add the following in your config:
 				),
 				'github' => array(
 					// register your app here: https://github.com/settings/applications
-					'class' => 'nodge\eauth\services\GithubOAuth2Service',
+					'class' => 'nodge\eauth\services\GitHubOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				),
