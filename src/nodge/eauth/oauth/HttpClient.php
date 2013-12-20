@@ -124,12 +124,17 @@ class HttpClient extends AbstractClient {
 			throw new \InvalidArgumentException('No body expected for "GET" request.');
 		}
 
-		if (!isset($extraHeaders['Content-type']) && $this->method === 'POST' && is_array($this->requestBody)) {
-			$extraHeaders['Content-type'] = 'Content-type: application/x-www-form-urlencoded';
+		if (!isset($this->extraHeaders['Content-type']) && $this->method === 'POST' && is_array($this->requestBody)) {
+			$this->extraHeaders['Content-type'] = 'Content-type: application/x-www-form-urlencoded';
 		}
 
-		$extraHeaders['Host'] = 'Host: '.$this->endpoint->getHost();
-		$extraHeaders['Connection'] = 'Connection: close';
+		// Some of services requires User-Agent header (e.g. GitHub)
+		if (!isset($this->extraHeaders['User-Agent'])) {
+			$this->extraHeaders['User-Agent'] = 'User-Agent: yii2-eauth';
+		}
+
+		$this->extraHeaders['Host'] = 'Host: '.$this->endpoint->getHost();
+		$this->extraHeaders['Connection'] = 'Connection: close';
 
 		if (YII_DEBUG) {
 			Yii::trace('EAuth http request: '.PHP_EOL.var_export(array(
