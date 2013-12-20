@@ -6,6 +6,7 @@ Yii2 EAuth Change Log
 * Assets bundle has been moved.
 * Fixed typo in HttpClient (#8).
 * Added default User-Agent header to HttpClient.
+* Disabled CSRF validation for OpenID callbacks.
 
 ### 2.0.3 (26.10.2013)
 * Fixed redirect_uri when not using url rule (#2).
