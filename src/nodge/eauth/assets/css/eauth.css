@@ -96,3 +96,7 @@
 .eauth-service-id-yahoo .eauth-service-link:before {
 	background-position: 0 -406px;
 }
+
+.eauth-service-id-steam .eauth-service-link:before {
+	background-position: 0 -440px;
+}

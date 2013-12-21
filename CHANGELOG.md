@@ -1,12 +1,14 @@
 Yii2 EAuth Change Log
 =====================
 
-### dev (20.12.2013)
+### dev (21.12.2013)
 * Reorganize project with new namespace.
 * Assets bundle has been moved.
 * Fixed typo in HttpClient (#8).
 * Added default User-Agent header to HttpClient.
 * Disabled CSRF validation for OpenID callbacks.
+* Optimized icons file.
+* Added SteamOpenIDService.
 
 ### 2.0.3 (26.10.2013)
 * Fixed redirect_uri when not using url rule (#2).

@@ -43,6 +43,7 @@ The implementation of the authorization on your own server has several advantage
 	* Google
 	* Yahoo
 	* Yandex (ru)
+	* Steam
 * OAuth1:
 	* Twitter
 	* LinkedIn
@@ -165,6 +166,7 @@ Add the following in your config:
 				),
 				'yahoo' => array(
 					'class' => 'nodge\eauth\services\YahooOpenIDService',
+					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
 				),
 				'linkedin' => array(
 					// register your app here: https://www.linkedin.com/secure/developer
@@ -191,6 +193,10 @@ Add the following in your config:
 					'class' => 'nodge\eauth\services\LiveOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
+				),
+				'steam' => array(
+					'class' => 'nodge\eauth\services\SteamOpenIDService',
+					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
 				),
 				'vkontakte' => array(
 					// register your app here: https://vk.com/editapp?act=create&site=1

@@ -12,7 +12,7 @@ namespace nodge\eauth\services;
 use nodge\eauth\openid\Service;
 
 /**
- * Google provider class.
+ * Yahoo provider class.
  *
  * @package application.extensions.eauth.services
  */
