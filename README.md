@@ -299,6 +299,24 @@ Then you can access to EAuth attributes through:
 
 ### Controller
 
+Attach OpenID Controller behavior to disable CSRF validation for OpenID callbacks.
+Or you can disable CSRF validation by yourself.
+
+```php
+<?php
+...
+	public function behaviors() {
+    		return array(
+    			'eauth' => array(
+    				// required to disable csrf validation on OpenID requests
+    				'class' => \nodge\eauth\openid\ControllerBehavior::className(),
+    				'only' => array('login'),
+    			),
+    		);
+    	}
+...
+```
+
 Add the following to your Login action:
 
 ```php
