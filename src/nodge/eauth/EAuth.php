@@ -265,8 +265,10 @@ class EAuth extends Object {
 		ob_start();
 		$widget->run();
 		$output = ob_get_clean();
-		Yii::$app->getResponse()->content = $output;
-		Yii::$app->getResponse()->send();
+		$response = Yii::$app->getResponse();
+		$response->content = $output;
+		$response->send();
+		exit();
 	}
 
 	/**

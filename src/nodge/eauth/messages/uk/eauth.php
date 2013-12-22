@@ -7,6 +7,9 @@ return array(
 	'Unable to complete the authentication because the required data was not received.' => 'Неможливо завершити авторизацію користувача, так як {provider} не передає необхідну інформацію.',
 	'Unable to complete the request because the user was not authenticated.' => 'Неможливо виконати захищений запит, так як користувач не був авторизований.',
 
+	'Redirecting back to the application...' => 'Redirecting back to the application...',
+	'Click here to return to the application.' => 'Click here to return to the application.',
+
 	'Google' => 'Google',
 	'Twitter' => 'Twitter',
 	'Yandex' => 'Яндекс',

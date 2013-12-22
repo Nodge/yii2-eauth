@@ -7,6 +7,9 @@ return array(
 	'Unable to complete the authentication because the required data was not received.' => '{provider}',
 	'Unable to complete the request because the user was not authenticated.' => '',
 
+	'Redirecting back to the application...' => '',
+	'Click here to return to the application.' => '',
+
 	'Google' => 'Google',
 	'Twitter' => 'Twitter',
 	'Yandex' => 'Yandex',
