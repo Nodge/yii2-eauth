@@ -1,7 +1,7 @@
 Yii2 EAuth Change Log
 =====================
 
-### 2.0.4 (22.12.2013)
+### 2.1 (22.12.2013)
 * Reorganize project with new namespace.
 * Assets bundle has been moved.
 * Fixed typo in HttpClient (#8).
