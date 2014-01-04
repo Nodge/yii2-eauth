@@ -1,0 +1,102 @@
+
+.eauth {
+	overflow: hidden;
+}
+
+.eauth-list {
+	margin: -1em 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.eauth-service {
+	display: inline-block;
+	vertical-align: top;
+	margin: 1em 1em 0 0;
+}
+
+.eauth-service-link {
+	position: relative;
+	display: block;
+	width: 60px;
+	padding-top: 34px;
+	text-align: center;
+}
+
+.eauth-service-link:before,
+.eauth-service-link:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 32px;
+	height: 32px;
+	margin-left: -16px;
+	background: url("../images/auth.png") 0 0 no-repeat;
+}
+
+.eauth-service-link:after {
+	display: none;
+}
+
+.eauth-service-link:hover:after {
+	display: block;
+}
+
+
+/* --- Services --- */
+
+.eauth-service-id-google .eauth-service-link:before,
+.eauth-service-id-google_oauth .eauth-service-link:before {
+	background-position: 0 -34px;
+}
+
+.eauth-service-id-yandex .eauth-service-link:before,
+.eauth-service-id-yandex_oauth .eauth-service-link:before {
+	background-position: 0 -102px;
+}
+
+.eauth-service-id-twitter .eauth-service-link:before {
+	background-position: 0 -68px;
+}
+
+.eauth-service-id-vkontakte .eauth-service-link:before {
+	background-position: 0 -136px;
+}
+
+.eauth-service-id-facebook .eauth-service-link:before {
+	background-position: 0 -170px;
+}
+
+.eauth-service-id-mailru .eauth-service-link:before {
+	background-position: 0 -204px;
+}
+
+.eauth-service-id-moikrug .eauth-service-link:before {
+	background-position: 0 -238px;
+}
+
+.eauth-service-id-odnoklassniki .eauth-service-link:before {
+	background-position: 0 -272px;
+}
+
+.eauth-service-id-linkedin .eauth-service-link:before,
+.eauth-service-id-linkedin_oauth2 .eauth-service-link:before {
+	background-position: 0 -306px;
+}
+
+.eauth-service-id-github .eauth-service-link:before {
+	background-position: 0 -340px;
+}
+
+.eauth-service-id-live .eauth-service-link:before {
+	background-position: 0 -372px;
+}
+
+.eauth-service-id-yahoo .eauth-service-link:before {
+	background-position: 0 -406px;
+}
+
+.eauth-service-id-steam .eauth-service-link:before {
+	background-position: 0 -440px;
+}
