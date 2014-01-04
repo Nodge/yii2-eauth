@@ -35,12 +35,27 @@ class ServiceProxy extends AbstractService {
 	protected $state;
 
 	/**
+	 * @param CredentialsInterface $credentials
+	 * @param ClientInterface $httpClient
+	 * @param TokenStorageInterface $storage
+	 * @param array $scopes
+	 * @param UriInterface $baseApiUri
 	 * @param Service $service
 	 * @param StateStorageInterface $stateStorage
 	 */
-	public function init(Service $service, StateStorageInterface $stateStorage) {
+	public function __construct(
+		CredentialsInterface $credentials,
+		ClientInterface $httpClient,
+		TokenStorageInterface $storage,
+		$scopes = array(),
+		UriInterface $baseApiUri = null,
+		Service $service,
+		StateStorageInterface $stateStorage
+	)
+	{
 		$this->service = $service;
 		$this->state = $stateStorage;
+		parent::__construct($credentials, $httpClient, $storage, $scopes = array(), $baseApiUri = null);
 	}
 
 	/**
@@ -235,5 +250,17 @@ class ServiceProxy extends AbstractService {
 		}
 
 		return $url;
+	}
+
+	/**
+	 * Validate scope
+	 * @param string $scope
+	 * @return bool
+	 */
+	public function isValidScope($scope)
+	{
+		$reflectionClass = new \ReflectionClass(get_class($this->service));
+		
+		return in_array($scope, $reflectionClass->getConstants(), true);
 	}
 }
