@@ -10,6 +10,8 @@
 namespace nodge\eauth\oauth2;
 
 use OAuth\Common\Consumer\Credentials;
+
+use OAuth\Common\Consumer\CredentialsInterface;
 use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\Uri;
