@@ -9,7 +9,7 @@
 <head>
 	<script type="text/javascript">
 		<?php 
-			$code = 'setTimeout(function(){if (window.opener) {';
+			$code = 'if (window.opener) {';
 			$code .= 'window.close();';
 			if ($redirect) {
 				$code .= 'window.opener.location = \''.addslashes($url).'\';';
@@ -19,7 +19,7 @@
 			if ($redirect) {
 				$code .= 'window.location = \''.addslashes($url).'\';';
 			}
-			$code .= '}},5000);';
+			$code .= '}';
 			echo $code;
 		?>
 	</script>
