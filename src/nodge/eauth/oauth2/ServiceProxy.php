@@ -9,8 +9,6 @@
 
 namespace nodge\eauth\oauth2;
 
-use OAuth\Common\Consumer\Credentials;
-
 use OAuth\Common\Consumer\CredentialsInterface;
 use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Http\Exception\TokenResponseException;
@@ -79,6 +77,16 @@ class ServiceProxy extends AbstractService {
 	 */
 	public function service() {
 		return $this->service->getServiceName();
+	}
+
+	/**
+	 * Validate scope
+	 * @param string $scope
+	 * @return bool
+	 */
+	public function isValidScope($scope) {
+		$reflectionClass = new \ReflectionClass(get_class($this->service));
+		return in_array($scope, $reflectionClass->getConstants(), true);
 	}
 
 	/**
@@ -252,17 +260,5 @@ class ServiceProxy extends AbstractService {
 		}
 
 		return $url;
-	}
-
-	/**
-	 * Validate scope
-	 * @param string $scope
-	 * @return bool
-	 */
-	public function isValidScope($scope)
-	{
-		$reflectionClass = new \ReflectionClass(get_class($this->service));
-		
-		return in_array($scope, $reflectionClass->getConstants(), true);
 	}
 }

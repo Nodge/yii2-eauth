@@ -1,7 +1,10 @@
 Yii2 EAuth Change Log
 =====================
 
-### 2.1 (22.12.2013)
+### 2.1.1 (07.01.2014)
+* Fixed scope validation for OAuth services.
+
+### 2.1.0 (22.12.2013)
 * Reorganize project with new namespace.
 * Assets bundle has been moved.
 * Fixed typo in HttpClient (#8).
