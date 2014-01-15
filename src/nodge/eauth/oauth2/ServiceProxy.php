@@ -55,7 +55,7 @@ class ServiceProxy extends AbstractService {
 	{
 		$this->service = $service;
 		$this->state = $stateStorage;
-		parent::__construct($credentials, $httpClient, $storage, $scopes = array(), $baseApiUri = null);
+		parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);
 	}
 
 	/**
