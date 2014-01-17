@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### 2.1.2 (17.01.2014)
+* Fixed typo in oauth2\ServiceProxy
+
 ### 2.1.1 (07.01.2014)
 * Fixed scope validation for OAuth services.
 
