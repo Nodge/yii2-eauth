@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### 2.1.3 (30.01.2014)
+* Yii2 update (Request methods has been refactored).
+
 ### 2.1.2 (17.01.2014)
 * Fixed typo in oauth2\ServiceProxy
 
