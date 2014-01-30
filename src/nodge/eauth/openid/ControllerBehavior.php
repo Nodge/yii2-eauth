@@ -26,7 +26,7 @@ class ControllerBehavior extends ActionFilter {
 	public function beforeAction($action) {
 		$request = Yii::$app->getRequest();
 
-		if (in_array($request->getRestParam('openid_mode', ''), ['id_res', 'cancel'])) {
+		if (in_array($request->getBodyParam('openid_mode', ''), ['id_res', 'cancel'])) {
 			$request->enableCsrfValidation = false;
 		}
 
