@@ -102,7 +102,7 @@ abstract class Service extends ServiceBase implements IAuthService {
 				$this->authenticated = true;
 			}
 			else {
-				throw new ErrorException(Yii::t('eauth', 'Unable to complete the authentication because the required data was not received.', array('{provider}' => $this->getServiceTitle())));
+				throw new ErrorException(Yii::t('eauth', 'Unable to complete the authentication because the required data was not received.', array('provider' => $this->getServiceTitle())));
 			}
 		}
 		catch (\Exception $e) {
@@ -132,7 +132,7 @@ abstract class Service extends ServiceBase implements IAuthService {
 				$this->attributes[$key] = $attributes[$attr[1]];
 			}
 			else {
-				throw new ErrorException(Yii::t('eauth', 'Unable to complete the authentication because the required data was not received.', array('{provider}' => $this->getServiceTitle())));
+				throw new ErrorException(Yii::t('eauth', 'Unable to complete the authentication because the required data was not received.', array('provider' => $this->getServiceTitle())));
 			}
 		}
 	}
