@@ -12,7 +12,7 @@ namespace nodge\eauth;
 use Yii;
 use yii\base\Object;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * The EAuth class provides simple authentication via OpenID and OAuth providers.
@@ -258,7 +258,7 @@ class EAuth extends Object {
 		/** @var RedirectWidget $widget */
 		$widget = Yii::createObject(array(
 			'class' => $this->redirectWidget,
-			'url' => Html::url($url),
+			'url' => Url::to($url),
 			'redirect' => $jsRedirect,
 			'params' => $params
 		));
