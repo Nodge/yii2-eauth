@@ -11,6 +11,7 @@ namespace nodge\eauth;
 
 use Yii;
 use yii\base\Object;
+use yii\helpers\Url;
 
 /**
  * EAuthServiceBase is a base class for providers.
@@ -117,7 +118,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 		$this->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
 
 		$service = Yii::$app->getRequest()->getQueryParam('service');
-		$cancelUrl = Yii::$app->controller->createAbsoluteUrl('', ['service' => $service]);
+		$cancelUrl = Url::to(['', 'service' => $service], true);
+
 		$this->setCancelUrl($cancelUrl);
 	}
 

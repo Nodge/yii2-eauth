@@ -14,11 +14,11 @@ use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Token\TokenInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
-use yii\base\Exception;
 use nodge\eauth\EAuth;
 use nodge\eauth\IAuthService;
 use nodge\eauth\ErrorException;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /**
  * EOAuthService is a base class for all OAuth providers.
@@ -96,7 +96,7 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	 */
 	protected function getCallbackUrl() {
 		$service = Yii::$app->getRequest()->getQueryParam('service');
-		$url = Yii::$app->controller->createAbsoluteUrl('', ['service' => $service]);
+		$url = Url::to(['', 'service' => $service], true);
 		return $url;
 	}
 

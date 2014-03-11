@@ -1,8 +1,10 @@
 Yii2 EAuth Change Log
 =====================
 
-### dev (11.03.2014)
-* Fix wrong callbackUrl in oauth\ServiceBase when UrlManager uses prettyUrl=false and showScript=false (#12)
+### 2.1.4 (11.03.2014)
+* Fixed wrong callbackUrl in oauth\ServiceBase when UrlManager uses prettyUrl=false and showScript=false (#12)
+* Fixed Yii::t() calls according to Yii2 i18n Named Placeholders (#14)
+* Fixed Yii2 refactor #2630 (#15)
 
 ### 2.1.3 (30.01.2014)
 * Yii2 update (Request methods has been refactored).
