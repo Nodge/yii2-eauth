@@ -88,9 +88,9 @@ class EAuth extends Object {
 	 */
 	public function getServices() {
 		$services = false;
-		if (!empty($this->cache) && Yii::$app->hasComponent($this->cache)) {
+		if (!empty($this->cache) && Yii::$app->has($this->cache)) {
 			/** @var $cache \yii\caching\Cache */
-			$cache = Yii::$app->getComponent($this->cache);
+			$cache = Yii::$app->get($this->cache);
 			$services = $cache->get('EAuth.services');
 		}
 

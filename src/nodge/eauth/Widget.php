@@ -61,7 +61,7 @@ class Widget extends \yii\base\Widget {
 
 		// EAuth component
 		/** @var $component \nodge\eauth\EAuth */
-		$component = Yii::$app->getComponent($this->component);
+		$component = Yii::$app->get($this->component);
 
 		// Some default properties from component configuration
 		if (!isset($this->services)) {

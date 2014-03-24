@@ -28,6 +28,6 @@
 		"nodge/lightopenid": "~1.1"
 	},
 	"extra": {
-		"bootstrap": "nodge\\eauth\\Extension"
+		"bootstrap": "nodge\\eauth\\Bootstrap"
 	}
 }
