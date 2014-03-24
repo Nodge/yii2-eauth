@@ -385,8 +385,8 @@ Add the following to your Login action:
 ## Extending
 
 To receive all the necessary data to your application, you can override the base class of any provider.
-Base classes are stored in `@eauth/src/yii/eauth/services`.
-Examples of extended classes can be found in `@eauth/src/yii/eauth/services/extended/`.
+Base classes are stored in `@eauth/src/services`.
+Examples of extended classes can be found in `@eauth/src/services/extended/`.
 
 After overriding the base class, you need to update your configuration file with a new class name.
 
@@ -445,7 +445,7 @@ To use translations add the following in your config:
 ...
 ```
 
-Available translations can be found in `@eauth/src/yii/eauth/messages`.
+Available translations can be found in `@eauth/src/messages`.
 
 
 # License
