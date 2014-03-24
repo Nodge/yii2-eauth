@@ -16,7 +16,7 @@
 		"source": "https://github.com/nodge/yii2-eauth"
 	},
 	"autoload": {
-		"psr-0": {
+		"psr-4": {
 			"nodge\\eauth\\": "src/"
 		}
 	},

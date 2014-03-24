@@ -1,8 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
-### 2.1.4 (11.03.2014)
+### 2.1.5 (24.03.2014)
 * Fixed Yii2 refactor (#17)
+* PSR-4
 
 ### 2.1.4 (11.03.2014)
 * Fixed wrong callbackUrl in oauth\ServiceBase when UrlManager uses prettyUrl=false and showScript=false (#12)
