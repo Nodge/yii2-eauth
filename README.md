@@ -398,7 +398,7 @@ You can extend base classes with necessary methods and then write something like
 ```php
 <?php
 	/** @var $eauth EAuthServiceBase */
-	$eauth = Yii::app()->eauth->getIdentity('facebook');
+	$eauth = Yii::$app->eauth->getIdentity('facebook');
 	if ($eauth->getIsAuthenticated()) {
 		$eauth->callApiMethod();
 		$eauth->callAnotherApiMethod();
