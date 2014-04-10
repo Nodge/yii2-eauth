@@ -20,7 +20,7 @@ class Bootstrap implements BootstrapInterface {
 	/**
 	 * @inheritdoc
 	 */
-	public function bootstrap(Application $app) {
+	public function bootstrap($app) {
 		Yii::setAlias('@eauth', __DIR__);
 	}
 }
