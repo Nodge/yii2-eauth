@@ -1,6 +1,12 @@
 Yii2 EAuth Change Log
 =====================
 
+
+### 2.2.0 (19.04.2014)
+* Support for PHPoAuthLib v0.3 (#22)
+* Support fot Yii2 beta
+* Internal state implementation replace to PHPoAuthLib storage
+
 ### 2.1.5 (24.03.2014)
 * Fixed Yii2 refactor (#17)
 * PSR-4

@@ -9,7 +9,7 @@
 
 namespace nodge\eauth\oauth1;
 
-use OAuth\Common\Consumer\Credentials;
+use OAuth\Common\Consumer\CredentialsInterface;
 use OAuth\Common\Http\Client\ClientInterface;
 use OAuth\Common\Http\Exception\TokenResponseException;
 use OAuth\Common\Http\Uri\Uri;
@@ -19,7 +19,6 @@ use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth1\Service\AbstractService;
 use OAuth\OAuth1\Signature\SignatureInterface;
 use OAuth\OAuth1\Token\StdOAuth1Token;
-use nodge\eauth\ErrorException;
 
 class ServiceProxy extends AbstractService {
 
@@ -29,10 +28,18 @@ class ServiceProxy extends AbstractService {
 	protected $service;
 
 	/**
-	 * @param Service $service
+	 * {@inheritDoc}
 	 */
-	public function init(Service $service) {
+	public function __construct(
+		CredentialsInterface $credentials,
+		ClientInterface $httpClient,
+		TokenStorageInterface $storage,
+		SignatureInterface $signature,
+		UriInterface $baseApiUri = null,
+		Service $service
+	) {
 		$this->service = $service;
+		parent::__construct($credentials, $httpClient, $storage, $signature, $baseApiUri);
 	}
 
 	/**

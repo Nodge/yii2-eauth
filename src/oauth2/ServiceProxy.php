@@ -18,9 +18,6 @@ use OAuth\Common\Storage\TokenStorageInterface;
 use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth2\Service\AbstractService;
 use OAuth\OAuth2\Token\StdOAuth2Token;
-use nodge\eauth\ErrorException;
-use nodge\eauth\oauth2\state\InvalidStateException;
-use nodge\eauth\oauth2\state\StateStorageInterface;
 
 class ServiceProxy extends AbstractService {
 
@@ -30,18 +27,12 @@ class ServiceProxy extends AbstractService {
 	protected $service;
 
 	/**
-	 * @var StateStorageInterface
-	 */
-	protected $state;
-
-	/**
 	 * @param CredentialsInterface $credentials
 	 * @param ClientInterface $httpClient
 	 * @param TokenStorageInterface $storage
 	 * @param array $scopes
 	 * @param UriInterface $baseApiUri
 	 * @param Service $service
-	 * @param StateStorageInterface $stateStorage
 	 */
 	public function __construct(
 		CredentialsInterface $credentials,
@@ -49,27 +40,11 @@ class ServiceProxy extends AbstractService {
 		TokenStorageInterface $storage,
 		$scopes = array(),
 		UriInterface $baseApiUri = null,
-		Service $service,
-		StateStorageInterface $stateStorage
+		Service $service
 	)
 	{
 		$this->service = $service;
-		$this->state = $stateStorage;
-		parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);
-	}
-
-	/**
-	 * @param StateStorageInterface $storage
-	 */
-	public function setStateStorage(StateStorageInterface $storage) {
-		$this->state = $storage;
-	}
-
-	/**
-	 * @return StateStorageInterface
-	 */
-	public function getStateStorage() {
-		return $this->state;
+		parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri, $service->getValidateState());
 	}
 
 	/**
@@ -140,11 +115,7 @@ class ServiceProxy extends AbstractService {
 	 * @return UriInterface
 	 */
 	public function getAuthorizationEndpoint() {
-		$url = new Uri($this->service->getAuthorizationEndpoint());
-		if (isset($this->state) && $this->service->getValidateState()) {
-			$url->addToQuery('state', $this->state->generateId());
-		}
-		return $url;
+		return new Uri($this->service->getAuthorizationEndpoint());
 	}
 
 	/**
@@ -152,24 +123,6 @@ class ServiceProxy extends AbstractService {
 	 */
 	public function getAccessTokenEndpoint() {
 		return new Uri($this->service->getAccessTokenEndpoint());
-	}
-
-	/**
-	 * Retrieves and stores the OAuth2 access token after a successful authorization.
-	 *
-	 * @param string $code The access code from the callback.
-	 * @return TokenInterface $token
-	 * @throws TokenResponseException
-	 * @throws ErrorException
-	 * @throws InvalidStateException
-	 */
-	public function requestAccessToken($code) {
-		if (isset($this->state) && $this->service->getValidateState()) {
-			if (!isset($_GET['state']) || !$this->state->validateId($_GET['state'])) {
-				throw new InvalidStateException('The valid "state" argument required.');
-			}
-		}
-		return parent::requestAccessToken($code);
 	}
 
 	/**
@@ -253,9 +206,16 @@ class ServiceProxy extends AbstractService {
 
 		$parameters['scope'] = implode($this->service->getScopeSeparator(), $this->scopes);
 
+		if ($this->needsStateParameterInAuthUrl()) {
+			if (!isset($parameters['state'])) {
+				$parameters['state'] = $this->generateAuthorizationState();
+			}
+			$this->storeAuthorizationState($parameters['state']);
+		}
+
 		// Build the url
 		$url = clone $this->getAuthorizationEndpoint();
-		foreach($parameters as $key => $val) {
+		foreach ($parameters as $key => $val) {
 			$url->addToQuery($key, $val);
 		}
 

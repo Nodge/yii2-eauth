@@ -12,6 +12,7 @@
 namespace nodge\eauth\services;
 
 use nodge\eauth\oauth2\Service;
+use OAuth\OAuth2\Service\ServiceInterface;
 
 /**
  * VKontakte provider class.
@@ -86,4 +87,13 @@ class VKontakteOAuth2Service extends Service {
 			return null;
 		}
 	}
+
+	/**
+	 * Returns a class constant from ServiceInterface defining the authorization method used for the API.
+	 * @return int
+	 */
+	public function getAuthorizationMethod() {
+		return ServiceInterface::AUTHORIZATION_METHOD_QUERY_STRING;
+	}
+
 }

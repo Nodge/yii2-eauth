@@ -18,7 +18,6 @@ use nodge\eauth\EAuth;
 use nodge\eauth\ErrorException;
 use nodge\eauth\IAuthService;
 use nodge\eauth\oauth\ServiceBase;
-use nodge\eauth\oauth2\state\StateStorageInterface;
 
 /**
  * EOAuthService is a base class for all OAuth providers.
@@ -81,21 +80,9 @@ abstract class Service extends ServiceBase implements IAuthService{
 	protected $validateState = true;
 
 	/**
-	 * @var string
-	 */
-	protected $stateStorage = array(
-		'class' => 'nodge\eauth\oauth2\state\SessionStateStorage',
-	);
-
-	/**
 	 * @var ServiceProxy
 	 */
 	private $_proxy;
-
-	/**
-	 * @var StateStorageInterface
-	 */
-	private $_stateStorage;
 
 	/**
 	 * Initialize the component.
@@ -168,10 +155,9 @@ abstract class Service extends ServiceBase implements IAuthService{
 	protected function getProxy() {
 		if (!isset($this->_proxy)) {
 			$tokenStorage = $this->getTokenStorage();
-			$stateStorage = $this->getStateStorage();
 			$httpClient = $this->getHttpClient();
 			$credentials = new Credentials($this->clientId, $this->clientSecret, $this->getCallbackUrl());
-			$this->_proxy = new ServiceProxy($credentials, $httpClient, $tokenStorage, $this->scopes, null, $this, $stateStorage);
+			$this->_proxy = new ServiceProxy($credentials, $httpClient, $tokenStorage, $this->scopes, null, $this);
 		}
 		return $this->_proxy;
 	}
@@ -209,16 +195,6 @@ abstract class Service extends ServiceBase implements IAuthService{
 		}
 
 		return $this->getIsAuthenticated();
-	}
-
-	/**
-	 * @return StateStorageInterface
-	 */
-	protected function getStateStorage() {
-		if (!isset($this->_stateStorage)) {
-			$this->_stateStorage = Yii::createObject($this->stateStorage);
-		}
-		return $this->_stateStorage;
 	}
 
 	/**

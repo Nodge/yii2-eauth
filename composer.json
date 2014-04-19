@@ -24,8 +24,8 @@
 		"php": ">=5.4.0",
 		"lib-curl": "*",
 		"yiisoft/yii2": "dev-master@dev",
-		"lusitanian/oauth": "~0.2",
-		"nodge/lightopenid": "~1.1"
+		"lusitanian/oauth": "~0.3.0",
+		"nodge/lightopenid": "~1.1.0"
 	},
 	"extra": {
 		"bootstrap": "nodge\\eauth\\Bootstrap"
