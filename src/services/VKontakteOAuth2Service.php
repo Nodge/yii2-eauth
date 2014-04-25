@@ -84,11 +84,28 @@ class VKontakteOAuth2Service extends Service
 		if (isset($response['error'])) {
 			return array(
 				'code' => is_string($response['error']) ? 0 : $response['error']['error_code'],
-				'message' => is_string($response['error']) ? $response['error'] : $response['error']['error_msg'],
+//				'message' => is_string($response['error']) ? $response['error'] : $response['error']['error_msg'],
+//				'message' => is_string($response['error']) ? $response['error'] : $response['error']['error_msg'],
 			);
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * @param array $data
+	 * @return string|null
+	 */
+	public function getAccessTokenResponseError($data)
+	{
+		if (!isset($data['error'])) {
+			return null;
+		}
+		$error = $data['error'];
+		if (isset($data['error_description'])) {
+			$error .= ': ' . $data['error_description'];
+		}
+		return $error;
 	}
 
 	/**
