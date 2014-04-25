@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### (25.04.2014)
+* Fix missing query params in callback urls (#26)
+* Follow Yii2 code style
 
 ### 2.2.0 (19.04.2014)
 * Support for PHPoAuthLib v0.3 (#22)

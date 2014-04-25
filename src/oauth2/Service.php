@@ -10,6 +10,7 @@
 namespace nodge\eauth\oauth2;
 
 use Yii;
+use yii\helpers\Url;
 use OAuth\Common\Exception\Exception as OAuthException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Consumer\Credentials;
@@ -166,6 +167,25 @@ abstract class Service extends ServiceBase implements IAuthService
 			$this->_proxy = new ServiceProxy($credentials, $httpClient, $tokenStorage, $this->scopes, null, $this);
 		}
 		return $this->_proxy;
+	}
+
+	/**
+	 * @return string the current url
+	 */
+	protected function getCallbackUrl()
+	{
+		$route = Yii::$app->getRequest()->getQueryParams();
+		array_unshift($route, '');
+
+		// Can not use these params in OAuth2 callbacks
+		foreach (['code', 'state'] as $param) {
+			if (isset($route[$param])) {
+				unset($route[$param]);
+			}
+		}
+
+		$url = Url::to($route, true);
+		return $url;
 	}
 
 	/**
