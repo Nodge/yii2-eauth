@@ -20,20 +20,22 @@ use nodge\eauth\oauth2\Service;
  *
  * @package application.extensions.eauth.services
  */
-class LinkedinOAuth2Service extends Service {
+class LinkedinOAuth2Service extends Service
+{
 
 	/**
 	 * Defined scopes
+	 *
 	 * @link http://developer.linkedin.com/documents/authentication#granting
 	 */
 	const SCOPE_R_BASICPROFILE = 'r_basicprofile';
-	const SCOPE_R_FULLPROFILE  = 'r_fullprofile';
+	const SCOPE_R_FULLPROFILE = 'r_fullprofile';
 	const SCOPE_R_EMAILADDRESS = 'r_emailaddress';
-	const SCOPE_R_NETWORK      = 'r_network';
-	const SCOPE_R_CONTACTINFO  = 'r_contactinfo';
-	const SCOPE_RW_NUS         = 'rw_nus';
-	const SCOPE_RW_GROUPS      = 'rw_groups';
-	const SCOPE_W_MESSAGES     = 'w_messages';
+	const SCOPE_R_NETWORK = 'r_network';
+	const SCOPE_R_CONTACTINFO = 'r_contactinfo';
+	const SCOPE_RW_NUS = 'rw_nus';
+	const SCOPE_RW_GROUPS = 'rw_groups';
+	const SCOPE_W_MESSAGES = 'w_messages';
 
 	protected $name = 'linkedin_oauth2';
 	protected $title = 'LinkedIn';
@@ -47,7 +49,8 @@ class LinkedinOAuth2Service extends Service {
 	);
 	protected $baseApiUrl = 'https://api.linkedin.com/v1/';
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('people/~:(id,first-name,last-name,public-profile-url)', array(
 			'query' => array(
 				'format' => 'json',
@@ -64,7 +67,8 @@ class LinkedinOAuth2Service extends Service {
 	/**
 	 * @return int
 	 */
-	public function getAuthorizationMethod() {
+	public function getAuthorizationMethod()
+	{
 		return ServiceInterface::AUTHORIZATION_METHOD_QUERY_STRING_V2;
 	}
 }

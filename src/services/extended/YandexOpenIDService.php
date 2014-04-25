@@ -9,7 +9,8 @@
 
 namespace nodge\eauth\services\extended;
 
-class YandexOpenIDService extends \nodge\eauth\services\YandexOpenIDService {
+class YandexOpenIDService extends \nodge\eauth\services\YandexOpenIDService
+{
 
 	protected $jsArguments = array('popup' => array('width' => 900, 'height' => 620));
 
@@ -23,7 +24,8 @@ class YandexOpenIDService extends \nodge\eauth\services\YandexOpenIDService {
 		'birthDate' => array('dob', 'birthDate'),
 	);
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		if (isset($this->attributes['username']) && !empty($this->attributes['username'])) {
 			$this->attributes['url'] = 'http://openid.yandex.ru/' . $this->attributes['username'];
 		}

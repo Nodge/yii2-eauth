@@ -16,7 +16,8 @@ use Yii;
  *
  * @package application.extensions.eauth
  */
-class Widget extends \yii\base\Widget {
+class Widget extends \yii\base\Widget
+{
 
 	/**
 	 * @var string EAuth component name.
@@ -56,7 +57,8 @@ class Widget extends \yii\base\Widget {
 	 * and {@link CBaseController::beginWidget} after the widget's
 	 * properties have been initialized.
 	 */
-	public function init() {
+	public function init()
+	{
 		parent::init();
 
 		// EAuth component
@@ -84,7 +86,7 @@ class Widget extends \yii\base\Widget {
 
 		// Set the current route, if it is not set.
 		if (!isset($this->action)) {
-			$this->action = '/'.Yii::$app->requestedRoute;
+			$this->action = '/' . Yii::$app->requestedRoute;
 		}
 	}
 
@@ -92,7 +94,8 @@ class Widget extends \yii\base\Widget {
 	 * Executes the widget.
 	 * This method is called by {@link CBaseController::endWidget}.
 	 */
-	public function run() {
+	public function run()
+	{
 		parent::run();
 		echo $this->render('widget', array(
 			'id' => $this->getId(),

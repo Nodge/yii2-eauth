@@ -9,6 +9,7 @@
 
 namespace nodge\eauth;
 
-class ErrorException extends \yii\base\ErrorException {
+class ErrorException extends \yii\base\ErrorException
+{
 
 }

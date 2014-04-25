@@ -24,7 +24,8 @@ use nodge\eauth\oauth\ServiceBase;
  *
  * @package application.extensions.eauth
  */
-abstract class Service extends ServiceBase implements IAuthService{
+abstract class Service extends ServiceBase implements IAuthService
+{
 
 	/**
 	 * @var string OAuth2 client id.
@@ -97,21 +98,24 @@ abstract class Service extends ServiceBase implements IAuthService{
 	/**
 	 * @param string $id
 	 */
-	public function setClientId($id) {
+	public function setClientId($id)
+	{
 		$this->clientId = $id;
 	}
 
 	/**
 	 * @param string $secret
 	 */
-	public function setClientSecret($secret) {
+	public function setClientSecret($secret)
+	{
 		$this->clientSecret = $secret;
 	}
 
 	/**
 	 * @param string|array $scopes
 	 */
-	public function setScope($scopes) {
+	public function setScope($scopes)
+	{
 		if (!is_array($scopes)) {
 			$scopes = array($scopes);
 		}
@@ -126,8 +130,7 @@ abstract class Service extends ServiceBase implements IAuthService{
 			// try to find a class constant with this name
 			if (array_key_exists($key, $constants)) {
 				$resolvedScopes[] = $constants[$key];
-			}
-			else {
+			} else {
 				$resolvedScopes[] = $scopes;
 			}
 		}
@@ -138,21 +141,24 @@ abstract class Service extends ServiceBase implements IAuthService{
 	/**
 	 * @param bool $validate
 	 */
-	public function setValidateState($validate) {
+	public function setValidateState($validate)
+	{
 		$this->validateState = $validate;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function getValidateState() {
+	public function getValidateState()
+	{
 		return $this->validateState;
 	}
 
 	/**
 	 * @return ServiceProxy
 	 */
-	protected function getProxy() {
+	protected function getProxy()
+	{
 		if (!isset($this->_proxy)) {
 			$tokenStorage = $this->getTokenStorage();
 			$httpClient = $this->getHttpClient();
@@ -168,7 +174,8 @@ abstract class Service extends ServiceBase implements IAuthService{
 	 * @return boolean whether user was successfuly authenticated.
 	 * @throws ErrorException
 	 */
-	public function authenticate() {
+	public function authenticate()
+	{
 		if (!$this->checkError()) {
 			return false;
 		}
@@ -180,17 +187,14 @@ abstract class Service extends ServiceBase implements IAuthService{
 				// This was a callback request from a service, get the token
 				$proxy->requestAccessToken($_GET['code']);
 				$this->authenticated = true;
-			}
-			else if ($proxy->hasValidAccessToken()) {
+			} else if ($proxy->hasValidAccessToken()) {
 				$this->authenticated = true;
-			}
-			else {
+			} else {
 				/** @var $url Uri */
 				$url = $proxy->getAuthorizationUri();
 				Yii::$app->getResponse()->redirect($url->getAbsoluteUri())->send();
 			}
-		}
-		catch (OAuthException $e) {
+		} catch (OAuthException $e) {
 			throw new ErrorException($e->getMessage(), $e->getCode(), 1, $e->getFile(), $e->getLine(), $e);
 		}
 
@@ -199,20 +203,21 @@ abstract class Service extends ServiceBase implements IAuthService{
 
 	/**
 	 * Check request params for error code and message.
+	 *
 	 * @return bool
 	 * @throws ErrorException
 	 */
-	protected function checkError() {
+	protected function checkError()
+	{
 		if (isset($_GET[$this->errorParam])) {
 			$error_code = $_GET[$this->errorParam];
 			if ($error_code === $this->errorAccessDeniedCode) {
 				// access_denied error (user canceled)
 				$this->cancel();
-			}
-			else {
+			} else {
 				$error = $error_code;
 				if (isset($_GET[$this->errorDescriptionParam])) {
-					$error = $_GET[$this->errorDescriptionParam].' ('.$error.')';
+					$error = $_GET[$this->errorDescriptionParam] . ' (' . $error . ')';
 				}
 				throw new ErrorException($error);
 			}
@@ -225,7 +230,8 @@ abstract class Service extends ServiceBase implements IAuthService{
 	/**
 	 * @return string
 	 */
-	public function getAuthorizationEndpoint() {
+	public function getAuthorizationEndpoint()
+	{
 		$url = $this->providerOptions['authorize'];
 		if ($this->popupDisplayName !== false && $this->getIsInsidePopup()) {
 			$url = new Uri($url);
@@ -238,7 +244,8 @@ abstract class Service extends ServiceBase implements IAuthService{
 	/**
 	 * @return string
 	 */
-	public function getAccessTokenEndpoint() {
+	public function getAccessTokenEndpoint()
+	{
 		return $this->providerOptions['access_token'];
 	}
 
@@ -246,14 +253,16 @@ abstract class Service extends ServiceBase implements IAuthService{
 	 * @param string $response
 	 * @return array
 	 */
-	public function parseAccessTokenResponse($response) {
+	public function parseAccessTokenResponse($response)
+	{
 		return json_decode($response, true);
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getAccessTokenArgumentNames() {
+	public function getAccessTokenArgumentNames()
+	{
 		return array(
 			'access_token' => 'access_token',
 			'expires_in' => 'expires_in',
@@ -263,33 +272,40 @@ abstract class Service extends ServiceBase implements IAuthService{
 
 	/**
 	 * Return any additional headers always needed for this service implementation's OAuth calls.
+	 *
 	 * @return array
 	 */
-	public function getExtraOAuthHeaders() {
+	public function getExtraOAuthHeaders()
+	{
 		return array();
 	}
 
 	/**
 	 * Return any additional headers always needed for this service implementation's API calls.
+	 *
 	 * @return array
 	 */
-	public function getExtraApiHeaders() {
+	public function getExtraApiHeaders()
+	{
 		return array();
 	}
 
 	/**
 	 * Returns a class constant from ServiceInterface defining the authorization method used for the API
 	 * Header is the sane default.
+	 *
 	 * @return int
 	 */
-	public function getAuthorizationMethod() {
+	public function getAuthorizationMethod()
+	{
 		return ServiceInterface::AUTHORIZATION_METHOD_HEADER_OAUTH;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getScopeSeparator() {
+	public function getScopeSeparator()
+	{
 		return $this->scopeSeparator;
 	}
 }

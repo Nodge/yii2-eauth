@@ -17,13 +17,14 @@ use OAuth\Common\Http\Uri\UriInterface;
 /**
  * Client implementation for cURL
  */
-class HttpClient extends AbstractClient {
+class HttpClient extends AbstractClient
+{
 
 	/**
 	 *  If true, explicitly sets cURL to use SSL version 3. Use this if cURL
 	 *  compiles with GnuTLS SSL.
 	 *
-	 *  @var bool
+	 * @var bool
 	 */
 	protected $forceSSL3 = false;
 
@@ -58,28 +59,32 @@ class HttpClient extends AbstractClient {
 	/**
 	 * @param bool $force
 	 */
-	public function setForceSSL3($force) {
+	public function setForceSSL3($force)
+	{
 		$this->forceSSL3 = $force;
 	}
 
 	/**
 	 * @return boolean
 	 */
-	public function getForceSSL3() {
+	public function getForceSSL3()
+	{
 		return $this->forceSSL3;
 	}
 
 	/**
 	 * @param bool $useStreamsFallback
 	 */
-	public function setUseStreamsFallback($useStreamsFallback) {
+	public function setUseStreamsFallback($useStreamsFallback)
+	{
 		$this->useStreamsFallback = $useStreamsFallback;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function getUseStreamsFallback() {
+	public function getUseStreamsFallback()
+	{
 		return $this->useStreamsFallback;
 	}
 
@@ -93,7 +98,8 @@ class HttpClient extends AbstractClient {
 	 * @param string $method
 	 * @return string
 	 */
-	public function retrieveResponse(UriInterface $endpoint, $requestBody, array $extraHeaders = array(), $method = 'POST') {
+	public function retrieveResponse(UriInterface $endpoint, $requestBody, array $extraHeaders = array(), $method = 'POST')
+	{
 		$this->endpoint = $endpoint;
 		$this->requestBody = $requestBody;
 		$this->extraHeaders = $extraHeaders;
@@ -109,14 +115,16 @@ class HttpClient extends AbstractClient {
 	/**
 	 * @return bool
 	 */
-	protected function allowFollowLocation() {
+	protected function allowFollowLocation()
+	{
 		return !ini_get('safe_mode') && !ini_get('open_basedir');
 	}
 
 	/**
 	 *
 	 */
-	protected function prepareRequest() {
+	protected function prepareRequest()
+	{
 		$this->method = strtoupper($this->method);
 		$this->normalizeHeaders($this->extraHeaders);
 
@@ -133,19 +141,19 @@ class HttpClient extends AbstractClient {
 			$this->extraHeaders['User-Agent'] = 'User-Agent: yii2-eauth';
 		}
 
-		$this->extraHeaders['Host'] = 'Host: '.$this->endpoint->getHost();
+		$this->extraHeaders['Host'] = 'Host: ' . $this->endpoint->getHost();
 		$this->extraHeaders['Connection'] = 'Connection: close';
 
 		if (YII_DEBUG) {
-			Yii::trace('EAuth http request: '.PHP_EOL.var_export(array(
-				'url' => $this->endpoint->getAbsoluteUri(),
-				'method' => $this->method,
-				'headers' => $this->extraHeaders,
-				'body' => $this->requestBody,
-			), true), __NAMESPACE__);
+			Yii::trace('EAuth http request: ' . PHP_EOL . var_export(array(
+					'url' => $this->endpoint->getAbsoluteUri(),
+					'method' => $this->method,
+					'headers' => $this->extraHeaders,
+					'body' => $this->requestBody,
+				), true), __NAMESPACE__);
 		}
 
-		if (is_array($this->requestBody) ) {
+		if (is_array($this->requestBody)) {
 			$this->requestBody = http_build_query($this->requestBody, null, '&');
 		}
 	}
@@ -154,22 +162,21 @@ class HttpClient extends AbstractClient {
 	 * @return string
 	 * @throws TokenResponseException
 	 */
-	protected function curl() {
+	protected function curl()
+	{
 		$this->prepareRequest();
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $this->endpoint->getAbsoluteUri());
 
-		if ($this->method === 'POST' || $this->method === 'PUT' ) {
-			if ($this->method === 'PUT' ) {
+		if ($this->method === 'POST' || $this->method === 'PUT') {
+			if ($this->method === 'PUT') {
 				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-			}
-			else {
+			} else {
 				curl_setopt($ch, CURLOPT_POST, true);
 			}
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $this->requestBody);
-		}
-		else {
+		} else {
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->method);
 		}
 
@@ -191,22 +198,21 @@ class HttpClient extends AbstractClient {
 		$responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 		if (YII_DEBUG) {
-			Yii::trace('EAuth http response: '.PHP_EOL.var_export($response, true), __NAMESPACE__);
+			Yii::trace('EAuth http response: ' . PHP_EOL . var_export($response, true), __NAMESPACE__);
 		}
 
 		if (false === $response) {
-			$errNo  = curl_errno($ch);
+			$errNo = curl_errno($ch);
 			$errStr = curl_error($ch);
 			curl_close($ch);
 
 			if (empty($errStr)) {
 				$errStr = 'Failed to request resource.';
-			}
-			else {
-				$errStr = 'cURL Error # '.$errNo.': '.$errStr;
+			} else {
+				$errStr = 'cURL Error # ' . $errNo . ': ' . $errStr;
 			}
 
-			Yii::error('EAuth curl error ('.$responseCode.'): '.$errStr, __NAMESPACE__);
+			Yii::error('EAuth curl error (' . $responseCode . '): ' . $errStr, __NAMESPACE__);
 			throw new TokenResponseException($errStr, $responseCode);
 		}
 
@@ -219,18 +225,19 @@ class HttpClient extends AbstractClient {
 	 * @return string
 	 * @throws TokenResponseException
 	 */
-	protected function streams() {
+	protected function streams()
+	{
 		$this->prepareRequest();
 
 		$context = stream_context_create(array(
 			'http' => array(
-				'method'			=> $this->method,
-				'header'			=> array_values($this->extraHeaders),
-				'content'			=> $this->requestBody,
-				'protocol_version'	=> '1.1',
-				'user_agent'		=> 'Yii2 EAuth Client',
-				'max_redirects'		=> $this->maxRedirects,
-				'timeout'			=> $this->timeout,
+				'method' => $this->method,
+				'header' => array_values($this->extraHeaders),
+				'content' => $this->requestBody,
+				'protocol_version' => '1.1',
+				'user_agent' => 'Yii2 EAuth Client',
+				'max_redirects' => $this->maxRedirects,
+				'timeout' => $this->timeout,
 			),
 		));
 
@@ -239,7 +246,7 @@ class HttpClient extends AbstractClient {
 		error_reporting($level);
 
 		if (YII_DEBUG) {
-			Yii::trace('EAuth http response: '.PHP_EOL.var_export($response, true), __NAMESPACE__);
+			Yii::trace('EAuth http response: ' . PHP_EOL . var_export($response, true), __NAMESPACE__);
 		}
 
 		if (false === $response) {
@@ -247,12 +254,11 @@ class HttpClient extends AbstractClient {
 
 			if (is_null($lastError)) {
 				$errStr = 'Failed to request resource.';
-			}
-			else {
+			} else {
 				$errStr = $lastError['message'];
 			}
 
-			Yii::error('EAuth streams error: '.$errStr, __NAMESPACE__);
+			Yii::error('EAuth streams error: ' . $errStr, __NAMESPACE__);
 			throw new TokenResponseException($errStr);
 		}
 

@@ -19,7 +19,8 @@ use nodge\eauth\oauth2\Service;
  *
  * @package application.extensions.eauth.services
  */
-class YandexOAuth2Service extends Service {
+class YandexOAuth2Service extends Service
+{
 
 	protected $name = 'yandex_oauth';
 	protected $title = 'Yandex';
@@ -33,7 +34,8 @@ class YandexOAuth2Service extends Service {
 		'access_token' => 'https://oauth.yandex.ru/token',
 	);
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('https://login.yandex.ru/info');
 
 		$this->attributes['id'] = $info['id'];

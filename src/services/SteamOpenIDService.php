@@ -16,7 +16,8 @@ use nodge\eauth\openid\Service;
  *
  * @package application.extensions.eauth.services
  */
-class SteamOpenIDService extends Service {
+class SteamOpenIDService extends Service
+{
 
 	protected $name = 'steam';
 	protected $title = 'Steam';
@@ -25,7 +26,8 @@ class SteamOpenIDService extends Service {
 
 	protected $url = 'http://steamcommunity.com/openid/';
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		if (isset($this->attributes['id'])) {
 			$urlChunks = explode('/', $this->attributes['id']);
 			if ($count = count($urlChunks)) {

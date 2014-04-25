@@ -9,11 +9,13 @@
 
 namespace nodge\eauth\services\extended;
 
-class VKontakteOAuth2Service extends \nodge\eauth\services\VKontakteOAuth2Service {
+class VKontakteOAuth2Service extends \nodge\eauth\services\VKontakteOAuth2Service
+{
 
 	// protected $scope = 'friends';
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$tokenData = $this->getAccessTokenData();
 		$info = $this->makeSignedRequest('users.get.json', array(
 			'query' => array(
@@ -32,8 +34,7 @@ class VKontakteOAuth2Service extends \nodge\eauth\services\VKontakteOAuth2Servic
 
 		if (!empty($info['nickname'])) {
 			$this->attributes['username'] = $info['nickname'];
-		}
-		else {
+		} else {
 			$this->attributes['username'] = 'id' . $info['uid'];
 		}
 

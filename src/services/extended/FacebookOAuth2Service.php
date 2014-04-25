@@ -9,7 +9,8 @@
 
 namespace nodge\eauth\services\extended;
 
-class FacebookOAuth2Service extends \nodge\eauth\services\FacebookOAuth2Service {
+class FacebookOAuth2Service extends \nodge\eauth\services\FacebookOAuth2Service
+{
 
 	protected $scopes = array(
 		self::SCOPE_EMAIL,
@@ -24,7 +25,8 @@ class FacebookOAuth2Service extends \nodge\eauth\services\FacebookOAuth2Service 
 	 *
 	 * @see FacebookOAuth2Service::fetchAttributes()
 	 */
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$this->attributes = $this->makeSignedRequest('me');
 		return true;
 	}

@@ -20,7 +20,8 @@ use OAuth\OAuth1\Service\AbstractService;
 use OAuth\OAuth1\Signature\SignatureInterface;
 use OAuth\OAuth1\Token\StdOAuth1Token;
 
-class ServiceProxy extends AbstractService {
+class ServiceProxy extends AbstractService
+{
 
 	/**
 	 * @var Service the currently used service class
@@ -37,7 +38,8 @@ class ServiceProxy extends AbstractService {
 		SignatureInterface $signature,
 		UriInterface $baseApiUri = null,
 		Service $service
-	) {
+	)
+	{
 		$this->service = $service;
 		parent::__construct($credentials, $httpClient, $storage, $signature, $baseApiUri);
 	}
@@ -45,21 +47,24 @@ class ServiceProxy extends AbstractService {
 	/**
 	 * @return string
 	 */
-	public function service() {
+	public function service()
+	{
 		return $this->service->getServiceName();
 	}
 
 	/**
 	 * @return StdOAuth1Token
 	 */
-	public function retrieveAccessToken() {
+	public function retrieveAccessToken()
+	{
 		return $this->storage->retrieveAccessToken($this->service());
 	}
 
 	/**
 	 *
 	 */
-	public function hasValidAccessToken() {
+	public function hasValidAccessToken()
+	{
 		$serviceName = $this->service();
 
 		if (!$this->storage->hasAccessToken($serviceName)) {
@@ -81,16 +86,18 @@ class ServiceProxy extends AbstractService {
 	 * @param TokenInterface $token
 	 * @return bool
 	 */
-	protected function checkTokenLifetime($token) {
+	protected function checkTokenLifetime($token)
+	{
 		// assume that we have at least a minute to execute a queries.
 		return $token->getEndOfLife() - 60 > time()
-			|| $token->getEndOfLife() === TokenInterface::EOL_NEVER_EXPIRES;
+		|| $token->getEndOfLife() === TokenInterface::EOL_NEVER_EXPIRES;
 	}
 
 	/**
 	 * @return null|TokenInterface
 	 */
-	public function getAccessToken() {
+	public function getAccessToken()
+	{
 		if (!$this->hasValidAccessToken()) {
 			return null;
 		}
@@ -102,21 +109,24 @@ class ServiceProxy extends AbstractService {
 	/**
 	 * @return UriInterface
 	 */
-	public function getRequestTokenEndpoint() {
+	public function getRequestTokenEndpoint()
+	{
 		return new Uri($this->service->getRequestTokenEndpoint());
 	}
 
 	/**
 	 * @return UriInterface
 	 */
-	public function getAuthorizationEndpoint() {
+	public function getAuthorizationEndpoint()
+	{
 		return new Uri($this->service->getAuthorizationEndpoint());
 	}
 
 	/**
 	 * @return UriInterface
 	 */
-	public function getAccessTokenEndpoint() {
+	public function getAccessTokenEndpoint()
+	{
 		return new Uri($this->service->getAccessTokenEndpoint());
 	}
 
@@ -128,13 +138,13 @@ class ServiceProxy extends AbstractService {
 	 * @return StdOAuth1Token
 	 * @throws TokenResponseException
 	 */
-	protected function parseRequestTokenResponse($responseBody) {
+	protected function parseRequestTokenResponse($responseBody)
+	{
 		parse_str($responseBody, $data);
 
 		if (!isset($data) || !is_array($data)) {
 			throw new TokenResponseException('Unable to parse response.');
-		}
-		else if (!isset($data['oauth_callback_confirmed']) || $data['oauth_callback_confirmed'] != 'true') {
+		} else if (!isset($data['oauth_callback_confirmed']) || $data['oauth_callback_confirmed'] != 'true') {
 			throw new TokenResponseException('Error in retrieving token.');
 		}
 
@@ -147,15 +157,15 @@ class ServiceProxy extends AbstractService {
 	 * @return StdOAuth1Token
 	 * @throws TokenResponseException
 	 */
-	protected function parseAccessTokenResponse($responseBody) {
+	protected function parseAccessTokenResponse($responseBody)
+	{
 		if (!is_array($responseBody)) {
 			parse_str($responseBody, $data);
 
 			if (!isset($data) || !is_array($data)) {
 				throw new TokenResponseException('Unable to parse response.');
 			}
-		}
-		else {
+		} else {
 			$data = $responseBody;
 		}
 
@@ -176,8 +186,7 @@ class ServiceProxy extends AbstractService {
 		if (isset($data[$names['oauth_expires_in']])) {
 			$token->setLifeTime($data[$names['oauth_expires_in']]);
 			unset($data[$names['oauth_expires_in']]);
-		}
-		else {
+		} else {
 			$token->setLifetime($this->service->getTokenDefaultLifetime());
 		}
 

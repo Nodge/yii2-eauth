@@ -16,14 +16,17 @@ use yii\base\ActionFilter;
 /**
  * @package application.extensions.eauth
  */
-class ControllerBehavior extends ActionFilter {
+class ControllerBehavior extends ActionFilter
+{
 	/**
 	 * This method is invoked right before an action is to be executed (after all possible filters.)
 	 * You may override this method to do last-minute preparation for the action.
+	 *
 	 * @param Action $action the action to be executed.
 	 * @return boolean whether the action should continue to be executed.
 	 */
-	public function beforeAction($action) {
+	public function beforeAction($action)
+	{
 		$request = Yii::$app->getRequest();
 
 		if (in_array($request->getBodyParam('openid_mode', ''), ['id_res', 'cancel'])) {

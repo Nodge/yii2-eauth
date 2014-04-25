@@ -20,7 +20,8 @@ use nodge\eauth\oauth2\Service;
  *
  * @package application.extensions.eauth.services
  */
-class OdnoklassnikiOAuth2Service extends Service {
+class OdnoklassnikiOAuth2Service extends Service
+{
 
 	const SCOPE_VALUABLE_ACCESS = 'VALUABLE ACCESS';
 	const SCOPE_SET_STATUS = 'SET STATUS';
@@ -43,7 +44,8 @@ class OdnoklassnikiOAuth2Service extends Service {
 	protected $tokenDefaultLifetime = 1500; // about 25 minutes
 	protected $validateState = false;
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('', array(
 			'query' => array(
 				'method' => 'users.getCurrentUser',
@@ -54,7 +56,7 @@ class OdnoklassnikiOAuth2Service extends Service {
 		));
 
 		$this->attributes['id'] = $info['uid'];
-		$this->attributes['name'] = $info['first_name'].' '.$info['last_name'];
+		$this->attributes['name'] = $info['first_name'] . ' ' . $info['last_name'];
 
 		return true;
 	}
@@ -62,14 +64,16 @@ class OdnoklassnikiOAuth2Service extends Service {
 	/**
 	 * @return string
 	 */
-	public function getClientPublic() {
+	public function getClientPublic()
+	{
 		return $this->clientPublic;
 	}
 
 	/**
 	 * @param string $clientPublic
 	 */
-	public function setClientPublic($clientPublic) {
+	public function setClientPublic($clientPublic)
+	{
 		$this->clientPublic = $clientPublic;
 	}
 
@@ -81,7 +85,8 @@ class OdnoklassnikiOAuth2Service extends Service {
 	 * @param boolean $parseResponse Whether to parse response.
 	 * @return mixed the response.
 	 */
-	public function makeSignedRequest($url, $options = array(), $parseResponse = true) {
+	public function makeSignedRequest($url, $options = array(), $parseResponse = true)
+	{
 		$token = $this->getAccessTokenData();
 		if (isset($token)) {
 			$params = '';
@@ -97,17 +102,18 @@ class OdnoklassnikiOAuth2Service extends Service {
 
 	/**
 	 * Returns the error array.
+	 *
 	 * @param array $response
 	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
 	 */
-	protected function fetchResponseError($response) {
+	protected function fetchResponseError($response)
+	{
 		if (isset($response['error_code'])) {
 			return array(
 				'code' => $response['error_code'],
 				'message' => $response['error_msg'],
 			);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

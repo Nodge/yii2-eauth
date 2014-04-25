@@ -16,11 +16,13 @@ use yii\base\BootstrapInterface;
 /**
  * This is the bootstrap class for the yii2-eauth extension.
  */
-class Bootstrap implements BootstrapInterface {
+class Bootstrap implements BootstrapInterface
+{
 	/**
 	 * @inheritdoc
 	 */
-	public function bootstrap($app) {
+	public function bootstrap($app)
+	{
 		Yii::setAlias('@eauth', __DIR__);
 	}
 }

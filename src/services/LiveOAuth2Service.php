@@ -19,7 +19,8 @@ use nodge\eauth\oauth2\Service;
  *
  * @package application.extensions.eauth.services
  */
-class LiveOAuth2Service extends Service {
+class LiveOAuth2Service extends Service
+{
 
 	const SCOPE_BASIC = 'wl.basic';
 	const SCOPE_OFFLINE = 'wl.offline_access';
@@ -57,7 +58,8 @@ class LiveOAuth2Service extends Service {
 	);
 	protected $baseApiUrl = 'https://apis.live.net/v5.0/';
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('me');
 
 		$this->attributes['id'] = $info['id'];
@@ -76,7 +78,8 @@ class LiveOAuth2Service extends Service {
 	/**
 	 * @return int
 	 */
-	public function getAuthorizationMethod() {
+	public function getAuthorizationMethod()
+	{
 		return ServiceInterface::AUTHORIZATION_METHOD_QUERY_STRING;
 	}
 }

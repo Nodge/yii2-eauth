@@ -9,7 +9,8 @@
 
 namespace nodge\eauth\services\extended;
 
-class GoogleOpenIDService extends \nodge\eauth\services\GoogleOpenIDService {
+class GoogleOpenIDService extends \nodge\eauth\services\GoogleOpenIDService
+{
 
 	//protected $jsArguments = array('popup' => array('width' => 450, 'height' => 450));
 
@@ -22,7 +23,8 @@ class GoogleOpenIDService extends \nodge\eauth\services\GoogleOpenIDService {
 		'lastname' => array('lastname', 'namePerson/last'),
 	);
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$this->attributes['fullname'] = $this->attributes['name'] . ' ' . $this->attributes['lastname'];
 		return true;
 	}

@@ -19,7 +19,8 @@ use nodge\eauth\oauth1\Service;
  *
  * @package application.extensions.eauth.services
  */
-class LinkedinOAuth1Service extends Service {
+class LinkedinOAuth1Service extends Service
+{
 
 	protected $name = 'linkedin';
 	protected $title = 'LinkedIn';
@@ -33,7 +34,8 @@ class LinkedinOAuth1Service extends Service {
 	);
 	protected $baseApiUrl = 'http://api.linkedin.com/v1/';
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('people/~:(id,first-name,last-name,public-profile-url)', array(
 			'query' => array(
 				'format' => 'json',
@@ -49,17 +51,18 @@ class LinkedinOAuth1Service extends Service {
 
 	/**
 	 * Returns the error array.
+	 *
 	 * @param array $response
 	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
 	 */
-	protected function fetchResponseError($response) {
+	protected function fetchResponseError($response)
+	{
 		if (isset($response['error-code'])) {
 			return array(
 				'code' => $response['error-code'],
 				'message' => $response['message'],
 			);
-		}
-		else if (isset($response['errorCode'])) {
+		} else if (isset($response['errorCode'])) {
 			return array(
 				'code' => $response['errorCode'],
 				'message' => $response['message'],

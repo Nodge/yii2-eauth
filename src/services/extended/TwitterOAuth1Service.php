@@ -9,9 +9,11 @@
 
 namespace nodge\eauth\services\extended;
 
-class TwitterOAuth1Service extends \nodge\eauth\services\TwitterOAuth1Service {
+class TwitterOAuth1Service extends \nodge\eauth\services\TwitterOAuth1Service
+{
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('account/verify_credentials.json');
 
 		$this->attributes['id'] = $info['id'];
@@ -28,10 +30,12 @@ class TwitterOAuth1Service extends \nodge\eauth\services\TwitterOAuth1Service {
 
 	/**
 	 * Returns the error array.
+	 *
 	 * @param array $response
 	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
 	 */
-	protected function fetchResponseError($response) {
+	protected function fetchResponseError($response)
+	{
 		if (isset($response['errors'])) {
 			$first = reset($response['errors']);
 			return array(

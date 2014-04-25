@@ -14,7 +14,8 @@ namespace nodge\eauth;
  *
  * @package application.extensions.eauth
  */
-interface IAuthService {
+interface IAuthService
+{
 
 	/**
 	 * Returns service name(id).

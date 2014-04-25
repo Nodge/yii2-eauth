@@ -18,7 +18,8 @@ use nodge\eauth\oauth2\Service;
  *
  * @package application.extensions.eauth.services
  */
-class MailruOAuth2Service extends Service {
+class MailruOAuth2Service extends Service
+{
 
 	protected $name = 'mailru';
 	protected $title = 'Mail.ru';
@@ -32,7 +33,8 @@ class MailruOAuth2Service extends Service {
 	);
 	protected $baseApiUrl = 'http://www.appsmail.ru/platform/api';
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$tokenData = $this->getAccessTokenData();
 
 		$info = $this->makeSignedRequest('/', array(
@@ -60,7 +62,8 @@ class MailruOAuth2Service extends Service {
 	 * @param boolean $parseResponse Whether to parse response.
 	 * @return mixed the response.
 	 */
-	public function makeSignedRequest($url, $options = array(), $parseResponse = true) {
+	public function makeSignedRequest($url, $options = array(), $parseResponse = true)
+	{
 		$token = $this->getAccessTokenData();
 		if (isset($token)) {
 			$options['query']['secure'] = 1;
@@ -77,17 +80,18 @@ class MailruOAuth2Service extends Service {
 
 	/**
 	 * Returns the error array.
+	 *
 	 * @param array $response
 	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
 	 */
-	protected function fetchResponseError($response) {
+	protected function fetchResponseError($response)
+	{
 		if (isset($response['error'])) {
 			return array(
 				'code' => $response['error']['error_code'],
 				'message' => $response['error']['error_msg'],
 			);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

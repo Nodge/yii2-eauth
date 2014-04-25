@@ -4,7 +4,7 @@
  * @link http://github.com/Nodge/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
-(function($) {
+(function ($) {
 	var popup,
 		defaults = {
 			popup: {
@@ -32,8 +32,8 @@
 		popup.focus();
 	}
 
-	$.fn.eauth = function(services) {
-		$(this).on('click', '[data-eauth-service]', function(e) {
+	$.fn.eauth = function (services) {
+		$(this).on('click', '[data-eauth-service]', function (e) {
 			e.preventDefault();
 
 			var service = $(this).data('eauthService'),

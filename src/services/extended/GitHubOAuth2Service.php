@@ -9,9 +9,11 @@
 
 namespace nodge\eauth\services\extended;
 
-class GitHubOAuth2Service extends \nodge\eauth\services\GitHubOAuth2Service {
+class GitHubOAuth2Service extends \nodge\eauth\services\GitHubOAuth2Service
+{
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('user');
 
 		$this->attributes['id'] = $info['id'];

@@ -18,7 +18,8 @@ use OAuth\Common\Storage\Exception\AuthorizationStateNotFoundException;
 /**
  * Stores a token in a PHP session.
  */
-class SessionTokenStorage implements TokenStorageInterface {
+class SessionTokenStorage implements TokenStorageInterface
+{
 
 	const SESSION_TOKEN_PREFIX = 'eauth-token-';
 	const SESSION_STATE_PREFIX = 'eauth-state-';
@@ -31,14 +32,16 @@ class SessionTokenStorage implements TokenStorageInterface {
 	/**
 	 * @param string $componentName
 	 */
-	public function __construct($componentName = 'session') {
+	public function __construct($componentName = 'session')
+	{
 		$this->componentName = $componentName;
 	}
 
 	/**
 	 * @return null|object
 	 */
-	protected function getSession() {
+	protected function getSession()
+	{
 		return Yii::$app->get($this->componentName);
 	}
 
@@ -47,7 +50,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @return TokenInterface
 	 * @throws TokenNotFoundException
 	 */
-	public function retrieveAccessToken($service) {
+	public function retrieveAccessToken($service)
+	{
 		if ($this->hasAccessToken($service)) {
 			return $this->getSession()->get(self::SESSION_TOKEN_PREFIX . $service);
 		}
@@ -59,7 +63,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @param TokenInterface $token
 	 * @return TokenInterface
 	 */
-	public function storeAccessToken($service, TokenInterface $token) {
+	public function storeAccessToken($service, TokenInterface $token)
+	{
 		$this->getSession()->set(self::SESSION_TOKEN_PREFIX . $service, $token);
 		return $token;
 	}
@@ -68,7 +73,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @param string $service
 	 * @return bool
 	 */
-	public function hasAccessToken($service) {
+	public function hasAccessToken($service)
+	{
 		return $this->getSession()->has(self::SESSION_TOKEN_PREFIX . $service);
 	}
 
@@ -78,7 +84,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @param string $service
 	 * @return TokenStorageInterface
 	 */
-	public function clearToken($service) {
+	public function clearToken($service)
+	{
 		$this->getSession()->remove(self::SESSION_TOKEN_PREFIX . $service);
 		return $this;
 	}
@@ -88,7 +95,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 *
 	 * @return TokenStorageInterface
 	 */
-	public function clearAllTokens() {
+	public function clearAllTokens()
+	{
 		$session = $this->getSession();
 		foreach ($session as $key => $value) {
 			if (strpos($key, self::SESSION_TOKEN_PREFIX) === 0) {
@@ -105,7 +113,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @param string $state
 	 * @return TokenStorageInterface
 	 */
-	public function storeAuthorizationState($service, $state) {
+	public function storeAuthorizationState($service, $state)
+	{
 		$this->getSession()->set(self::SESSION_STATE_PREFIX . $service, $state);
 		return $this;
 	}
@@ -116,7 +125,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @param string $service
 	 * @return bool
 	 */
-	public function hasAuthorizationState($service) {
+	public function hasAuthorizationState($service)
+	{
 		return $this->getSession()->has(self::SESSION_STATE_PREFIX . $service);
 	}
 
@@ -127,7 +137,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @return string
 	 * @throws AuthorizationStateNotFoundException
 	 */
-	public function retrieveAuthorizationState($service) {
+	public function retrieveAuthorizationState($service)
+	{
 		if ($this->hasAuthorizationState($service)) {
 			return $this->getSession()->get(self::SESSION_STATE_PREFIX . $service);
 		}
@@ -140,7 +151,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 * @param string $service
 	 * @return TokenStorageInterface
 	 */
-	public function clearAuthorizationState($service) {
+	public function clearAuthorizationState($service)
+	{
 		$this->getSession()->remove(self::SESSION_STATE_PREFIX . $service);
 		return $this;
 	}
@@ -151,7 +163,8 @@ class SessionTokenStorage implements TokenStorageInterface {
 	 *
 	 * @return TokenStorageInterface
 	 */
-	public function clearAllAuthorizationStates() {
+	public function clearAllAuthorizationStates()
+	{
 		$session = $this->getSession();
 		foreach ($session as $key => $value) {
 			if (strpos($key, self::SESSION_STATE_PREFIX) === 0) {

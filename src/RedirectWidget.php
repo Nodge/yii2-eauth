@@ -17,7 +17,8 @@ use yii\helpers\ArrayHelper;
  *
  * @package application.extensions.eauth
  */
-class RedirectWidget extends Widget {
+class RedirectWidget extends Widget
+{
 
 	/**
 	 * @var mixed the widget mode. Default to "login".
@@ -42,7 +43,8 @@ class RedirectWidget extends Widget {
 	/**
 	 * Executes the widget.
 	 */
-	public function run() {
+	public function run()
+	{
 		echo $this->render($this->view,
 			ArrayHelper::merge(array(
 				'id' => $this->getId(),

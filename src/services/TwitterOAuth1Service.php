@@ -20,7 +20,8 @@ use nodge\eauth\oauth1\Service;
  *
  * @package application.extensions.eauth.services
  */
-class TwitterOAuth1Service extends Service {
+class TwitterOAuth1Service extends Service
+{
 
 	protected $name = 'twitter';
 	protected $title = 'Twitter';
@@ -38,7 +39,8 @@ class TwitterOAuth1Service extends Service {
 	/**
 	 * @return bool
 	 */
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('account/verify_credentials.json');
 
 		$this->attributes['id'] = $info['id'];
@@ -58,7 +60,8 @@ class TwitterOAuth1Service extends Service {
 	 *
 	 * @return boolean whether user was successfuly authenticated.
 	 */
-	public function authenticate() {
+	public function authenticate()
+	{
 		if (isset($_GET['denied'])) {
 			$this->cancel();
 		}

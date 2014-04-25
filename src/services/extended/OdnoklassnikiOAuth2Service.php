@@ -9,11 +9,13 @@
 
 namespace nodge\eauth\services\extended;
 
-class OdnoklassnikiOAuth2Service extends \nodge\eauth\services\OdnoklassnikiOAuth2Service {
+class OdnoklassnikiOAuth2Service extends \nodge\eauth\services\OdnoklassnikiOAuth2Service
+{
 
 	protected $scopes = array(self::SCOPE_VALUABLE_ACCESS);
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		parent::fetchAttributes();
 
 		$info = $this->makeSignedRequest('', array(
@@ -40,7 +42,8 @@ class OdnoklassnikiOAuth2Service extends \nodge\eauth\services\OdnoklassnikiOAut
 	 * @param string $message
 	 * @return array
 	 */
-	public function wallPost($link, $message) {
+	public function wallPost($link, $message)
+	{
 		return $this->makeSignedRequest('', array(
 			'query' => array(
 				'application_key' => $this->clientPublic,

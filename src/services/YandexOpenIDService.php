@@ -16,7 +16,8 @@ use nodge\eauth\openid\Service;
  *
  * @package application.extensions.eauth.services
  */
-class YandexOpenIDService extends Service {
+class YandexOpenIDService extends Service
+{
 
 	protected $name = 'yandex';
 	protected $title = 'Yandex';
@@ -34,7 +35,8 @@ class YandexOpenIDService extends Service {
 		//'birthDate' => array('dob', 'birthDate'),
 	);
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		if (isset($this->attributes['username']) && !empty($this->attributes['username'])) {
 			$this->attributes['url'] = 'http://openid.yandex.ru/' . $this->attributes['username'];
 		}

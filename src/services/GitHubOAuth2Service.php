@@ -20,7 +20,8 @@ use nodge\eauth\oauth2\Service;
  *
  * @package application.extensions.eauth.services
  */
-class GitHubOAuth2Service extends Service {
+class GitHubOAuth2Service extends Service
+{
 
 	/**
 	 * Defined scopes, see http://developer.github.com/v3/oauth/ for definitions
@@ -46,7 +47,8 @@ class GitHubOAuth2Service extends Service {
 	protected $tokenDefaultLifetime = TokenInterface::EOL_NEVER_EXPIRES;
 	protected $errorAccessDeniedCode = 'user_denied';
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('user');
 
 		$this->attributes['id'] = $info['id'];
@@ -58,40 +60,46 @@ class GitHubOAuth2Service extends Service {
 
 	/**
 	 * Used to configure response type -- we want JSON from github, default is query string format
+	 *
 	 * @return array
 	 */
-	public function getExtraOAuthHeaders() {
+	public function getExtraOAuthHeaders()
+	{
 		return array('Accept' => 'application/json');
 	}
 
 	/**
 	 * Required for GitHub API calls.
+	 *
 	 * @return array
 	 */
-	public function getExtraApiHeaders() {
+	public function getExtraApiHeaders()
+	{
 		return array('Accept' => 'application/vnd.github.beta+json');
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getAuthorizationMethod() {
+	public function getAuthorizationMethod()
+	{
 		return ServiceInterface::AUTHORIZATION_METHOD_QUERY_STRING;
 	}
 
 	/**
 	 * Returns the error array.
+	 *
 	 * @param array $response
 	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
 	 */
-	protected function fetchResponseError($response) {
+	protected function fetchResponseError($response)
+	{
 		if (isset($response['message'])) {
 			return array(
 				'code' => isset($response['error']) ? $response['code'] : 0,
 				'message' => $response['message'],
 			);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

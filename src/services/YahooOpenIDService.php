@@ -16,7 +16,8 @@ use nodge\eauth\openid\Service;
  *
  * @package application.extensions.eauth.services
  */
-class YahooOpenIDService extends Service {
+class YahooOpenIDService extends Service
+{
 
 	protected $name = 'yahoo';
 	protected $title = 'Yahoo';

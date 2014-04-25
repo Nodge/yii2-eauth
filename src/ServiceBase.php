@@ -18,7 +18,8 @@ use yii\helpers\Url;
  *
  * @package application.extensions.eauth
  */
-abstract class ServiceBase extends Object implements IAuthService {
+abstract class ServiceBase extends Object implements IAuthService
+{
 
 	/**
 	 * @var string the service name.
@@ -82,11 +83,11 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 * @return mixed property value.
 	 * @see getAttribute
 	 */
-	public function __get($name) {
+	public function __get($name)
+	{
 		if ($this->hasAttribute($name)) {
 			return $this->getAttribute($name);
-		}
-		else {
+		} else {
 			return parent::__get($name);
 		}
 	}
@@ -99,11 +100,11 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 * @param string $name the attribute name.
 	 * @return boolean whether the attribute value is null.
 	 */
-	public function __isset($name) {
+	public function __isset($name)
+	{
 		if ($this->hasAttribute($name)) {
 			return true;
-		}
-		else {
+		} else {
 			return parent::__isset($name);
 		}
 	}
@@ -112,7 +113,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 * Initialize the component.
 	 * Sets the default {@link redirectUrl} and {@link cancelUrl}.
 	 */
-	public function init() {
+	public function init()
+	{
 		parent::init();
 
 		$this->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
@@ -128,7 +130,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return string the service name(id).
 	 */
-	public function getServiceName() {
+	public function getServiceName()
+	{
 		return $this->name;
 	}
 
@@ -137,7 +140,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return string the service title.
 	 */
-	public function getServiceTitle() {
+	public function getServiceTitle()
+	{
 		return Yii::t('eauth', $this->title);
 	}
 
@@ -146,7 +150,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return string the service type (e.g. OpenID, OAuth).
 	 */
-	public function getServiceType() {
+	public function getServiceType()
+	{
 		return $this->type;
 	}
 
@@ -155,15 +160,18 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return array the arguments for the jQuery.eauth() javascript function.
 	 */
-	public function getJsArguments() {
+	public function getJsArguments()
+	{
 		return $this->jsArguments;
 	}
 
 	/**
 	 * Sets {@link EAuth} application component
+	 *
 	 * @param EAuth $component the application auth component.
 	 */
-	public function setComponent($component) {
+	public function setComponent($component)
+	{
 		$this->component = $component;
 	}
 
@@ -172,7 +180,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return EAuth the {@link EAuth} application component.
 	 */
-	public function getComponent() {
+	public function getComponent()
+	{
 		return $this->component;
 	}
 
@@ -181,36 +190,42 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @param string $url to redirect.
 	 */
-	public function setRedirectUrl($url) {
+	public function setRedirectUrl($url)
+	{
 		$this->redirectUrl = $url;
 	}
 
 	/**
 	 * @return string the redirect url after successful authorization.
 	 */
-	public function getRedirectUrl() {
+	public function getRedirectUrl()
+	{
 		return $this->redirectUrl;
 	}
 
 	/**
 	 * Sets redirect url after unsuccessful authorization (e.g. user canceled).
+	 *
 	 * @param string $url
 	 */
-	public function setCancelUrl($url) {
+	public function setCancelUrl($url)
+	{
 		$this->cancelUrl = $url;
 	}
 
 	/**
 	 * @return string the redirect url after unsuccessful authorization (e.g. user canceled).
 	 */
-	public function getCancelUrl() {
+	public function getCancelUrl()
+	{
 		return $this->cancelUrl;
 	}
 
 	/**
 	 * @param string $title
 	 */
-	public function setTitle($title) {
+	public function setTitle($title)
+	{
 		$this->title = $title;
 	}
 
@@ -219,7 +234,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return boolean whether user was successfuly authenticated.
 	 */
-	public function authenticate() {
+	public function authenticate()
+	{
 		return $this->getIsAuthenticated();
 	}
 
@@ -228,7 +244,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return boolean whether user was successfuly authenticated.
 	 */
-	public function getIsAuthenticated() {
+	public function getIsAuthenticated()
+	{
 		return $this->authenticated;
 	}
 
@@ -238,14 +255,16 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 * @param string $url url to redirect.
 	 * @param array $params
 	 */
-	public function redirect($url = null, $params = array()) {
+	public function redirect($url = null, $params = array())
+	{
 		$this->component->redirect(isset($url) ? $url : $this->redirectUrl, true, $params);
 	}
 
 	/**
 	 * Redirect to the {@link cancelUrl} or simply close the popup window.
 	 */
-	public function cancel($url = null) {
+	public function cancel($url = null)
+	{
 		$this->component->redirect(isset($url) ? $url : $this->cancelUrl, !$this->component->popup);
 	}
 
@@ -254,7 +273,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return boolean whether the attributes was successfully fetched.
 	 */
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		return true;
 	}
 
@@ -262,7 +282,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 * Fetch attributes array.
 	 * This function is internally used to handle fetched state.
 	 */
-	protected function _fetchAttributes() {
+	protected function _fetchAttributes()
+	{
 		if (!$this->fetched) {
 			$this->fetched = true;
 			$result = $this->fetchAttributes();
@@ -277,7 +298,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return mixed the user id.
 	 */
-	public function getId() {
+	public function getId()
+	{
 		$this->_fetchAttributes();
 		return $this->attributes['id'];
 	}
@@ -287,7 +309,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 *
 	 * @return array the attributes.
 	 */
-	public function getAttributes() {
+	public function getAttributes()
+	{
 		$this->_fetchAttributes();
 		$attributes = array();
 		foreach ($this->attributes as $key => $val) {
@@ -303,13 +326,13 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 * @param mixed $default the default value.
 	 * @return mixed the attribute value.
 	 */
-	public function getAttribute($key, $default = null) {
+	public function getAttribute($key, $default = null)
+	{
 		$this->_fetchAttributes();
 		$getter = 'get' . $key;
 		if (method_exists($this, $getter)) {
 			return $this->$getter();
-		}
-		else {
+		} else {
 			return isset($this->attributes[$key]) ? $this->attributes[$key] : $default;
 		}
 	}
@@ -320,7 +343,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	 * @param string $key the attribute name.
 	 * @return boolean true if attribute exists, false otherwise.
 	 */
-	public function hasAttribute($key) {
+	public function hasAttribute($key)
+	{
 		$this->_fetchAttributes();
 		return isset($this->attributes[$key]);
 	}
@@ -328,7 +352,8 @@ abstract class ServiceBase extends Object implements IAuthService {
 	/**
 	 * @return bool
 	 */
-	public function getIsInsidePopup() {
+	public function getIsInsidePopup()
+	{
 		return isset($_GET['js']);
 	}
 }

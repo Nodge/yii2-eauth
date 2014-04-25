@@ -19,7 +19,8 @@ use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth2\Service\AbstractService;
 use OAuth\OAuth2\Token\StdOAuth2Token;
 
-class ServiceProxy extends AbstractService {
+class ServiceProxy extends AbstractService
+{
 
 	/**
 	 * @var Service the currently used service class
@@ -50,16 +51,19 @@ class ServiceProxy extends AbstractService {
 	/**
 	 * @return string
 	 */
-	public function service() {
+	public function service()
+	{
 		return $this->service->getServiceName();
 	}
 
 	/**
 	 * Validate scope
+	 *
 	 * @param string $scope
 	 * @return bool
 	 */
-	public function isValidScope($scope) {
+	public function isValidScope($scope)
+	{
 		$reflectionClass = new \ReflectionClass(get_class($this->service));
 		return in_array($scope, $reflectionClass->getConstants(), true);
 	}
@@ -67,7 +71,8 @@ class ServiceProxy extends AbstractService {
 	/**
 	 * @return bool
 	 */
-	public function hasValidAccessToken() {
+	public function hasValidAccessToken()
+	{
 		$serviceName = $this->service();
 
 		if (!$this->storage->hasAccessToken($serviceName)) {
@@ -93,16 +98,18 @@ class ServiceProxy extends AbstractService {
 	 * @param TokenInterface $token
 	 * @return bool
 	 */
-	protected function checkTokenLifetime($token) {
+	protected function checkTokenLifetime($token)
+	{
 		// assume that we have at least a minute to execute a queries.
 		return $token->getEndOfLife() - 60 > time()
-			|| $token->getEndOfLife() === TokenInterface::EOL_NEVER_EXPIRES;
+		|| $token->getEndOfLife() === TokenInterface::EOL_NEVER_EXPIRES;
 	}
 
 	/**
 	 * @return null|TokenInterface
 	 */
-	public function getAccessToken() {
+	public function getAccessToken()
+	{
 		if (!$this->hasValidAccessToken()) {
 			return null;
 		}
@@ -114,14 +121,16 @@ class ServiceProxy extends AbstractService {
 	/**
 	 * @return UriInterface
 	 */
-	public function getAuthorizationEndpoint() {
+	public function getAuthorizationEndpoint()
+	{
 		return new Uri($this->service->getAuthorizationEndpoint());
 	}
 
 	/**
 	 * @return UriInterface
 	 */
-	public function getAccessTokenEndpoint() {
+	public function getAccessTokenEndpoint()
+	{
 		return new Uri($this->service->getAccessTokenEndpoint());
 	}
 
@@ -130,7 +139,8 @@ class ServiceProxy extends AbstractService {
 	 * @return StdOAuth2Token
 	 * @throws TokenResponseException
 	 */
-	protected function parseAccessTokenResponse($responseBody) {
+	protected function parseAccessTokenResponse($responseBody)
+	{
 		$data = $this->service->parseAccessTokenResponse($responseBody);
 
 		if (!isset($data) || !is_array($data)) {
@@ -151,8 +161,7 @@ class ServiceProxy extends AbstractService {
 		if (isset($data[$names['expires_in']])) {
 			$token->setLifeTime($data[$names['expires_in']]);
 			unset($data[$names['expires_in']]);
-		}
-		else {
+		} else {
 			$token->setLifetime($this->service->getTokenDefaultLifetime());
 		}
 
@@ -168,39 +177,47 @@ class ServiceProxy extends AbstractService {
 
 	/**
 	 * Return any additional headers always needed for this service implementation's OAuth calls.
+	 *
 	 * @return array
 	 */
-	protected function getExtraOAuthHeaders() {
+	protected function getExtraOAuthHeaders()
+	{
 		return $this->service->getExtraOAuthHeaders();
 	}
 
 	/**
 	 * Return any additional headers always needed for this service implementation's API calls.
+	 *
 	 * @return array
 	 */
-	protected function getExtraApiHeaders() {
+	protected function getExtraApiHeaders()
+	{
 		return $this->service->getExtraApiHeaders();
 	}
 
 	/**
 	 * Returns a class constant from ServiceInterface defining the authorization method used for the API
 	 * Header is the sane default.
+	 *
 	 * @return int
 	 */
-	protected function getAuthorizationMethod() {
+	protected function getAuthorizationMethod()
+	{
 		return $this->service->getAuthorizationMethod();
 	}
 
 	/**
 	 * Returns the url to redirect to for authorization purposes.
+	 *
 	 * @param array $additionalParameters
 	 * @return Uri
 	 */
-	public function getAuthorizationUri(array $additionalParameters = array()) {
+	public function getAuthorizationUri(array $additionalParameters = array())
+	{
 		$parameters = array_merge($additionalParameters, array(
-			'type'          => 'web_server',
-			'client_id'     => $this->credentials->getConsumerId(),
-			'redirect_uri'  => $this->credentials->getCallbackUrl(),
+			'type' => 'web_server',
+			'client_id' => $this->credentials->getConsumerId(),
+			'redirect_uri' => $this->credentials->getCallbackUrl(),
 			'response_type' => 'code',
 		));
 

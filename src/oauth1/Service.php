@@ -24,7 +24,8 @@ use nodge\eauth\oauth\ServiceBase;
  *
  * @package application.extensions.eauth
  */
-abstract class Service extends ServiceBase implements IAuthService {
+abstract class Service extends ServiceBase implements IAuthService
+{
 
 	/**
 	 * @var string OAuth2 client id.
@@ -63,21 +64,24 @@ abstract class Service extends ServiceBase implements IAuthService {
 	/**
 	 * @param string $key
 	 */
-	public function setKey($key) {
+	public function setKey($key)
+	{
 		$this->key = $key;
 	}
 
 	/**
 	 * @param string $secret
 	 */
-	public function setSecret($secret) {
+	public function setSecret($secret)
+	{
 		$this->secret = $secret;
 	}
 
 	/**
 	 * @return ServiceProxy
 	 */
-	protected function getProxy() {
+	protected function getProxy()
+	{
 		if (!isset($this->_proxy)) {
 			$storage = $this->getTokenStorage();
 			$httpClient = $this->getHttpClient();
@@ -94,7 +98,8 @@ abstract class Service extends ServiceBase implements IAuthService {
 	 * @return boolean whether user was successfuly authenticated.
 	 * @throws ErrorException
 	 */
-	public function authenticate() {
+	public function authenticate()
+	{
 		try {
 			$proxy = $this->getProxy();
 
@@ -105,19 +110,16 @@ abstract class Service extends ServiceBase implements IAuthService {
 				$proxy->requestAccessToken($_GET['oauth_token'], $_GET['oauth_verifier'], $token->getRequestTokenSecret());
 
 				$this->authenticated = true;
-			}
-			else if ($proxy->hasValidAccessToken()) {
+			} else if ($proxy->hasValidAccessToken()) {
 				$this->authenticated = true;
-			}
-			else {
+			} else {
 				// extra request needed for oauth1 to request a request token :-)
 				$token = $proxy->requestRequestToken();
 				/** @var $url Uri */
 				$url = $proxy->getAuthorizationUri(array('oauth_token' => $token->getRequestToken()));
 				Yii::$app->getResponse()->redirect($url->getAbsoluteUri())->send();
 			}
-		}
-		catch (OAuthException $e) {
+		} catch (OAuthException $e) {
 			throw new ErrorException($e->getMessage(), $e->getCode(), 1, $e->getFile(), $e->getLine(), $e);
 		}
 
@@ -127,28 +129,32 @@ abstract class Service extends ServiceBase implements IAuthService {
 	/**
 	 * @return string
 	 */
-	public function getRequestTokenEndpoint() {
+	public function getRequestTokenEndpoint()
+	{
 		return $this->providerOptions['request'];
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getAuthorizationEndpoint() {
+	public function getAuthorizationEndpoint()
+	{
 		return $this->providerOptions['authorize'];
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getAccessTokenEndpoint() {
+	public function getAccessTokenEndpoint()
+	{
 		return $this->providerOptions['access'];
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getAccessTokenArgumentNames() {
+	public function getAccessTokenArgumentNames()
+	{
 		return array(
 			'oauth_token' => 'oauth_token',
 			'oauth_token_secret' => 'oauth_token_secret',

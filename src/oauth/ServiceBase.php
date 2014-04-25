@@ -25,7 +25,8 @@ use yii\helpers\Url;
  *
  * @package application.extensions.eauth
  */
-abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthService {
+abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthService
+{
 
 	/**
 	 * @var string Base url for API calls.
@@ -70,16 +71,17 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	/**
 	 * For OAuth we can check existing access token.
 	 * Useful for API calls.
+	 *
 	 * @return bool
 	 * @throws ErrorException
 	 */
-	public function getIsAuthenticated() {
+	public function getIsAuthenticated()
+	{
 		if (!$this->authenticated) {
 			try {
 				$proxy = $this->getProxy();
 				$this->authenticated = $proxy->hasValidAccessToken();
-			}
-			catch (\OAuth\Common\Exception\Exception $e) {
+			} catch (\OAuth\Common\Exception\Exception $e) {
 				throw new ErrorException($e->getMessage(), $e->getCode(), 1, $e->getFile(), $e->getLine(), $e);
 			}
 		}
@@ -94,7 +96,8 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	/**
 	 * @return string the current url
 	 */
-	protected function getCallbackUrl() {
+	protected function getCallbackUrl()
+	{
 		$service = Yii::$app->getRequest()->getQueryParam('service');
 		$url = Url::to(['', 'service' => $service], true);
 		return $url;
@@ -103,14 +106,16 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	/**
 	 * @param array $config
 	 */
-	public function setTokenStorage(array $config) {
+	public function setTokenStorage(array $config)
+	{
 		$this->tokenStorage = ArrayHelper::merge($this->tokenStorage, $config);
 	}
 
 	/**
 	 * @return TokenStorageInterface
 	 */
-	protected function getTokenStorage() {
+	protected function getTokenStorage()
+	{
 		if (!isset($this->_tokenStorage)) {
 			$config = $this->tokenStorage;
 			if (!isset($config)) {
@@ -124,14 +129,16 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	/**
 	 * @param array $config
 	 */
-	public function setHttpClient(array $config) {
+	public function setHttpClient(array $config)
+	{
 		$this->httpClient = ArrayHelper::merge($this->httpClient, $config);
 	}
 
 	/**
 	 * @return ClientInterface
 	 */
-	protected function getHttpClient() {
+	protected function getHttpClient()
+	{
 		if (!isset($this->_httpClient)) {
 			$config = $this->httpClient;
 			if (!isset($config)) {
@@ -145,7 +152,8 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	/**
 	 * @return int
 	 */
-	public function getTokenDefaultLifetime() {
+	public function getTokenDefaultLifetime()
+	{
 		return $this->tokenDefaultLifetime;
 	}
 
@@ -158,7 +166,8 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	 * @return mixed the response.
 	 * @throws ErrorException
 	 */
-	public function makeSignedRequest($url, $options = array(), $parseResponse = true) {
+	public function makeSignedRequest($url, $options = array(), $parseResponse = true)
+	{
 		if (!$this->getIsAuthenticated()) {
 			throw new ErrorException(Yii::t('eauth', 'Unable to complete the signed request because the user was not authenticated.'), 401);
 		}
@@ -190,11 +199,13 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 
 	/**
 	 * Parse response and check for errors.
+	 *
 	 * @param string $response
 	 * @return mixed
 	 * @throws ErrorException
 	 */
-	protected function parseResponseInternal($response) {
+	protected function parseResponseInternal($response)
+	{
 		try {
 			$result = $this->parseResponse($response);
 			if (!isset($result)) {
@@ -207,8 +218,7 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 			}
 
 			return $result;
-		}
-		catch (\Exception $e) {
+		} catch (\Exception $e) {
 			throw new ErrorException($e->getMessage(), $e->getCode());
 		}
 	}
@@ -217,16 +227,19 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	 * @param string $response
 	 * @return mixed
 	 */
-	protected function parseResponse($response) {
+	protected function parseResponse($response)
+	{
 		return json_decode($response, true);
 	}
 
 	/**
 	 * Returns the error array.
+	 *
 	 * @param array $response
 	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
 	 */
-	protected function fetchResponseError($response) {
+	protected function fetchResponseError($response)
+	{
 		if (isset($response['error'])) {
 			return array(
 				'code' => 500,
@@ -239,7 +252,8 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	/**
 	 * @return array|null An array with valid access_token information.
 	 */
-	protected function getAccessTokenData() {
+	protected function getAccessTokenData()
+	{
 		if (!$this->getIsAuthenticated()) {
 			return null;
 		}
@@ -261,7 +275,8 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	 * @param array $data
 	 * @return string|null
 	 */
-	public function getAccessTokenResponseError($data) {
+	public function getAccessTokenResponseError($data)
+	{
 		return isset($data['error']) ? $data['error'] : null;
 	}
 }

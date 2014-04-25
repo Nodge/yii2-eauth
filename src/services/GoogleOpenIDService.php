@@ -16,7 +16,8 @@ use nodge\eauth\openid\Service;
  *
  * @package application.extensions.eauth.services
  */
-class GoogleOpenIDService extends Service {
+class GoogleOpenIDService extends Service
+{
 
 	protected $name = 'google';
 	protected $title = 'Google';

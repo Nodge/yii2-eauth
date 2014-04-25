@@ -19,7 +19,8 @@ use OAuth\OAuth2\Service\ServiceInterface;
  *
  * @package application.extensions.eauth.services
  */
-class VKontakteOAuth2Service extends Service {
+class VKontakteOAuth2Service extends Service
+{
 
 	const SCOPE_FRIENDS = 'friends';
 
@@ -35,7 +36,8 @@ class VKontakteOAuth2Service extends Service {
 	);
 	protected $baseApiUrl = 'https://api.vk.com/method/';
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$tokenData = $this->getAccessTokenData();
 		$info = $this->makeSignedRequest('users.get.json', array(
 			'query' => array(
@@ -73,26 +75,29 @@ class VKontakteOAuth2Service extends Service {
 
 	/**
 	 * Returns the error array.
+	 *
 	 * @param array $response
 	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
 	 */
-	protected function fetchResponseError($response) {
+	protected function fetchResponseError($response)
+	{
 		if (isset($response['error'])) {
 			return array(
 				'code' => is_string($response['error']) ? 0 : $response['error']['error_code'],
 				'message' => is_string($response['error']) ? $response['error'] : $response['error']['error_msg'],
 			);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
 
 	/**
 	 * Returns a class constant from ServiceInterface defining the authorization method used for the API.
+	 *
 	 * @return int
 	 */
-	public function getAuthorizationMethod() {
+	public function getAuthorizationMethod()
+	{
 		return ServiceInterface::AUTHORIZATION_METHOD_QUERY_STRING;
 	}
 

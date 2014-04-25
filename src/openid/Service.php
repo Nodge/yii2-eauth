@@ -21,7 +21,8 @@ use nodge\eauth\ErrorException;
  *
  * @package application.extensions.eauth
  */
-abstract class Service extends ServiceBase implements IAuthService {
+abstract class Service extends ServiceBase implements IAuthService
+{
 
 	/**
 	 * @var string a pattern that represents the part of URL-space for which an OpenID Authentication request is valid.
@@ -54,7 +55,8 @@ abstract class Service extends ServiceBase implements IAuthService {
 	/**
 	 * Initialize the component.
 	 */
-	public function init() {
+	public function init()
+	{
 		parent::init();
 		$this->auth = new LightOpenID(Yii::$app->getRequest()->getHostInfo());
 	}
@@ -66,7 +68,8 @@ abstract class Service extends ServiceBase implements IAuthService {
 	 * @throws ErrorException
 	 * @throws HttpException
 	 */
-	public function authenticate() {
+	public function authenticate()
+	{
 		if (!empty($_REQUEST['openid_mode'])) {
 			switch ($_REQUEST['openid_mode']) {
 				case 'id_res':
@@ -82,8 +85,7 @@ abstract class Service extends ServiceBase implements IAuthService {
 					throw new HttpException(400, Yii::t('yii', 'Your request is invalid.'));
 					break;
 			}
-		}
-		else {
+		} else {
 			$this->request();
 		}
 
@@ -93,19 +95,18 @@ abstract class Service extends ServiceBase implements IAuthService {
 	/**
 	 * @throws ErrorException
 	 */
-	protected function id_res() {
+	protected function id_res()
+	{
 		try {
 			if ($this->auth->validate()) {
 				$this->attributes['id'] = $this->auth->identity;
 				$this->loadRequiredAttributes();
 				$this->loadOptionalAttributes();
 				$this->authenticated = true;
-			}
-			else {
+			} else {
 				throw new ErrorException(Yii::t('eauth', 'Unable to complete the authentication because the required data was not received.', array('provider' => $this->getServiceTitle())));
 			}
-		}
-		catch (\Exception $e) {
+		} catch (\Exception $e) {
 			throw new ErrorException($e->getMessage(), $e->getCode());
 		}
 	}
@@ -113,7 +114,8 @@ abstract class Service extends ServiceBase implements IAuthService {
 	/**
 	 * @throws ErrorException
 	 */
-	protected function loadOptionalAttributes() {
+	protected function loadOptionalAttributes()
+	{
 		$attributes = $this->auth->getAttributes();
 		foreach ($this->optionalAttributes as $key => $attr) {
 			if (isset($attributes[$attr[1]])) {
@@ -125,13 +127,13 @@ abstract class Service extends ServiceBase implements IAuthService {
 	/**
 	 *
 	 */
-	protected function loadRequiredAttributes() {
+	protected function loadRequiredAttributes()
+	{
 		$attributes = $this->auth->getAttributes();
 		foreach ($this->requiredAttributes as $key => $attr) {
 			if (isset($attributes[$attr[1]])) {
 				$this->attributes[$key] = $attributes[$attr[1]];
-			}
-			else {
+			} else {
 				throw new ErrorException(Yii::t('eauth', 'Unable to complete the authentication because the required data was not received.', array('provider' => $this->getServiceTitle())));
 			}
 		}
@@ -140,7 +142,8 @@ abstract class Service extends ServiceBase implements IAuthService {
 	/**
 	 * @throws ErrorException
 	 */
-	protected function request() {
+	protected function request()
+	{
 		$this->auth->identity = $this->url; //Setting identifier
 
 		$this->auth->required = array(); //Try to get info from openid provider
@@ -157,8 +160,7 @@ abstract class Service extends ServiceBase implements IAuthService {
 		try {
 			$url = $this->auth->authUrl();
 			Yii::$app->getResponse()->redirect($url)->send();
-		}
-		catch (\Exception $e) {
+		} catch (\Exception $e) {
 			throw new ErrorException($e->getMessage(), $e->getCode());
 		}
 	}
@@ -166,16 +168,15 @@ abstract class Service extends ServiceBase implements IAuthService {
 	/**
 	 * @return string
 	 */
-	protected function getRealm() {
+	protected function getRealm()
+	{
 		if (isset($this->realm)) {
 			if (!preg_match('#^[a-z]+\://#', $this->realm)) {
 				return 'http' . (Yii::$app->getRequest()->getIsSecureConnection() ? 's' : '') . '://' . $this->realm;
-			}
-			else {
+			} else {
 				return $this->realm;
 			}
-		}
-		else {
+		} else {
 			return Yii::$app->getRequest()->getHostInfo();
 		}
 	}

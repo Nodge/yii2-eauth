@@ -9,9 +9,11 @@
 
 namespace nodge\eauth\services\extended;
 
-class MailruOAuth2Service extends \nodge\eauth\services\MailruOAuth2Service {
+class MailruOAuth2Service extends \nodge\eauth\services\MailruOAuth2Service
+{
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$tokenData = $this->getAccessTokenData();
 
 		$info = $this->makeSignedRequest('/', array(

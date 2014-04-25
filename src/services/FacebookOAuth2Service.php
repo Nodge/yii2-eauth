@@ -18,7 +18,8 @@ use nodge\eauth\oauth2\Service;
  *
  * @package application.extensions.eauth.services
  */
-class FacebookOAuth2Service extends Service {
+class FacebookOAuth2Service extends Service
+{
 
 	/**
 	 * Full list of scopes may be found here:
@@ -45,7 +46,8 @@ class FacebookOAuth2Service extends Service {
 	protected $errorParam = 'error_code';
 	protected $errorDescriptionParam = 'error_message';
 
-	protected function fetchAttributes() {
+	protected function fetchAttributes()
+	{
 		$info = $this->makeSignedRequest('me');
 
 		$this->attributes['id'] = $info['id'];
@@ -58,7 +60,8 @@ class FacebookOAuth2Service extends Service {
 	/**
 	 * @return array
 	 */
-	public function getAccessTokenArgumentNames() {
+	public function getAccessTokenArgumentNames()
+	{
 		$names = parent::getAccessTokenArgumentNames();
 		$names['expires_in'] = 'expires';
 		return $names;
@@ -68,7 +71,8 @@ class FacebookOAuth2Service extends Service {
 	 * @param string $response
 	 * @return array
 	 */
-	public function parseAccessTokenResponse($response) {
+	public function parseAccessTokenResponse($response)
+	{
 		// Facebook gives us a query string...
 		parse_str($response, $data);
 		return $data;
@@ -76,17 +80,18 @@ class FacebookOAuth2Service extends Service {
 
 	/**
 	 * Returns the error array.
+	 *
 	 * @param array $response
 	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
 	 */
-	protected function fetchResponseError($response) {
+	protected function fetchResponseError($response)
+	{
 		if (isset($response['error'])) {
 			return array(
 				'code' => $response['error']['code'],
 				'message' => $response['error']['message'],
 			);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}

@@ -19,7 +19,8 @@ use yii\helpers\Url;
  *
  * @package application.extensions.eauth
  */
-class EAuth extends Object {
+class EAuth extends Object
+{
 
 	/**
 	 * @var array Authorization services and their settings.
@@ -64,7 +65,8 @@ class EAuth extends Object {
 	/**
 	 * Initialize the component.
 	 */
-	public function init() {
+	public function init()
+	{
 		parent::init();
 
 		// set default cache on production environments
@@ -76,7 +78,8 @@ class EAuth extends Object {
 	/**
 	 * @param array $services
 	 */
-	public function setServices($services) {
+	public function setServices($services)
+	{
 		$this->services = $services;
 	}
 
@@ -86,7 +89,8 @@ class EAuth extends Object {
 	 *
 	 * @return \stdClass[] services settings.
 	 */
-	public function getServices() {
+	public function getServices()
+	{
 		$services = false;
 		if (!empty($this->cache) && Yii::$app->has($this->cache)) {
 			/** @var $cache \yii\caching\Cache */
@@ -116,84 +120,96 @@ class EAuth extends Object {
 	/**
 	 * @param bool $usePopup
 	 */
-	public function setPopup($usePopup) {
+	public function setPopup($usePopup)
+	{
 		$this->popup = $usePopup;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function getPopup() {
+	public function getPopup()
+	{
 		return $this->popup;
 	}
 
 	/**
 	 * @param string|bool $cache
 	 */
-	public function setCache($cache) {
+	public function setCache($cache)
+	{
 		$this->cache = $cache;
 	}
 
 	/**
 	 * @return string|bool
 	 */
-	public function getCache() {
+	public function getCache()
+	{
 		return $this->cache;
 	}
 
 	/**
 	 * @param int $cacheExpire
 	 */
-	public function setCacheExpire($cacheExpire) {
+	public function setCacheExpire($cacheExpire)
+	{
 		$this->cacheExpire = $cacheExpire;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getCacheExpire() {
+	public function getCacheExpire()
+	{
 		return $this->cacheExpire;
 	}
 
 	/**
 	 * @param string $redirectWidget
 	 */
-	public function setRedirectWidget($redirectWidget) {
+	public function setRedirectWidget($redirectWidget)
+	{
 		$this->redirectWidget = $redirectWidget;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getRedirectWidget() {
+	public function getRedirectWidget()
+	{
 		return $this->redirectWidget;
 	}
 
 	/**
 	 * @param array $config
 	 */
-	public function setTokenStorage(array $config) {
+	public function setTokenStorage(array $config)
+	{
 		$this->tokenStorage = ArrayHelper::merge($this->tokenStorage, $config);
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getTokenStorage() {
+	public function getTokenStorage()
+	{
 		return $this->tokenStorage;
 	}
 
 	/**
 	 * @param array $config
 	 */
-	public function setHttpClient(array $config) {
+	public function setHttpClient(array $config)
+	{
 		$this->httpClient = ArrayHelper::merge($this->httpClient, $config);
 	}
 
 	/**
 	 * @return array
 	 */
-	public function getHttpClient() {
+	public function getHttpClient()
+	{
 		return $this->httpClient;
 	}
 
@@ -204,7 +220,8 @@ class EAuth extends Object {
 	 * @return \stdClass the service settings.
 	 * @throws ErrorException
 	 */
-	protected function getService($service) {
+	protected function getService($service)
+	{
 		$service = strtolower($service);
 		$services = $this->getServices();
 		if (!isset($services[$service])) {
@@ -219,7 +236,8 @@ class EAuth extends Object {
 	 * @param string $service the service name.
 	 * @return string the service type.
 	 */
-	public function getServiceType($service) {
+	public function getServiceType($service)
+	{
 		$service = $this->getService($service);
 		return $service->type;
 	}
@@ -231,7 +249,8 @@ class EAuth extends Object {
 	 * @return IAuthService the identity class.
 	 * @throws ErrorException
 	 */
-	public function getIdentity($service) {
+	public function getIdentity($service)
+	{
 		$service = strtolower($service);
 		if (!isset($this->services[$service])) {
 			throw new ErrorException(Yii::t('eauth', 'Undefined service name: {service}.', array('service' => $service)), 500);
@@ -254,7 +273,8 @@ class EAuth extends Object {
 	 * @param boolean $jsRedirect whether to use redirect while popup window is used. Defaults to true.
 	 * @param array $params
 	 */
-	public function redirect($url, $jsRedirect = true, $params = array()) {
+	public function redirect($url, $jsRedirect = true, $params = array())
+	{
 		/** @var RedirectWidget $widget */
 		$widget = Yii::createObject(array(
 			'class' => $this->redirectWidget,
@@ -277,7 +297,8 @@ class EAuth extends Object {
 	 * @param ServiceBase $identity the class instance.
 	 * @return string serialized value.
 	 */
-	public function toString($identity) {
+	public function toString($identity)
+	{
 		return serialize($identity);
 	}
 
@@ -287,7 +308,8 @@ class EAuth extends Object {
 	 * @param string $identity serialized value.
 	 * @return ServiceBase the class instance.
 	 */
-	public function fromString($identity) {
+	public function fromString($identity)
+	{
 		return unserialize($identity);
 	}
 
