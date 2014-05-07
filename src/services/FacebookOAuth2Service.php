@@ -53,6 +53,7 @@ class FacebookOAuth2Service extends Service
 		$this->attributes['id'] = $info['id'];
 		$this->attributes['name'] = $info['name'];
 		$this->attributes['url'] = $info['link'];
+        	$this->attributes['photo'] = "http://graph.facebook.com/{$info['id']}/picture?type=large";
 
 		return true;
 	}
