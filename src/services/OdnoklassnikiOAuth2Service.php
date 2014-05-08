@@ -46,6 +46,8 @@ class OdnoklassnikiOAuth2Service extends Service
 
 	protected function fetchAttributes()
 	{
+        $tokenData = $this->getAccessTokenData();
+
 		$info = $this->makeSignedRequest('', array(
 			'query' => array(
 				'method' => 'users.getCurrentUser',
@@ -58,8 +60,11 @@ class OdnoklassnikiOAuth2Service extends Service
 
 		$this->attributes['id'] = $info['uid'];
 		$this->attributes['name'] = $info['first_name'] . ' ' . $info['last_name'];
-        	$this->attributes['url'] = 'http://www.odnoklassniki.ru/profile/' . $info['uid'];
-        	$this->attributes['photo'] = $info['pic640x480'];
+        $this->attributes['url'] = 'http://www.odnoklassniki.ru/profile/' . $info['uid'];
+        $this->attributes['photo'] = $info['pic640x480'];
+
+        $this->attributes['access_token'] = $tokenData['access_token'];
+        $this->attributes['expires'] = $tokenData['expires'];
 
 		return true;
 	}
