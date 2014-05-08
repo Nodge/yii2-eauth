@@ -48,12 +48,17 @@ class FacebookOAuth2Service extends Service
 
 	protected function fetchAttributes()
 	{
+        $tokenData = $this->getAccessTokenData();
+
 		$info = $this->makeSignedRequest('me');
 
 		$this->attributes['id'] = $info['id'];
 		$this->attributes['name'] = $info['name'];
 		$this->attributes['url'] = $info['link'];
-        	$this->attributes['photo'] = "http://graph.facebook.com/{$info['id']}/picture?type=large";
+        $this->attributes['photo'] = "http://graph.facebook.com/{$info['id']}/picture?type=large";
+
+        $this->attributes['access_token'] = $tokenData['access_token'];
+        $this->attributes['expires'] = $tokenData['expires'];
 
 		return true;
 	}
