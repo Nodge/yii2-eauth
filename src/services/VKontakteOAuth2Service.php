@@ -39,6 +39,7 @@ class VKontakteOAuth2Service extends Service
 	protected function fetchAttributes()
 	{
 		$tokenData = $this->getAccessTokenData();
+
 		$info = $this->makeSignedRequest('users.get.json', array(
 			'query' => array(
 				'uids' => $tokenData['params']['user_id'],
@@ -51,7 +52,10 @@ class VKontakteOAuth2Service extends Service
 		$this->attributes['id'] = $info['uid'];
 		$this->attributes['name'] = $info['first_name'] . ' ' . $info['last_name'];
 		$this->attributes['url'] = 'http://vk.com/id' . $info['uid'];
-        	$this->attributes['photo'] = $info['photo_big'];
+        $this->attributes['photo'] = $info['photo_big'];
+
+        $this->attributes['access_token'] = $tokenData['access_token'];
+        $this->attributes['expires'] = $tokenData['expires'];
 
 		return true;
 	}
