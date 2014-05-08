@@ -41,12 +41,17 @@ class TwitterOAuth1Service extends Service
 	 */
 	protected function fetchAttributes()
 	{
+        $tokenData = $this->getAccessTokenData();
+
 		$info = $this->makeSignedRequest('account/verify_credentials.json');
 
 		$this->attributes['id'] = $info['id'];
 		$this->attributes['name'] = $info['name'];
 		$this->attributes['url'] = 'http://twitter.com/account/redirect_by_id?id=' . $info['id_str'];
-        	$this->attributes['photo'] = str_replace('_normal', '', $info['profile_image_url']);
+        $this->attributes['photo'] = str_replace('_normal', '', $info['profile_image_url']);
+
+        $this->attributes['access_token'] = $tokenData['access_token'];
+        $this->attributes['expires'] = $tokenData['expires'];
 
 		return true;
 	}
