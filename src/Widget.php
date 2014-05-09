@@ -10,6 +10,7 @@
 namespace nodge\eauth;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * The EAuthWidget widget prints buttons to authenticate user with OpenID and OAuth providers.
@@ -18,6 +19,8 @@ use Yii;
  */
 class Widget extends \yii\base\Widget
 {
+    public $viewsPath;
+    public $data = [];
 
 	/**
 	 * @var string EAuth component name.
@@ -97,12 +100,15 @@ class Widget extends \yii\base\Widget
 	public function run()
 	{
 		parent::run();
-		echo $this->render('widget', array(
-			'id' => $this->getId(),
-			'services' => $this->services,
-			'action' => $this->action,
-			'popup' => $this->popup,
-			'assetBundle' => $this->assetBundle,
-		));
+
+        $view = $this->viewsPath ? $this->viewsPath . 'widget' : 'widget';
+        $params = [
+            'id' => $this->getId(),
+            'services' => $this->services,
+            'action' => $this->action,
+            'popup' => $this->popup,
+            'assetBundle' => $this->assetBundle,
+        ];
+		echo $this->render($view, ArrayHelper::merge($params, $this->data));
 	}
 }
