@@ -15,7 +15,8 @@ use yii\web\View;
 			$code = 'if (window.opener) {';
 			$code .= 'window.close();';
 			if ($redirect) {
-				$code .= 'window.opener.location = \''.addslashes($url).'\';';
+				// $code .= 'window.opener.location = \''.addslashes($url).'\';';
+				$code .= 'window.opener.location.reload();';
 			}
 			$code .= '}';
 			$code .= 'else {';
