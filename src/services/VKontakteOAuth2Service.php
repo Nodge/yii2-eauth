@@ -57,6 +57,13 @@ class VKontakteOAuth2Service extends Service
         $this->attributes['access_token'] = $tokenData['access_token'];
         $this->attributes['expires'] = $tokenData['expires'];
 
+        $friends_data = $this->makeSignedRequest('friends.get.json', array(
+            'query' => array(
+                'user_id' => $info['uid']
+            ),
+        ));
+        $this->attributes['friend_uids'] = $friends_data['response'];
+
 		return true;
 	}
 
