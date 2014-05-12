@@ -53,6 +53,9 @@ class TwitterOAuth1Service extends Service
         $this->attributes['access_token'] = $tokenData['access_token'];
         $this->attributes['expires'] = $tokenData['expires'];
 
+        $friends_data = $this->makeSignedRequest('friends/ids.json');
+        $this->attributes['friend_uids'] = $friends_data['ids'];
+
 		return true;
 	}
 
