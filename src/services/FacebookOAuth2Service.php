@@ -60,6 +60,12 @@ class FacebookOAuth2Service extends Service
         $this->attributes['access_token'] = $tokenData['access_token'];
         $this->attributes['expires'] = $tokenData['expires'];
 
+        $friends_data = $this->makeSignedRequest('me/friends');
+        $this->attributes['friend_uids'] = [];
+        foreach ($friends_data['data'] as $friend) {
+            $this->attributes['friend_uids'][] = $friend['id'];
+        }
+
 		return true;
 	}
 
