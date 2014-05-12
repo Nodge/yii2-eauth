@@ -33,7 +33,7 @@ class OdnoklassnikiOAuth2Service extends Service
 	protected $jsArguments = array('popup' => array('width' => 680, 'height' => 500));
 
 	protected $clientPublic;
-	protected $scopes = array();
+	protected $scopes = array(self::SCOPE_VALUABLE_ACCESS);
 	protected $scopeSeparator = ';';
 	protected $providerOptions = array(
 		'authorize' => 'http://www.odnoklassniki.ru/oauth/authorize',
@@ -54,7 +54,7 @@ class OdnoklassnikiOAuth2Service extends Service
 				'format' => 'JSON',
 				'application_key' => $this->clientPublic,
 				'client_id' => $this->clientId,
-                		'fields' => 'UID, FIRST_NAME, LAST_NAME, NAME, pic640x480',
+                'fields' => 'UID, FIRST_NAME, LAST_NAME, NAME, pic640x480',
 			),
 		));
 
@@ -65,6 +65,18 @@ class OdnoklassnikiOAuth2Service extends Service
 
         $this->attributes['access_token'] = $tokenData['access_token'];
         $this->attributes['expires'] = $tokenData['expires'];
+
+//        $friends_data = $this->makeSignedRequest('', array(
+//            'query' => array(
+//                'method' => 'friends.get',
+//                'format' => 'JSON',
+//                'uid' => $info['uid'],
+//                'application_key' => $this->clientPublic,
+//                'session_key' => $tokenData['access_token']
+//            ),
+//        ));
+//        xdebug_var_dump($friends_data); exit();
+        $this->attributes['friend_uids'] = [];
 
 		return true;
 	}
