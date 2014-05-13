@@ -66,17 +66,15 @@ class OdnoklassnikiOAuth2Service extends Service
         $this->attributes['access_token'] = $tokenData['access_token'];
         $this->attributes['expires'] = $tokenData['expires'];
 
-//        $friends_data = $this->makeSignedRequest('', array(
-//            'query' => array(
-//                'method' => 'friends.get',
-//                'format' => 'JSON',
-//                'uid' => $info['uid'],
-//                'application_key' => $this->clientPublic,
-//                'session_key' => $tokenData['access_token']
-//            ),
-//        ));
-//        xdebug_var_dump($friends_data); exit();
-        $this->attributes['friend_uids'] = [];
+        $friends_data = $this->makeSignedRequest('', array(
+            'query' => array(
+                'method' => 'friends.get',
+                'format' => 'JSON',
+                'application_key' => $this->clientPublic,
+                'session_key' => $tokenData['access_token']
+            ),
+        ));
+        $this->attributes['friend_uids'] = $friends_data;
 
 		return true;
 	}
