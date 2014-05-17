@@ -30,13 +30,14 @@ class FacebookOAuth2Service extends Service
 	const SCOPE_USER_HOMETOWN = 'user_hometown';
 	const SCOPE_USER_LOCATION = 'user_location';
 	const SCOPE_USER_PHOTOS = 'user_photos';
+    const SCOPE_USER_FRIENDS = 'user_friends';
 
 	protected $name = 'facebook';
 	protected $title = 'Facebook';
 	protected $type = 'OAuth2';
 	protected $jsArguments = array('popup' => array('width' => 585, 'height' => 290));
 
-	protected $scopes = array();
+    protected $scopes = array(self::SCOPE_USER_FRIENDS);
 	protected $providerOptions = array(
 		'authorize' => 'https://www.facebook.com/dialog/oauth',
 		'access_token' => 'https://graph.facebook.com/oauth/access_token',
