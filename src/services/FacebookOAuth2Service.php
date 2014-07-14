@@ -73,9 +73,14 @@ class FacebookOAuth2Service extends Service
 	 */
 	public function parseAccessTokenResponse($response)
 	{
-		// Facebook gives us a query string...
-		parse_str($response, $data);
-		return $data;
+		// Facebook gives us a query string or json
+		if ($response[0] === '{') {
+			return json_decode($response, true);
+		}
+		else {
+			parse_str($response, $data);
+			return $data;
+		}
 	}
 
 	/**
@@ -94,5 +99,18 @@ class FacebookOAuth2Service extends Service
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * @param array $data
+	 * @return string|null
+	 */
+	public function getAccessTokenResponseError($data)
+	{
+		$error = $this->fetchResponseError($data);
+		if (!$error) {
+			return null;
+		}
+		return $error['code'].': '.$error['message'];
 	}
 }

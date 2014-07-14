@@ -174,17 +174,23 @@ abstract class Service extends ServiceBase implements IAuthService
 	 */
 	protected function getCallbackUrl()
 	{
-		$route = Yii::$app->getRequest()->getQueryParams();
-		array_unshift($route, '');
+		if (isset($_GET['redirect_uri'])) {
+			$url = $_GET['redirect_uri'];
+		}
+		else {
+			$route = Yii::$app->getRequest()->getQueryParams();
+			array_unshift($route, '');
 
-		// Can not use these params in OAuth2 callbacks
-		foreach (['code', 'state'] as $param) {
-			if (isset($route[$param])) {
-				unset($route[$param]);
+			// Can not use these params in OAuth2 callbacks
+			foreach (['code', 'state', 'redirect_uri'] as $param) {
+				if (isset($route[$param])) {
+					unset($route[$param]);
+				}
 			}
+
+			$url = Url::to($route, true);
 		}
 
-		$url = Url::to($route, true);
 		return $url;
 	}
 

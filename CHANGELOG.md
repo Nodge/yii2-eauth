@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### 2.2.2 (15.07.2014)
+* Fixed wrong redirect_uri when popup is used
+
 ### 2.2.1 (25.04.2014)
 * Fix missing query params in callback urls (#26)
 * Follow Yii2 code style

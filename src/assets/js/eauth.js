@@ -23,7 +23,7 @@
 		url += url.indexOf('?') >= 0 ? '&' : '?';
 		if (url.indexOf('redirect_uri=') === -1)
 			url += 'redirect_uri=' + encodeURIComponent(redirect_uri) + '&';
-		url += 'js';
+		url += 'js=';
 
 		var centerWidth = (window.screen.width - options.popup.width) / 2,
 			centerHeight = (window.screen.height - options.popup.height) / 2;
