@@ -159,7 +159,7 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	 * Returns the protected resource.
 	 *
 	 * @param string $url url to request.
-	 * @param array $options HTTP request options. Keys: query, data, referer.
+	 * @param array $options HTTP request options. Keys: query, data, headers.
 	 * @param boolean $parseResponse Whether to parse response.
 	 * @return mixed the response.
 	 * @throws ErrorException
@@ -194,6 +194,39 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 		return $response;
 	}
 
+	/**
+	 * Returns the public resource.
+	 *
+	 * @param string $url url to request.
+	 * @param array $options HTTP request options. Keys: query, data, headers.
+	 * @param boolean $parseResponse Whether to parse response.
+	 * @return mixed the response.
+	 */
+	public function makeRequest($url, $options = array(), $parseResponse = true) {
+		if (stripos($url, 'http') !== 0) {
+			$url = $this->baseApiUrl . $url;
+		}
+
+		$url = new Uri($url);
+		if (isset($options['query'])) {
+			foreach ($options['query'] as $key => $value) {
+				$url->addToQuery($key, $value);
+			}
+		}
+
+		$data = isset($options['data']) ? $options['data'] : array();
+		$method = !empty($data) ? 'POST' : 'GET';
+
+		$headers = isset($options['headers']) ? $options['headers'] : array();
+		$headers = array_merge($this->getProxy()->getExtraApiHeaders(), $headers);
+
+		$response = $this->getHttpClient()->retrieveResponse($url, $data, $headers, $method);
+		if ($parseResponse) {
+			$response = $this->parseResponseInternal($response);
+		}
+
+		return $response;
+	}
 
 	/**
 	 * Parse response and check for errors.

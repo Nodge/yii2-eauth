@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### 2.2.3 (15.07.2014)
+* Added ability to call public api methods (without access token) (#28)
+
 ### 2.2.2 (15.07.2014)
 * Fixed wrong redirect_uri when popup is used
 

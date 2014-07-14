@@ -399,9 +399,43 @@ You can extend base classes with necessary methods and then write something like
 <?php
 	/** @var $eauth EAuthServiceBase */
 	$eauth = Yii::$app->eauth->getIdentity('facebook');
+
+	// to get protected resources user should be authenticated:
 	if ($eauth->getIsAuthenticated()) {
-		$eauth->callApiMethod();
-		$eauth->callAnotherApiMethod();
+		$eauth->callProtectedApiMethod();
+		$eauth->callAnotherProtectedApiMethod();
+	}
+
+	// or you can get public resources at any time:
+	$eauth->callPublicApiMethod();
+	$eauth->callAnotherPublicApiMethod();
+```
+
+Example of a API call method:
+
+```php
+<?php
+	class FacebookOAuth2Service extends \nodge\eauth\services\FacebookOAuth2Service
+	{
+		public function fooApiMethod($bar) {
+			$api_method = 'me'; // ex. for Facebook this results to https://graph.facebook.com/me
+
+			// get protected resource
+			$response = $this->makeSignedRequest($api_method, [
+				'query' => [ 'foo' => 'bar' ], // GET arguments
+				'data' => [ 'foo' => 'bar' ], // POST arguments
+				'headers' => [ 'X-Foo' => 'bar'  ], // Extra HTTP headers
+			]);
+
+			// you can get public resources with the same API:
+			//$response = $this->makeRequest($api_method, $options);
+
+			// process $response
+			$data = process($response);
+
+			// return results
+			return $data;
+		}
 	}
 ```
 
