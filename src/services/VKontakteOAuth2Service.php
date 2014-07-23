@@ -23,13 +23,14 @@ class VKontakteOAuth2Service extends Service
 {
 
 	const SCOPE_FRIENDS = 'friends';
+    const SCOPE_EMAIL = 'email';
 
 	protected $name = 'vkontakte';
 	protected $title = 'VK.com';
 	protected $type = 'OAuth2';
 	protected $jsArguments = array('popup' => array('width' => 585, 'height' => 350));
 
-	protected $scopes = array(self::SCOPE_FRIENDS);
+	protected $scopes = array(self::SCOPE_FRIENDS, self::SCOPE_EMAIL);
 	protected $providerOptions = array(
 		'authorize' => 'http://api.vk.com/oauth/authorize',
 		'access_token' => 'https://api.vk.com/oauth/access_token',
@@ -50,6 +51,7 @@ class VKontakteOAuth2Service extends Service
 		$info = $info['response'][0];
 
 		$this->attributes['id'] = $info['uid'];
+        $this->attributes['email'] = $tokenData['params']['email'];
 		$this->attributes['name'] = $info['first_name'] . ' ' . $info['last_name'];
 		$this->attributes['url'] = 'http://vk.com/id' . $info['uid'];
         $this->attributes['photo'] = $info['photo_big'];
