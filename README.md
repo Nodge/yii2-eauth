@@ -221,6 +221,15 @@ Add the following in your config:
 				),
 			),
 		),
+		
+		'i18n' => array(
+			'translations' => array(
+				'eauth' => array(
+					'class' => 'yii\i18n\PhpMessageSource',
+					'basePath' => '@eauth/messages',
+				),
+			),
+		),
 
 		// (optionally) you can configure pretty urls
 		'urlManager' => array(
