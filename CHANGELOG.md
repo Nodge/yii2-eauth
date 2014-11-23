@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### dev (24.11.2014)
+* Fixed typo in `oauth2/Service.php` (#34)
+
 ### 2.2.3 (15.07.2014)
 * Added ability to call public api methods (without access token) (#28)
 
