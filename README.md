@@ -4,7 +4,7 @@ Yii2 EAuth extension
 EAuth extension allows to authenticate users with accounts on other websites.
 Supported protocols: OpenID, OAuth 1.0 and OAuth 2.0.
 
-EAuth is a extension for provide a unified (does not depend on the selected service) method to authenticate the user. So, the extension itself does not perform login, does not register the user and does not bind the user accounts from different providers.
+EAuth is an extension to provide a unified (does not depend on the selected service) method to authenticate the user. The extension itself does not perform login, does not register the user and does not bind the user accounts from different providers.
 
 * [Demo](http://nodge.ru/yii-eauth/demo2/)
 * [Demo project](https://github.com/Nodge/yii2-eauth-demo/)
@@ -14,16 +14,16 @@ EAuth is a extension for provide a unified (does not depend on the selected serv
 ### Why own extension and not a third-party service?
 The implementation of the authorization on your own server has several advantages:
 
-* Full control over the process: what will be written in the authorization window, what data we get, etc.
+* Full control over the process: What will be written in the authorization window, what data we get, etc.
 * Ability to change the appearance of the widget.
-* When logging via OAuth is possible to invoke methods on API.
+* When logging in via OAuth, it is possible to invoke methods on the API.
 * Fewer dependencies on third-party services - more reliable application.
 
 
 ### The extension allows you to:
 
-* Ignore the nuances of authorization through the different types of services, use the class based adapters for each service.
-* Get a unique user ID that can be used to register user in your application.
+* Ignore the nuances of authorization through the different types of services and use the class based adapters for each service.
+* Get a unique user ID that can be used to register the user in your application.
 * Extend the standard authorization classes to obtain additional data about the user.
 * Work with the API of social networks by extending the authorization classes.
 * Set up a list of supported services, customize the appearance of the widget, use the popup window without closing your application.
@@ -34,7 +34,7 @@ The implementation of the authorization on your own server has several advantage
 * The component that contains utility functions.
 * A widget that displays a list of services in the form of icons and allowing authorization in the popup window.
 * Base classes to create your own services.
-* Ready for authenticate via Google, Twitter, Facebook and other providers.
+* Ready to authenticate via Google, Twitter, Facebook and other providers.
 
 
 ### Included services:
@@ -420,7 +420,7 @@ You can extend base classes with necessary methods and then write something like
 	$eauth->callAnotherPublicApiMethod();
 ```
 
-Example of a API call method:
+Example of an API call method:
 
 ```php
 <?php
@@ -469,7 +469,7 @@ You can save access_token to your database by using custom token storage in your
 
 ## Translation
 
-To use translations add the following in your config:
+To use translations, add the following in your config:
 
 ```php
 <?php
