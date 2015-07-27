@@ -1,8 +1,10 @@
 Yii2 EAuth Change Log
 =====================
 
-### dev (24.11.2014)
+### 2.2.4 (27.07.2015)
 * Fixed typo in `oauth2/Service.php` (#34)
+* Added German translation
+* Added `email` attribute to `LinkedinOAuth2Service.php`
 
 ### 2.2.3 (15.07.2014)
 * Added ability to call public api methods (without access token) (#28)
