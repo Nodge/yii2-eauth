@@ -51,6 +51,7 @@ The implementation of the authorization on your own server has several advantage
 	* Live
 	* GitHub
 	* LinkedIn
+	* Instagram
 	* Yandex (ru)
 	* VKontake (ru)
 	* Mail.ru (ru)
@@ -87,9 +88,9 @@ Edit your `composer.json` and add:
 
 ```json
 {
-    "require": {
-        "nodge/yii2-eauth": "~2.0"
-    }
+		"require": {
+				"nodge/yii2-eauth": "~2.0"
+		}
 }
 ```
 
@@ -188,6 +189,12 @@ Add the following in your config:
 					'class' => 'nodge\eauth\services\SteamOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
 				],
+				'instagram' => [
+					// register your app here: https://instagram.com/developer/register/
+					'class' => 'nodge\eauth\services\InstagramOAuth2Service',
+					'clientId' => '...',
+					'clientSecret' => '...',
+				],
 				'vkontakte' => [
 					// register your app here: https://vk.com/editapp?act=create&site=1
 					'class' => 'nodge\eauth\services\VKontakteOAuth2Service',
@@ -208,7 +215,7 @@ Add the following in your config:
 					'clientSecret' => '...',
 					'clientPublic' => '...',
 					'title' => 'Odnoklas.',
-			  	],
+					],
 			],
 		],
 		
@@ -311,14 +318,14 @@ Or you can disable CSRF validation by yourself.
 <?php
 ...
 	public function behaviors() {
-    		return [
-    			'eauth' => [
-    				// required to disable csrf validation on OpenID requests
-    				'class' => \nodge\eauth\openid\ControllerBehavior::className(),
-    				'only' => ['login'],
-    			],
-    		];
-    	}
+				return [
+					'eauth' => [
+						// required to disable csrf validation on OpenID requests
+						'class' => \nodge\eauth\openid\ControllerBehavior::className(),
+						'only' => ['login'],
+					],
+				];
+			}
 ...
 ```
 
@@ -423,7 +430,7 @@ Example of an API call method:
 			$response = $this->makeSignedRequest($api_method, [
 				'query' => [ 'foo' => 'bar' ], // GET arguments
 				'data' => [ 'foo' => 'bar' ], // POST arguments
-				'headers' => [ 'X-Foo' => 'bar'  ], // Extra HTTP headers
+				'headers' => [ 'X-Foo' => 'bar' ], // Extra HTTP headers
 			]);
 
 			// you can get public resources with the same API:

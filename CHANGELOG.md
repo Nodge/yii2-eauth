@@ -2,6 +2,7 @@ Yii2 EAuth Change Log
 =====================
 
 ### In progress (17.10.2015)
+* Added InstagramOAuth2Service (#61)
 * Fixed default token lifetime (#53)
 * Replace array() with [] (#54)
 * Remove deprecated Google OpenID service (#56)
