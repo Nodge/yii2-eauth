@@ -12,16 +12,16 @@ namespace nodge\eauth\services\extended;
 class GoogleOpenIDService extends \nodge\eauth\services\GoogleOpenIDService
 {
 
-	//protected $jsArguments = array('popup' => array('width' => 450, 'height' => 450));
+	//protected $jsArguments = ['popup' => ['width' => 450, 'height' => 450]];
 
-	protected $requiredAttributes = array(
-		'name' => array('firstname', 'namePerson/first'),
-		'email' => array('email', 'contact/email'),
-	);
-	protected $optionalAttributes = array(
-		'language' => array('language', 'pref/language'),
-		'lastname' => array('lastname', 'namePerson/last'),
-	);
+	protected $requiredAttributes = [
+		'name' => ['firstname', 'namePerson/first'],
+		'email' => ['email', 'contact/email'],
+	];
+	protected $optionalAttributes = [
+		'language' => ['language', 'pref/language'],
+		'lastname' => ['lastname', 'namePerson/last'],
+	];
 
 	protected function fetchAttributes()
 	{

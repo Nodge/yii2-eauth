@@ -41,7 +41,7 @@ abstract class Service extends ServiceBase implements IAuthService
 	/**
 	 * @var array OAuth scopes.
 	 */
-	protected $scopes = array();
+	protected $scopes = [];
 
 	/**
 	 * @var string
@@ -51,10 +51,10 @@ abstract class Service extends ServiceBase implements IAuthService
 	/**
 	 * @var array Provider options. Must contain the keys: authorize, access_token.
 	 */
-	protected $providerOptions = array(
+	protected $providerOptions = [
 		'authorize' => '',
 		'access_token' => '',
-	);
+	];
 
 	/**
 	 * @var string Error key name in _GET options.
@@ -92,7 +92,7 @@ abstract class Service extends ServiceBase implements IAuthService
 	 * @param EAuth $component the component instance.
 	 * @param array $options properties initialization.
 	 */
-//	public function init($component, $options = array()) {
+//	public function init($component, $options = []) {
 //		parent::init($component, $options);
 //	}
 
@@ -118,10 +118,10 @@ abstract class Service extends ServiceBase implements IAuthService
 	public function setScope($scopes)
 	{
 		if (!is_array($scopes)) {
-			$scopes = array($scopes);
+			$scopes = [$scopes];
 		}
 
-		$resolvedScopes = array();
+		$resolvedScopes = [];
 		$reflClass = new \ReflectionClass($this);
 		$constants = $reflClass->getConstants();
 
@@ -289,11 +289,11 @@ abstract class Service extends ServiceBase implements IAuthService
 	 */
 	public function getAccessTokenArgumentNames()
 	{
-		return array(
+		return [
 			'access_token' => 'access_token',
 			'expires_in' => 'expires_in',
 			'refresh_token' => 'refresh_token',
-		);
+		];
 	}
 
 	/**
@@ -303,7 +303,7 @@ abstract class Service extends ServiceBase implements IAuthService
 	 */
 	public function getExtraOAuthHeaders()
 	{
-		return array();
+		return [];
 	}
 
 	/**
@@ -313,7 +313,7 @@ abstract class Service extends ServiceBase implements IAuthService
 	 */
 	public function getExtraApiHeaders()
 	{
-		return array();
+		return [];
 	}
 
 	/**

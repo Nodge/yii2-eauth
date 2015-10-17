@@ -102,13 +102,13 @@ class GoogleOAuth2Service extends Service
 	protected $name = 'google_oauth';
 	protected $title = 'Google';
 	protected $type = 'OAuth2';
-	protected $jsArguments = array('popup' => array('width' => 500, 'height' => 450));
+	protected $jsArguments = ['popup' => ['width' => 500, 'height' => 450]];
 
-	protected $scopes = array(self::SCOPE_USERINFO_PROFILE);
-	protected $providerOptions = array(
+	protected $scopes = [self::SCOPE_USERINFO_PROFILE];
+	protected $providerOptions = [
 		'authorize' => 'https://accounts.google.com/o/oauth2/auth',
 		'access_token' => 'https://accounts.google.com/o/oauth2/token',
-	);
+	];
 
 	protected function fetchAttributes()
 	{
@@ -141,7 +141,7 @@ class GoogleOAuth2Service extends Service
 	 * @param boolean $parseResponse Whether to parse response.
 	 * @return mixed the response.
 	 */
-	public function makeSignedRequest($url, $options = array(), $parseResponse = true)
+	public function makeSignedRequest($url, $options = [], $parseResponse = true)
 	{
 		if (!isset($options['query']['alt'])) {
 			$options['query']['alt'] = 'json';
@@ -158,10 +158,10 @@ class GoogleOAuth2Service extends Service
 	protected function fetchResponseError($response)
 	{
 		if (isset($response['error'])) {
-			return array(
+			return [
 				'code' => $response['error']['code'],
 				'message' => $response['error']['message'],
-			);
+			];
 		} else {
 			return null;
 		}

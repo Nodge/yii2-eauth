@@ -22,7 +22,7 @@ class SteamOpenIDService extends Service
 	protected $name = 'steam';
 	protected $title = 'Steam';
 	protected $type = 'OpenID';
-	protected $jsArguments = array('popup' => array('width' => 990, 'height' => 615));
+	protected $jsArguments = ['popup' => ['width' => 990, 'height' => 615]];
 
 	protected $url = 'http://steamcommunity.com/openid/';
 

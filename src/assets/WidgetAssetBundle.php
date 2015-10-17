@@ -16,13 +16,13 @@ use yii\web\AssetBundle;
 class WidgetAssetBundle extends AssetBundle
 {
 	public $sourcePath = '@eauth/assets';
-	public $css = array(
+	public $css = [
 		'css/eauth.css',
-	);
-	public $js = array(
+	];
+	public $js = [
 		'js/eauth.js',
-	);
-	public $depends = array(
+	];
+	public $depends = [
 		'yii\web\JqueryAsset',
-	);
+	];
 }

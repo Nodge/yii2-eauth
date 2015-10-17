@@ -38,10 +38,10 @@ class TwitterOAuth1Service extends \nodge\eauth\services\TwitterOAuth1Service
 	{
 		if (isset($response['errors'])) {
 			$first = reset($response['errors']);
-			return array(
+			return [
 				'code' => $first['code'],
 				'message' => $first['message'],
-			);
+			];
 		}
 		return null;
 	}

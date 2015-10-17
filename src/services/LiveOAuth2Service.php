@@ -49,13 +49,13 @@ class LiveOAuth2Service extends Service
 	protected $name = 'live';
 	protected $title = 'Live';
 	protected $type = 'OAuth2';
-	protected $jsArguments = array('popup' => array('width' => 500, 'height' => 600));
+	protected $jsArguments = ['popup' => ['width' => 500, 'height' => 600]];
 
-	protected $scopes = array(self::SCOPE_BASIC);
-	protected $providerOptions = array(
+	protected $scopes = [self::SCOPE_BASIC];
+	protected $providerOptions = [
 		'authorize' => 'https://login.live.com/oauth20_authorize.srf',
 		'access_token' => 'https://login.live.com/oauth20_token.srf',
-	);
+	];
 	protected $baseApiUrl = 'https://apis.live.net/v5.0/';
 
 	protected function fetchAttributes()

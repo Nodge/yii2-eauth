@@ -26,13 +26,13 @@ class TwitterOAuth1Service extends Service
 	protected $name = 'twitter';
 	protected $title = 'Twitter';
 	protected $type = 'OAuth1';
-	protected $jsArguments = array('popup' => array('width' => 900, 'height' => 550));
+	protected $jsArguments = ['popup' => ['width' => 900, 'height' => 550]];
 
-	protected $providerOptions = array(
+	protected $providerOptions = [
 		'request' => 'https://api.twitter.com/oauth/request_token',
 		'authorize' => 'https://api.twitter.com/oauth/authenticate', //https://api.twitter.com/oauth/authorize
 		'access' => 'https://api.twitter.com/oauth/access_token',
-	);
+	];
 	protected $baseApiUrl = 'https://api.twitter.com/1.1/';
 	protected $tokenDefaultLifetime = TokenInterface::EOL_NEVER_EXPIRES;
 

@@ -35,13 +35,13 @@ class GitHubOAuth2Service extends Service
 	protected $name = 'github';
 	protected $title = 'GitHub';
 	protected $type = 'OAuth2';
-	protected $jsArguments = array('popup' => array('width' => 600, 'height' => 450));
+	protected $jsArguments = ['popup' => ['width' => 600, 'height' => 450]];
 
-	protected $scopes = array();
-	protected $providerOptions = array(
+	protected $scopes = [];
+	protected $providerOptions = [
 		'authorize' => 'https://github.com/login/oauth/authorize',
 		'access_token' => 'https://github.com/login/oauth/access_token',
-	);
+	];
 	protected $baseApiUrl = 'https://api.github.com/';
 
 	protected $tokenDefaultLifetime = TokenInterface::EOL_NEVER_EXPIRES;
@@ -65,7 +65,7 @@ class GitHubOAuth2Service extends Service
 	 */
 	public function getExtraOAuthHeaders()
 	{
-		return array('Accept' => 'application/json');
+		return ['Accept' => 'application/json'];
 	}
 
 	/**
@@ -75,7 +75,7 @@ class GitHubOAuth2Service extends Service
 	 */
 	public function getExtraApiHeaders()
 	{
-		return array('Accept' => 'application/vnd.github.beta+json');
+		return ['Accept' => 'application/vnd.github.beta+json'];
 	}
 
 	/**
@@ -95,10 +95,10 @@ class GitHubOAuth2Service extends Service
 	protected function fetchResponseError($response)
 	{
 		if (isset($response['message'])) {
-			return array(
+			return [
 				'code' => isset($response['error']) ? $response['code'] : 0,
 				'message' => $response['message'],
-			);
+			];
 		} else {
 			return null;
 		}

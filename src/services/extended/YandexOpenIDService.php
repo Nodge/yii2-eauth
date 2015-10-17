@@ -12,17 +12,17 @@ namespace nodge\eauth\services\extended;
 class YandexOpenIDService extends \nodge\eauth\services\YandexOpenIDService
 {
 
-	protected $jsArguments = array('popup' => array('width' => 900, 'height' => 620));
+	protected $jsArguments = ['popup' => ['width' => 900, 'height' => 620]];
 
-	protected $requiredAttributes = array(
-		'name' => array('fullname', 'namePerson'),
-		'username' => array('nickname', 'namePerson/friendly'),
-		'email' => array('email', 'contact/email'),
-	);
-	protected $optionalAttributes = array(
-		'gender' => array('gender', 'person/gender'),
-		'birthDate' => array('dob', 'birthDate'),
-	);
+	protected $requiredAttributes = [
+		'name' => ['fullname', 'namePerson'],
+		'username' => ['nickname', 'namePerson/friendly'],
+		'email' => ['email', 'contact/email'],
+	];
+	protected $optionalAttributes = [
+		'gender' => ['gender', 'person/gender'],
+		'birthDate' => ['dob', 'birthDate'],
+	];
 
 	protected function fetchAttributes()
 	{

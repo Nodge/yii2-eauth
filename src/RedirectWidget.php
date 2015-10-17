@@ -38,7 +38,7 @@ class RedirectWidget extends Widget
 	/**
 	 * @var array
 	 */
-	public $params = array();
+	public $params = [];
 
 	/**
 	 * Executes the widget.
@@ -46,11 +46,11 @@ class RedirectWidget extends Widget
 	public function run()
 	{
 		echo $this->render($this->view,
-			ArrayHelper::merge(array(
+			ArrayHelper::merge([
 				'id' => $this->getId(),
 				'url' => $this->url,
 				'redirect' => $this->redirect,
-			), $this->params)
+			], $this->params)
 		);
 	}
 }

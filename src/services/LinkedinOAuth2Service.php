@@ -40,22 +40,22 @@ class LinkedinOAuth2Service extends Service
 	protected $name = 'linkedin_oauth2';
 	protected $title = 'LinkedIn';
 	protected $type = 'OAuth2';
-	protected $jsArguments = array('popup' => array('width' => 900, 'height' => 550));
+	protected $jsArguments = ['popup' => ['width' => 900, 'height' => 550]];
 
-	protected $scopes = array(self::SCOPE_R_BASICPROFILE);
-	protected $providerOptions = array(
+	protected $scopes = [self::SCOPE_R_BASICPROFILE];
+	protected $providerOptions = [
 		'authorize' => 'https://www.linkedin.com/uas/oauth2/authorization',
 		'access_token' => 'https://www.linkedin.com/uas/oauth2/accessToken',
-	);
+	];
 	protected $baseApiUrl = 'https://api.linkedin.com/v1/';
 
 	protected function fetchAttributes()
 	{
-		$info = $this->makeSignedRequest('people/~:(id,first-name,last-name,public-profile-url)', array(
-			'query' => array(
+		$info = $this->makeSignedRequest('people/~:(id,first-name,last-name,public-profile-url)', [
+			'query' => [
 				'format' => 'json',
-			),
-		));
+			],
+		]);
 
 		$this->attributes['id'] = $info['id'];
 		$this->attributes['name'] = $info['firstName'] . ' ' . $info['lastName'];

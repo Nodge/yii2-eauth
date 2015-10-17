@@ -34,13 +34,13 @@ class FacebookOAuth2Service extends Service
 	protected $name = 'facebook';
 	protected $title = 'Facebook';
 	protected $type = 'OAuth2';
-	protected $jsArguments = array('popup' => array('width' => 585, 'height' => 290));
+	protected $jsArguments = ['popup' => ['width' => 585, 'height' => 290]];
 
-	protected $scopes = array();
-	protected $providerOptions = array(
+	protected $scopes = [];
+	protected $providerOptions = [
 		'authorize' => 'https://www.facebook.com/dialog/oauth',
 		'access_token' => 'https://graph.facebook.com/oauth/access_token',
-	);
+	];
 	protected $baseApiUrl = 'https://graph.facebook.com/';
 
 	protected $errorParam = 'error_code';
@@ -92,10 +92,10 @@ class FacebookOAuth2Service extends Service
 	protected function fetchResponseError($response)
 	{
 		if (isset($response['error'])) {
-			return array(
+			return [
 				'code' => $response['error']['code'],
 				'message' => $response['error']['message'],
-			);
+			];
 		} else {
 			return null;
 		}

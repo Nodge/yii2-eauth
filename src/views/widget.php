@@ -10,11 +10,11 @@ use yii\web\View;
 /** @var $popup bool */
 /** @var $assetBundle string Alias to AssetBundle */
 
-Yii::createObject(array('class' => $assetBundle))->register($this);
+Yii::createObject(['class' => $assetBundle])->register($this);
 
 // Open the authorization dilalog in popup window.
 if ($popup) {
-	$options = array();
+	$options = [];
 	foreach ($services as $name => $service) {
 		$options[$service->id] = $service->jsArguments;
 	}
@@ -27,10 +27,10 @@ if ($popup) {
 		<?php
 		foreach ($services as $name => $service) {
 			echo '<li class="eauth-service eauth-service-id-' . $service->id . '">';
-			echo Html::a($service->title, array($action, 'service' => $name), array(
+			echo Html::a($service->title, [$action, 'service' => $name], [
 				'class' => 'eauth-service-link',
 				'data-eauth-service' => $service->id,
-			));
+			]);
 			echo '</li>';
 		}
 		?>

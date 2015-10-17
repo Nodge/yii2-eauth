@@ -71,7 +71,7 @@ class Widget extends \yii\base\Widget
 		}
 
 		if (is_array($this->predefinedServices)) {
-			$_services = array();
+			$_services = [];
 			foreach ($this->predefinedServices as $_serviceName) {
 				if (isset($this->services[$_serviceName])) {
 					$_services[$_serviceName] = $this->services[$_serviceName];
@@ -97,12 +97,12 @@ class Widget extends \yii\base\Widget
 	public function run()
 	{
 		parent::run();
-		echo $this->render('widget', array(
+		echo $this->render('widget', [
 			'id' => $this->getId(),
 			'services' => $this->services,
 			'action' => $this->action,
 			'popup' => $this->popup,
 			'assetBundle' => $this->assetBundle,
-		));
+		]);
 	}
 }

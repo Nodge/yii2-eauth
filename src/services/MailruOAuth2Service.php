@@ -24,26 +24,26 @@ class MailruOAuth2Service extends Service
 	protected $name = 'mailru';
 	protected $title = 'Mail.ru';
 	protected $type = 'OAuth2';
-	protected $jsArguments = array('popup' => array('width' => 580, 'height' => 400));
+	protected $jsArguments = ['popup' => ['width' => 580, 'height' => 400]];
 
-	protected $scopes = array();
-	protected $providerOptions = array(
+	protected $scopes = [];
+	protected $providerOptions = [
 		'authorize' => 'https://connect.mail.ru/oauth/authorize',
 		'access_token' => 'https://connect.mail.ru/oauth/token',
-	);
+	];
 	protected $baseApiUrl = 'http://www.appsmail.ru/platform/api';
 
 	protected function fetchAttributes()
 	{
 		$tokenData = $this->getAccessTokenData();
 
-		$info = $this->makeSignedRequest('/', array(
-			'query' => array(
+		$info = $this->makeSignedRequest('/', [
+			'query' => [
 				'uids' => $tokenData['params']['x_mailru_vid'],
 				'method' => 'users.getInfo',
 				'app_id' => $this->clientId,
-			),
-		));
+			],
+		]);
 
 		$info = $info[0];
 
@@ -62,7 +62,7 @@ class MailruOAuth2Service extends Service
 	 * @param boolean $parseResponse Whether to parse response.
 	 * @return mixed the response.
 	 */
-	public function makeSignedRequest($url, $options = array(), $parseResponse = true)
+	public function makeSignedRequest($url, $options = [], $parseResponse = true)
 	{
 		$token = $this->getAccessTokenData();
 		if (isset($token)) {
@@ -87,10 +87,10 @@ class MailruOAuth2Service extends Service
 	protected function fetchResponseError($response)
 	{
 		if (isset($response['error'])) {
-			return array(
+			return [
 				'code' => $response['error']['error_code'],
 				'message' => $response['error']['error_msg'],
-			);
+			];
 		} else {
 			return null;
 		}

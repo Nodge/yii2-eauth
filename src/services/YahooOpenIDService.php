@@ -22,20 +22,20 @@ class YahooOpenIDService extends Service
 	protected $name = 'yahoo';
 	protected $title = 'Yahoo';
 	protected $type = 'OpenID';
-	protected $jsArguments = array('popup' => array('width' => 880, 'height' => 520));
+	protected $jsArguments = ['popup' => ['width' => 880, 'height' => 520]];
 
 	protected $url = 'https://me.yahoo.com';
-	protected $requiredAttributes = array(
-		'name' => array('fullname', 'namePerson'),
-//		'login' => array('nickname', 'namePerson/friendly'),
-//		'email' => array('email', 'contact/email'),
-	);
-	protected $optionalAttributes = array(
-//		'language' => array('language', 'pref/language'),
-//		'gender' => array('gender', 'person/gender'),
-//		'timezone' => array('timezone', 'pref/timezone'),
-//		'image' => array('image', 'media/image/default'),
-	);
+	protected $requiredAttributes = [
+		'name' => ['fullname', 'namePerson'],
+//		'login' => ['nickname', 'namePerson/friendly'],
+//		'email' => ['email', 'contact/email'],
+	];
+	protected $optionalAttributes = [
+//		'language' => ['language', 'pref/language'],
+//		'gender' => ['gender', 'person/gender'],
+//		'timezone' => ['timezone', 'pref/timezone'],
+//		'image' => ['image', 'media/image/default'],
+	];
 
 	/*protected function fetchAttributes() {
 		$this->attributes['fullname'] = $this->attributes['name'].' '.$this->attributes['lastname'];

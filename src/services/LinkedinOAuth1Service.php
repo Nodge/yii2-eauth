@@ -25,22 +25,22 @@ class LinkedinOAuth1Service extends Service
 	protected $name = 'linkedin';
 	protected $title = 'LinkedIn';
 	protected $type = 'OAuth1';
-	protected $jsArguments = array('popup' => array('width' => 900, 'height' => 550));
+	protected $jsArguments = ['popup' => ['width' => 900, 'height' => 550]];
 
-	protected $providerOptions = array(
+	protected $providerOptions = [
 		'request' => 'https://api.linkedin.com/uas/oauth/requestToken',
 		'authorize' => 'https://www.linkedin.com/uas/oauth/authenticate', // https://www.linkedin.com/uas/oauth/authorize
 		'access' => 'https://api.linkedin.com/uas/oauth/accessToken',
-	);
+	];
 	protected $baseApiUrl = 'http://api.linkedin.com/v1/';
 
 	protected function fetchAttributes()
 	{
-		$info = $this->makeSignedRequest('people/~:(id,first-name,last-name,public-profile-url)', array(
-			'query' => array(
+		$info = $this->makeSignedRequest('people/~:(id,first-name,last-name,public-profile-url)', [
+			'query' => [
 				'format' => 'json',
-			),
-		));
+			],
+		]);
 
 		$this->attributes['id'] = $info['id'];
 		$this->attributes['name'] = $info['firstName'] . ' ' . $info['lastName'];
@@ -58,15 +58,15 @@ class LinkedinOAuth1Service extends Service
 	protected function fetchResponseError($response)
 	{
 		if (isset($response['error-code'])) {
-			return array(
+			return [
 				'code' => $response['error-code'],
 				'message' => $response['message'],
-			);
+			];
 		} else if (isset($response['errorCode'])) {
-			return array(
+			return [
 				'code' => $response['errorCode'],
 				'message' => $response['message'],
-			);
+			];
 		}
 		return null;
 	}

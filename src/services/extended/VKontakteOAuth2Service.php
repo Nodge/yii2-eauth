@@ -17,13 +17,13 @@ class VKontakteOAuth2Service extends \nodge\eauth\services\VKontakteOAuth2Servic
 	protected function fetchAttributes()
 	{
 		$tokenData = $this->getAccessTokenData();
-		$info = $this->makeSignedRequest('users.get.json', array(
-			'query' => array(
+		$info = $this->makeSignedRequest('users.get.json', [
+			'query' => [
 				'uids' => $tokenData['params']['user_id'],
 				//'fields' => '', // uid, first_name and last_name is always available
 				'fields' => 'nickname, sex, bdate, city, country, timezone, photo, photo_medium, photo_big, photo_rec',
-			),
-		));
+			],
+		]);
 
 		$info = $info['response'][0];
 

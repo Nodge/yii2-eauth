@@ -64,7 +64,7 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	 * @param EAuth $component the component instance.
 	 * @param array $options properties initialization.
 	 */
-//	public function init($component, $options = array()) {
+//	public function init($component, $options = []) {
 //		parent::init($component, $options);
 //	}
 
@@ -164,7 +164,7 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	 * @return mixed the response.
 	 * @throws ErrorException
 	 */
-	public function makeSignedRequest($url, $options = array(), $parseResponse = true)
+	public function makeSignedRequest($url, $options = [], $parseResponse = true)
 	{
 		if (!$this->getIsAuthenticated()) {
 			throw new ErrorException(Yii::t('eauth', 'Unable to complete the signed request because the user was not authenticated.'), 401);
@@ -181,9 +181,9 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 			}
 		}
 
-		$data = isset($options['data']) ? $options['data'] : array();
+		$data = isset($options['data']) ? $options['data'] : [];
 		$method = !empty($data) ? 'POST' : 'GET';
-		$headers = isset($options['headers']) ? $options['headers'] : array();
+		$headers = isset($options['headers']) ? $options['headers'] : [];
 
 		$response = $this->getProxy()->request($url, $method, $data, $headers);
 
@@ -202,7 +202,7 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	 * @param boolean $parseResponse Whether to parse response.
 	 * @return mixed the response.
 	 */
-	public function makeRequest($url, $options = array(), $parseResponse = true) {
+	public function makeRequest($url, $options = [], $parseResponse = true) {
 		if (stripos($url, 'http') !== 0) {
 			$url = $this->baseApiUrl . $url;
 		}
@@ -214,10 +214,10 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 			}
 		}
 
-		$data = isset($options['data']) ? $options['data'] : array();
+		$data = isset($options['data']) ? $options['data'] : [];
 		$method = !empty($data) ? 'POST' : 'GET';
 
-		$headers = isset($options['headers']) ? $options['headers'] : array();
+		$headers = isset($options['headers']) ? $options['headers'] : [];
 		$headers = array_merge($this->getProxy()->getExtraApiHeaders(), $headers);
 
 		$response = $this->getHttpClient()->retrieveResponse($url, $data, $headers, $method);
@@ -272,10 +272,10 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	protected function fetchResponseError($response)
 	{
 		if (isset($response['error'])) {
-			return array(
+			return [
 				'code' => 500,
 				'message' => 'Unknown error occurred.',
-			);
+			];
 		}
 		return null;
 	}
@@ -294,12 +294,12 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 			return null;
 		}
 
-		return array(
+		return [
 			'access_token' => $token->getAccessToken(),
 			'refresh_token' => $token->getRefreshToken(),
 			'expires' => $token->getEndOfLife(),
 			'params' => $token->getExtraParams(),
-		);
+		];
 	}
 
 	/**

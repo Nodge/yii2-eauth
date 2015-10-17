@@ -25,7 +25,7 @@ class EAuth extends Object
 	/**
 	 * @var array Authorization services and their settings.
 	 */
-	protected $services = array();
+	protected $services = [];
 
 	/**
 	 * @var boolean Whether to use popup window for the authorization dialog.
@@ -50,17 +50,17 @@ class EAuth extends Object
 	/**
 	 * @var array TokenStorage class.
 	 */
-	protected $tokenStorage = array(
+	protected $tokenStorage = [
 		'class' => 'nodge\eauth\oauth\SessionTokenStorage',
-	);
+	];
 
 	/**
 	 * @var array HttpClient class.
 	 */
-	protected $httpClient = array(
+	protected $httpClient = [
 		'class' => 'nodge\eauth\oauth\HttpClient',
 //		'useStreamsFallback' => false,
-	);
+	];
 
 	/**
 	 * Initialize the component.
@@ -99,16 +99,16 @@ class EAuth extends Object
 		}
 
 		if (false === $services || !is_array($services)) {
-			$services = array();
+			$services = [];
 			foreach ($this->services as $service => $options) {
 				/** @var $class ServiceBase */
 				$class = $this->getIdentity($service);
-				$services[$service] = (object)array(
+				$services[$service] = (object)[
 					'id' => $class->getServiceName(),
 					'title' => $class->getServiceTitle(),
 					'type' => $class->getServiceType(),
 					'jsArguments' => $class->getJsArguments(),
-				);
+				];
 			}
 			if (isset($cache)) {
 				$cache->set('EAuth.services', $services, $this->cacheExpire);
@@ -225,7 +225,7 @@ class EAuth extends Object
 		$service = strtolower($service);
 		$services = $this->getServices();
 		if (!isset($services[$service])) {
-			throw new ErrorException(Yii::t('eauth', 'Undefined service name: {service}.', array('service' => $service)), 500);
+			throw new ErrorException(Yii::t('eauth', 'Undefined service name: {service}.', ['service' => $service]), 500);
 		}
 		return $services[$service];
 	}
@@ -253,7 +253,7 @@ class EAuth extends Object
 	{
 		$service = strtolower($service);
 		if (!isset($this->services[$service])) {
-			throw new ErrorException(Yii::t('eauth', 'Undefined service name: {service}.', array('service' => $service)), 500);
+			throw new ErrorException(Yii::t('eauth', 'Undefined service name: {service}.', ['service' => $service]), 500);
 		}
 		$service = $this->services[$service];
 
@@ -273,15 +273,15 @@ class EAuth extends Object
 	 * @param boolean $jsRedirect whether to use redirect while popup window is used. Defaults to true.
 	 * @param array $params
 	 */
-	public function redirect($url, $jsRedirect = true, $params = array())
+	public function redirect($url, $jsRedirect = true, $params = [])
 	{
 		/** @var RedirectWidget $widget */
-		$widget = Yii::createObject(array(
+		$widget = Yii::createObject([
 			'class' => $this->redirectWidget,
 			'url' => Url::to($url),
 			'redirect' => $jsRedirect,
 			'params' => $params
-		));
+		]);
 		ob_start();
 		$widget->run();
 		$output = ob_get_clean();

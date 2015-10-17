@@ -49,7 +49,7 @@ class HttpClient extends AbstractClient
 	/**
 	 * @var array
 	 */
-	protected $extraHeaders = array();
+	protected $extraHeaders = [];
 
 	/**
 	 * @var string
@@ -98,7 +98,7 @@ class HttpClient extends AbstractClient
 	 * @param string $method
 	 * @return string
 	 */
-	public function retrieveResponse(UriInterface $endpoint, $requestBody, array $extraHeaders = array(), $method = 'POST')
+	public function retrieveResponse(UriInterface $endpoint, $requestBody, array $extraHeaders = [], $method = 'POST')
 	{
 		$this->endpoint = $endpoint;
 		$this->requestBody = $requestBody;
@@ -145,12 +145,12 @@ class HttpClient extends AbstractClient
 		$this->extraHeaders['Connection'] = 'Connection: close';
 
 		if (YII_DEBUG) {
-			Yii::trace('EAuth http request: ' . PHP_EOL . var_export(array(
+			Yii::trace('EAuth http request: ' . PHP_EOL . var_export([
 					'url' => $this->endpoint->getAbsoluteUri(),
 					'method' => $this->method,
 					'headers' => $this->extraHeaders,
 					'body' => $this->requestBody,
-				), true), __NAMESPACE__);
+				], true), __NAMESPACE__);
 		}
 
 		if (is_array($this->requestBody)) {
@@ -229,8 +229,8 @@ class HttpClient extends AbstractClient
 	{
 		$this->prepareRequest();
 
-		$context = stream_context_create(array(
-			'http' => array(
+		$context = stream_context_create([
+			'http' => [
 				'method' => $this->method,
 				'header' => array_values($this->extraHeaders),
 				'content' => $this->requestBody,
@@ -238,8 +238,8 @@ class HttpClient extends AbstractClient
 				'user_agent' => 'Yii2 EAuth Client',
 				'max_redirects' => $this->maxRedirects,
 				'timeout' => $this->timeout,
-			),
-		));
+			],
+		]);
 
 		$level = error_reporting(0);
 		$response = file_get_contents($this->endpoint->getAbsoluteUri(), false, $context);

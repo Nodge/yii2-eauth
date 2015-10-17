@@ -12,22 +12,22 @@ namespace nodge\eauth\services\extended;
 class OdnoklassnikiOAuth2Service extends \nodge\eauth\services\OdnoklassnikiOAuth2Service
 {
 
-	protected $scopes = array(self::SCOPE_VALUABLE_ACCESS);
+	protected $scopes = [self::SCOPE_VALUABLE_ACCESS];
 
 	protected function fetchAttributes()
 	{
 		parent::fetchAttributes();
 
-		$info = $this->makeSignedRequest('', array(
-			'query' => array(
+		$info = $this->makeSignedRequest('', [
+			'query' => [
 				'method' => 'users.getInfo',
 				'uids' => $this->attributes['id'],
 				'fields' => 'url_profile',
 				'format' => 'JSON',
 				'application_key' => $this->clientPublic,
 				'client_id' => $this->clientId,
-			),
-		));
+			],
+		]);
 
 		preg_match('/\d+\/{0,1}$/', $info[0]->url_profile, $matches);
 		$this->attributes['id'] = (int)$matches[0];
@@ -44,15 +44,15 @@ class OdnoklassnikiOAuth2Service extends \nodge\eauth\services\OdnoklassnikiOAut
 	 */
 	public function wallPost($link, $message)
 	{
-		return $this->makeSignedRequest('', array(
-			'query' => array(
+		return $this->makeSignedRequest('', [
+			'query' => [
 				'application_key' => $this->clientPublic,
 				'method' => 'share.addLink',
 				'format' => 'JSON',
 				'linkUrl' => $link,
 				'comment' => $message,
-			),
-		));
+			],
+		]);
 	}
 
 }

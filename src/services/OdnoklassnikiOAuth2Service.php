@@ -30,15 +30,15 @@ class OdnoklassnikiOAuth2Service extends Service
 	protected $name = 'odnoklassniki';
 	protected $title = 'Odnoklassniki';
 	protected $type = 'OAuth2';
-	protected $jsArguments = array('popup' => array('width' => 680, 'height' => 500));
+	protected $jsArguments = ['popup' => ['width' => 680, 'height' => 500]];
 
 	protected $clientPublic;
-	protected $scopes = array();
+	protected $scopes = [];
 	protected $scopeSeparator = ';';
-	protected $providerOptions = array(
+	protected $providerOptions = [
 		'authorize' => 'http://www.odnoklassniki.ru/oauth/authorize',
 		'access_token' => 'http://api.odnoklassniki.ru/oauth/token.do',
-	);
+	];
 	protected $baseApiUrl = 'http://api.odnoklassniki.ru/fb.do';
 
 	protected $tokenDefaultLifetime = 1500; // about 25 minutes
@@ -46,14 +46,14 @@ class OdnoklassnikiOAuth2Service extends Service
 
 	protected function fetchAttributes()
 	{
-		$info = $this->makeSignedRequest('', array(
-			'query' => array(
+		$info = $this->makeSignedRequest('', [
+			'query' => [
 				'method' => 'users.getCurrentUser',
 				'format' => 'JSON',
 				'application_key' => $this->clientPublic,
 				'client_id' => $this->clientId,
-			),
-		));
+			],
+		]);
 
 		$this->attributes['id'] = $info['uid'];
 		$this->attributes['name'] = $info['first_name'] . ' ' . $info['last_name'];
@@ -85,7 +85,7 @@ class OdnoklassnikiOAuth2Service extends Service
 	 * @param boolean $parseResponse Whether to parse response.
 	 * @return mixed the response.
 	 */
-	public function makeSignedRequest($url, $options = array(), $parseResponse = true)
+	public function makeSignedRequest($url, $options = [], $parseResponse = true)
 	{
 		$token = $this->getAccessTokenData();
 		if (isset($token)) {
@@ -109,10 +109,10 @@ class OdnoklassnikiOAuth2Service extends Service
 	protected function fetchResponseError($response)
 	{
 		if (isset($response['error_code'])) {
-			return array(
+			return [
 				'code' => $response['error_code'],
 				'message' => $response['error_msg'],
-			);
+			];
 		} else {
 			return null;
 		}

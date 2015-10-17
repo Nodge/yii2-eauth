@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 	'Undefined service name: {service}.' => 'Авторизация с помощью {service} не поддерживается.',
 	'Invalid response http code: {code}.' => 'Неверный ответ от сервера авторизации: {code}.',
 	'Invalid response format.' => 'Сервер авторизации вернул данные в неправильном формате.',
@@ -20,4 +20,4 @@ return array(
 	'Odnoklassniki' => 'Одноклассники',
 	'LinkedIn' => 'LinkedIn',
 	'GitHub' => 'GitHub',
-);
+];

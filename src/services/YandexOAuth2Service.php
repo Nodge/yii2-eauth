@@ -25,14 +25,14 @@ class YandexOAuth2Service extends Service
 	protected $name = 'yandex_oauth';
 	protected $title = 'Yandex';
 	protected $type = 'OAuth2';
-	protected $jsArguments = array('popup' => array('width' => 500, 'height' => 450));
+	protected $jsArguments = ['popup' => ['width' => 500, 'height' => 450]];
 	protected $tokenDefaultLifetime = TokenInterface::EOL_NEVER_EXPIRES;
 
-	protected $scope = array();
-	protected $providerOptions = array(
+	protected $scope = [];
+	protected $providerOptions = [
 		'authorize' => 'https://oauth.yandex.ru/authorize',
 		'access_token' => 'https://oauth.yandex.ru/token',
-	);
+	];
 
 	protected function fetchAttributes()
 	{

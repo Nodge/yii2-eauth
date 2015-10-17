@@ -39,7 +39,7 @@ class ServiceProxy extends AbstractService
 		CredentialsInterface $credentials,
 		ClientInterface $httpClient,
 		TokenStorageInterface $storage,
-		$scopes = array(),
+		$scopes = [],
 		UriInterface $baseApiUri = null,
 		Service $service
 	)
@@ -213,14 +213,14 @@ class ServiceProxy extends AbstractService
 	 * @param array $additionalParameters
 	 * @return Uri
 	 */
-	public function getAuthorizationUri(array $additionalParameters = array())
+	public function getAuthorizationUri(array $additionalParameters = [])
 	{
-		$parameters = array_merge($additionalParameters, array(
+		$parameters = array_merge($additionalParameters, [
 			'type' => 'web_server',
 			'client_id' => $this->credentials->getConsumerId(),
 			'redirect_uri' => $this->credentials->getCallbackUrl(),
 			'response_type' => 'code',
-		));
+		]);
 
 		$parameters['scope'] = implode($this->service->getScopeSeparator(), $this->scopes);
 

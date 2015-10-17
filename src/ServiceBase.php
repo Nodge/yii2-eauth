@@ -40,14 +40,14 @@ abstract class ServiceBase extends Object implements IAuthService
 	/**
 	 * @var array arguments for the jQuery.eauth() javascript function.
 	 */
-	protected $jsArguments = array();
+	protected $jsArguments = [];
 
 	/**
 	 * @var array authorization attributes.
 	 * @see getAttribute
 	 * @see getItem
 	 */
-	protected $attributes = array();
+	protected $attributes = [];
 
 	/**
 	 * @var boolean whether user was successfuly authenticated.
@@ -255,7 +255,7 @@ abstract class ServiceBase extends Object implements IAuthService
 	 * @param string $url url to redirect.
 	 * @param array $params
 	 */
-	public function redirect($url = null, $params = array())
+	public function redirect($url = null, $params = [])
 	{
 		$this->component->redirect(isset($url) ? $url : $this->redirectUrl, true, $params);
 	}
@@ -312,7 +312,7 @@ abstract class ServiceBase extends Object implements IAuthService
 	public function getAttributes()
 	{
 		$this->_fetchAttributes();
-		$attributes = array();
+		$attributes = [];
 		foreach ($this->attributes as $key => $val) {
 			$attributes[$key] = $this->getAttribute($key);
 		}

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 	'Undefined service name: {service}.' => 'Undefinierter Servicename: {service}',
 	'Invalid response http code: {code}.' => 'Ungültiger HTTP Code: {code}',
 	'Invalid response format.' => 'Ungültiges Antwortformat.',
@@ -20,4 +20,4 @@ return array(
 	'Odnoklassniki' => 'Odnoklassniki',
 	'LinkedIn' => 'LinkedIn',
 	'GitHub' => 'GitHub',
-);
+];

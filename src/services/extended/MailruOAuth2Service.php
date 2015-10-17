@@ -16,13 +16,13 @@ class MailruOAuth2Service extends \nodge\eauth\services\MailruOAuth2Service
 	{
 		$tokenData = $this->getAccessTokenData();
 
-		$info = $this->makeSignedRequest('/', array(
-			'query' => array(
+		$info = $this->makeSignedRequest('/', [
+			'query' => [
 				'uids' => $tokenData['params']['x_mailru_vid'],
 				'method' => 'users.getInfo',
 				'app_id' => $this->clientId,
-			),
-		));
+			],
+		]);
 
 		$info = $info[0];
 

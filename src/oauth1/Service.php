@@ -40,11 +40,11 @@ abstract class Service extends ServiceBase implements IAuthService
 	/**
 	 * @var array Provider options. Must contain the keys: request, authorize, access.
 	 */
-	protected $providerOptions = array(
+	protected $providerOptions = [
 		'request' => '',
 		'authorize' => '',
 		'access' => '',
-	);
+	];
 
 	/**
 	 * @var ServiceProxy
@@ -57,7 +57,7 @@ abstract class Service extends ServiceBase implements IAuthService
 	 * @param EAuth $component the component instance.
 	 * @param array $options properties initialization.
 	 */
-//	public function init($component, $options = array()) {
+//	public function init($component, $options = []) {
 //		parent::init($component, $options);
 //	}
 
@@ -116,7 +116,7 @@ abstract class Service extends ServiceBase implements IAuthService
 				// extra request needed for oauth1 to request a request token :-)
 				$token = $proxy->requestRequestToken();
 				/** @var $url Uri */
-				$url = $proxy->getAuthorizationUri(array('oauth_token' => $token->getRequestToken()));
+				$url = $proxy->getAuthorizationUri(['oauth_token' => $token->getRequestToken()]);
 				Yii::$app->getResponse()->redirect($url->getAbsoluteUri())->send();
 			}
 		} catch (OAuthException $e) {
@@ -155,10 +155,10 @@ abstract class Service extends ServiceBase implements IAuthService
 	 */
 	public function getAccessTokenArgumentNames()
 	{
-		return array(
+		return [
 			'oauth_token' => 'oauth_token',
 			'oauth_token_secret' => 'oauth_token_secret',
 			'oauth_expires_in' => 'oauth_expires_in',
-		);
+		];
 	}
 }

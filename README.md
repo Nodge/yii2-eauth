@@ -119,98 +119,98 @@ Add the following in your config:
 ```php
 <?php
 ...
-	'components'=>array(
-		'eauth' => array(
+	'components' => [
+		'eauth' => [
 			'class' => 'nodge\eauth\EAuth',
 			'popup' => true, // Use the popup window instead of redirecting.
 			'cache' => false, // Cache component name or false to disable cache. Defaults to 'cache' on production environments.
 			'cacheExpire' => 0, // Cache lifetime. Defaults to 0 - means unlimited.
-			'httpClient' => array(
+			'httpClient' => [
 				// uncomment this to use streams in safe_mode
 				//'useStreamsFallback' => true,
-			),
-			'services' => array( // You can change the providers and their classes.
-				'google' => array(
+			],
+			'services' => [ // You can change the providers and their classes.
+				'google' => [
 					'class' => 'nodge\eauth\services\GoogleOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
-				),
-				'yandex' => array(
+				],
+				'yandex' => [
 					'class' => 'nodge\eauth\services\YandexOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
-				),
-				'twitter' => array(
+				],
+				'twitter' => [
 					// register your app here: https://dev.twitter.com/apps/new
 					'class' => 'nodge\eauth\services\TwitterOAuth1Service',
 					'key' => '...',
 					'secret' => '...',
-				),
-				'google_oauth' => array(
+				],
+				'google_oauth' => [
 					// register your app here: https://code.google.com/apis/console/
 					'class' => 'nodge\eauth\services\GoogleOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'title' => 'Google (OAuth)',
-				),
-				'yandex_oauth' => array(
+				],
+				'yandex_oauth' => [
 					// register your app here: https://oauth.yandex.ru/client/my
 					'class' => 'nodge\eauth\services\YandexOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'title' => 'Yandex (OAuth)',
-				),
-				'facebook' => array(
+				],
+				'facebook' => [
 					// register your app here: https://developers.facebook.com/apps/
 					'class' => 'nodge\eauth\services\FacebookOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
-				),
-				'yahoo' => array(
+				],
+				'yahoo' => [
 					'class' => 'nodge\eauth\services\YahooOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
-				),
-				'linkedin' => array(
+				],
+				'linkedin' => [
 					// register your app here: https://www.linkedin.com/secure/developer
 					'class' => 'nodge\eauth\services\LinkedinOAuth1Service',
 					'key' => '...',
 					'secret' => '...',
 					'title' => 'LinkedIn (OAuth1)',
-				),
-				'linkedin_oauth2' => array(
+				],
+				'linkedin_oauth2' => [
 					// register your app here: https://www.linkedin.com/secure/developer
 					'class' => 'nodge\eauth\services\LinkedinOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'title' => 'LinkedIn (OAuth2)',
-				),
-				'github' => array(
+				],
+				'github' => [
 					// register your app here: https://github.com/settings/applications
 					'class' => 'nodge\eauth\services\GitHubOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
-				),
-				'live' => array(
+				],
+				'live' => [
 					// register your app here: https://account.live.com/developers/applications/index
 					'class' => 'nodge\eauth\services\LiveOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
-				),
-				'steam' => array(
+				],
+				'steam' => [
 					'class' => 'nodge\eauth\services\SteamOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
-				),
-				'vkontakte' => array(
+				],
+				'vkontakte' => [
 					// register your app here: https://vk.com/editapp?act=create&site=1
 					'class' => 'nodge\eauth\services\VKontakteOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
-				),
-				'mailru' => array(
+				],
+				'mailru' => [
 					// register your app here: http://api.mail.ru/sites/my/add
 					'class' => 'nodge\eauth\services\MailruOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
-				),
-				'odnoklassniki' => array(
+				],
+				'odnoklassniki' => [
 					// register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
 					// ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
 					'class' => 'nodge\eauth\services\OdnoklassnikiOAuth2Service',
@@ -218,41 +218,41 @@ Add the following in your config:
 					'clientSecret' => '...',
 					'clientPublic' => '...',
 					'title' => 'Odnoklas.',
-				),
-			),
-		),
+			  ],
+			],
+		],
 		
-		'i18n' => array(
-			'translations' => array(
-				'eauth' => array(
+		'i18n' => [
+			'translations' => [
+				'eauth' => [
 					'class' => 'yii\i18n\PhpMessageSource',
 					'basePath' => '@eauth/messages',
-				),
-			),
-		),
+				],
+			],
+		],
 
 		// (optionally) you can configure pretty urls
-		'urlManager' => array(
+		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
-			'rules' => array(
+			'rules' => [
 				'login/<service:google|facebook|etc>' => 'site/login',
-			),
-		),
+			],
+		],
 
 		// (optionally) you can configure logging
-		'log' => array(
-			'targets' => array(
-				array(
+		'log' => [
+			'targets' => [
+				[
 					'class' => 'yii\log\FileTarget',
 					'logFile' => '@app/runtime/logs/eauth.log',
-					'categories' => array('nodge\eauth\*'),
-					'logVars' => array(),
-				),
-			),
-		),
+					'categories' => ['nodge\eauth\*'],
+					'logVars' => [],
+				],
+			],
+		],
 		...
-	),
+	],
 ...
 ```
 
@@ -289,12 +289,12 @@ Example from demo project:
 		}
 
 		$id = $service->getServiceName().'-'.$service->getId();
-		$attributes = array(
+		$attributes = [
 			'id' => $id,
 			'username' => $service->getAttribute('name'),
 			'authKey' => md5($id),
 			'profile' => $service->getAttributes(),
-		);
+		];
 		$attributes['profile']['service'] = $service->getServiceName();
 		Yii::$app->getSession()->set('user-'.$id, $attributes);
 		return new self($attributes);
@@ -321,13 +321,13 @@ Or you can disable CSRF validation by yourself.
 <?php
 ...
 	public function behaviors() {
-    		return array(
-    			'eauth' => array(
+    		return [
+    			'eauth' => [
     				// required to disable csrf validation on OpenID requests
     				'class' => \nodge\eauth\openid\ControllerBehavior::className(),
-    				'only' => array('login'),
-    			),
-    		);
+    				'only' => ['login'],
+    			],
+    		];
     	}
 ...
 ```
@@ -386,7 +386,7 @@ Add the following to your Login action:
 ?>
 ...
 <p class="lead">Do you already have an account on one of these sites? Click the logo to log in with it here:</p>
-<?php echo \nodge\eauth\Widget::widget(array('action' => 'site/login')); ?>
+<?php echo \nodge\eauth\Widget::widget(['action' => 'site/login']); ?>
 ...
 ```
 
@@ -454,15 +454,15 @@ You can save access_token to your database by using custom token storage in your
 ```php
 <?php
 ...
-	'components'=>array(
-		'eauth' => array(
+	'components' => [
+		'eauth' => [
 			'class' => 'nodge\eauth\EAuth',
-			'tokenStorage' => array(
+			'tokenStorage' => [
 				'class' => '@app\eauth\DatabaseTokenStorage',
-			),
-		),
+			],
+		],
 		...
-	),
+	],
 ...
 ```
 
@@ -474,17 +474,17 @@ To use translations, add the following in your config:
 ```php
 <?php
 ...
-	'components'=>array(
-		'i18n' => array(
-			'translations' => array(
-				'eauth' => array(
+	'components' => [
+		'i18n' => [
+			'translations' => [
+				'eauth' => [
 					'class' => 'yii\i18n\PhpMessageSource',
 					'basePath' => '@eauth/messages',
-				),
-			),
-		),
+				],
+			],
+		],
 		...
-	),
+	],
 ...
 ```
 
