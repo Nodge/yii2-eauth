@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### In progress (17.10.2015)
+* Fixed default token lifetime (#53)
+
 ### 2.2.4 (27.07.2015)
 * Fixed typo in `oauth2/Service.php` (#34)
 * Added German translation
