@@ -36,7 +36,7 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	/**
 	 * @var int Default token lifetime. Used when service wont provide expires_in param.
 	 */
-	protected $tokenDefaultLifetime = TokenInterface::EOL_UNKNOWN;
+	protected $tokenDefaultLifetime = null;
 
 	/**
 	 * @var array TokenStorage class. Null means default value from EAuth component config.

@@ -90,7 +90,8 @@ class ServiceProxy extends AbstractService
 	{
 		// assume that we have at least a minute to execute a queries.
 		return $token->getEndOfLife() - 60 > time()
-		|| $token->getEndOfLife() === TokenInterface::EOL_NEVER_EXPIRES;
+			|| $token->getEndOfLife() === TokenInterface::EOL_NEVER_EXPIRES
+			|| $token->getEndOfLife() === TokenInterface::EOL_UNKNOWN;
 	}
 
 	/**
