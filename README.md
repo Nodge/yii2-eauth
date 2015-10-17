@@ -40,7 +40,6 @@ The implementation of the authorization on your own server has several advantage
 ### Included services:
 
 * OpenID:
-	* Google
 	* Yahoo
 	* Yandex (ru)
 	* Steam
@@ -130,10 +129,13 @@ Add the following in your config:
 				//'useStreamsFallback' => true,
 			],
 			'services' => [ // You can change the providers and their classes.
-				'google' => [
-					'class' => 'nodge\eauth\services\GoogleOpenIDService',
-					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
-				],
+			  'google' => [
+          // register your app here: https://code.google.com/apis/console/
+          'class' => 'nodge\eauth\services\GoogleOAuth2Service',
+          'clientId' => '...',
+          'clientSecret' => '...',
+          'title' => 'Google',
+        ],
 				'yandex' => [
 					'class' => 'nodge\eauth\services\YandexOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
@@ -143,13 +145,6 @@ Add the following in your config:
 					'class' => 'nodge\eauth\services\TwitterOAuth1Service',
 					'key' => '...',
 					'secret' => '...',
-				],
-				'google_oauth' => [
-					// register your app here: https://code.google.com/apis/console/
-					'class' => 'nodge\eauth\services\GoogleOAuth2Service',
-					'clientId' => '...',
-					'clientSecret' => '...',
-					'title' => 'Google (OAuth)',
 				],
 				'yandex_oauth' => [
 					// register your app here: https://oauth.yandex.ru/client/my

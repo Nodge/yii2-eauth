@@ -45,7 +45,6 @@
 
 /* --- Services --- */
 
-.eauth-service-id-google .eauth-service-link:before,
 .eauth-service-id-google_oauth .eauth-service-link:before {
 	background-position: 0 -34px;
 }
