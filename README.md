@@ -41,7 +41,6 @@ The implementation of the authorization on your own server has several advantage
 
 * OpenID:
 	* Yahoo
-	* Yandex (ru)
 	* Steam
 * OAuth1:
 	* Twitter
@@ -136,22 +135,18 @@ Add the following in your config:
           'clientSecret' => '...',
           'title' => 'Google',
         ],
-				'yandex' => [
-					'class' => 'nodge\eauth\services\YandexOpenIDService',
-					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
-				],
 				'twitter' => [
 					// register your app here: https://dev.twitter.com/apps/new
 					'class' => 'nodge\eauth\services\TwitterOAuth1Service',
 					'key' => '...',
 					'secret' => '...',
 				],
-				'yandex_oauth' => [
+				'yandex' => [
 					// register your app here: https://oauth.yandex.ru/client/my
 					'class' => 'nodge\eauth\services\YandexOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
-					'title' => 'Yandex (OAuth)',
+					'title' => 'Yandex',
 				],
 				'facebook' => [
 					// register your app here: https://developers.facebook.com/apps/

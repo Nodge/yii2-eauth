@@ -5,6 +5,7 @@ Yii2 EAuth Change Log
 * Fixed default token lifetime (#53)
 * Replace array() with [] (#54)
 * Remove deprecated Google OpenID service (#56)
+* Remove deprecated Yandex OpenID service
 
 ### 2.2.4 (27.07.2015)
 * Fixed typo in `oauth2/Service.php` (#34)
