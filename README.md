@@ -128,13 +128,13 @@ Add the following in your config:
 				//'useStreamsFallback' => true,
 			],
 			'services' => [ // You can change the providers and their classes.
-			  'google' => [
-          // register your app here: https://code.google.com/apis/console/
-          'class' => 'nodge\eauth\services\GoogleOAuth2Service',
-          'clientId' => '...',
-          'clientSecret' => '...',
-          'title' => 'Google',
-        ],
+				'google' => [
+          				// register your app here: https://code.google.com/apis/console/
+          				'class' => 'nodge\eauth\services\GoogleOAuth2Service',
+          				'clientId' => '...',
+          				'clientSecret' => '...',
+          				'title' => 'Google',
+        			],
 				'twitter' => [
 					// register your app here: https://dev.twitter.com/apps/new
 					'class' => 'nodge\eauth\services\TwitterOAuth1Service',
@@ -208,7 +208,7 @@ Add the following in your config:
 					'clientSecret' => '...',
 					'clientPublic' => '...',
 					'title' => 'Odnoklas.',
-			  ],
+			  	],
 			],
 		],
 		
