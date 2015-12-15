@@ -101,3 +101,7 @@
 .eauth-service-id-instagram .eauth-service-link:before {
 	background-position: 0 -474px;
 }
+
+.eauth-service-id-eve .eauth-service-link:before {
+	background-position: 0 -507px;
+}
