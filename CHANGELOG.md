@@ -1,6 +1,9 @@
 Yii2 EAuth Change Log
 =====================
 
+### dev
+* Fixed error param names for Facebook (#63)
+
 ### 2.3.0 (17.10.2015)
 * Added InstagramOAuth2Service (#61)
 * Fixed default token lifetime (#53)

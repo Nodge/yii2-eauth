@@ -43,9 +43,6 @@ class FacebookOAuth2Service extends Service
 	];
 	protected $baseApiUrl = 'https://graph.facebook.com/';
 
-	protected $errorParam = 'error_code';
-	protected $errorDescriptionParam = 'error_message';
-
 	protected function fetchAttributes()
 	{
 		$info = $this->makeSignedRequest('me');
