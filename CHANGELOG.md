@@ -3,6 +3,7 @@ Yii2 EAuth Change Log
 
 ### dev
 * Fixed error param names for Facebook (#63)
+* Use the latest Graph Api v2.5 for Facebook (#65)
 
 ### 2.3.0 (17.10.2015)
 * Added InstagramOAuth2Service (#61)

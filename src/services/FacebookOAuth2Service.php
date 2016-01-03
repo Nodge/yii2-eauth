@@ -41,11 +41,19 @@ class FacebookOAuth2Service extends Service
 		'authorize' => 'https://www.facebook.com/dialog/oauth',
 		'access_token' => 'https://graph.facebook.com/oauth/access_token',
 	];
-	protected $baseApiUrl = 'https://graph.facebook.com/';
+	protected $baseApiUrl = 'https://graph.facebook.com/v2.5/';
 
 	protected function fetchAttributes()
 	{
-		$info = $this->makeSignedRequest('me');
+		$info = $this->makeSignedRequest('me', [
+            'query' => [
+                'fields' => join(',', [
+                    'id',
+                    'name',
+                    'link'
+                ])
+            ]
+        ]);
 
 		$this->attributes['id'] = $info['id'];
 		$this->attributes['name'] = $info['name'];
