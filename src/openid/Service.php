@@ -86,7 +86,7 @@ abstract class Service extends ServiceBase implements IAuthService
 					break;
 			}
 		} else {
-			$this->request();
+			$this->processRequest();
 		}
 
 		return false;
@@ -142,7 +142,7 @@ abstract class Service extends ServiceBase implements IAuthService
 	/**
 	 * @throws ErrorException
 	 */
-	protected function request()
+	protected function processRequest()
 	{
 		$this->auth->identity = $this->url; //Setting identifier
 
@@ -180,4 +180,19 @@ abstract class Service extends ServiceBase implements IAuthService
 			return Yii::$app->getRequest()->getHostInfo();
 		}
 	}
+
+    /**
+     * Returns the public resource.
+     *
+     * @param string $url url to request.
+     * @param array $options HTTP request options. Keys: query, data, headers.
+     * @return mixed the response.
+     * @throws ErrorException
+     */
+    public function makeRequest($url, $options = [])
+    {
+        return $this->request($url, $options, function ($url, $method, $headers, $data) {
+            return $this->getHttpClient()->retrieveResponse($url, $data, $headers, $method);
+        });
+    }
 }

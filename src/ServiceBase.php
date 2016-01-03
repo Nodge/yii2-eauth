@@ -12,6 +12,9 @@ namespace nodge\eauth;
 use Yii;
 use yii\base\Object;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
+use OAuth\Common\Http\Uri\Uri;
+use OAuth\Common\Http\Client\ClientInterface;
 
 /**
  * EAuthServiceBase is a base class for providers.
@@ -55,6 +58,11 @@ abstract class ServiceBase extends Object implements IAuthService
 	 */
 	protected $authenticated = false;
 
+    /**
+     * @var array HttpClient class. Null means default value from EAuth component config.
+     */
+    protected $httpClient;
+
 	/**
 	 * @var boolean whether is attributes was fetched.
 	 */
@@ -74,6 +82,11 @@ abstract class ServiceBase extends Object implements IAuthService
 	 * @var string the redirect url after unsuccessful authorization (e.g. user canceled).
 	 */
 	private $cancelUrl = '';
+
+    /**
+     * @var ClientInterface
+     */
+    private $_httpClient;
 
 	/**
 	 * PHP getter magic method.
@@ -356,4 +369,54 @@ abstract class ServiceBase extends Object implements IAuthService
 	{
 		return isset($_GET['js']);
 	}
+
+    /**
+     * @return ClientInterface
+     */
+    protected function getHttpClient()
+    {
+        if (!isset($this->_httpClient)) {
+            $config = $this->httpClient;
+            if (!isset($config)) {
+                $config = $this->getComponent()->getHttpClient();
+            }
+            $this->_httpClient = Yii::createObject($config);
+        }
+        return $this->_httpClient;
+    }
+
+    /**
+     * @param array $config
+     */
+    public function setHttpClient(array $config)
+    {
+        $this->httpClient = ArrayHelper::merge($this->httpClient, $config);
+    }
+
+    /**
+     * @param string $url
+     * @param array $options
+     * @param callable $fn
+     * @return mixed
+     * @throws ErrorException
+     */
+    protected function request($url, $options, $fn)
+    {
+        if (stripos($url, 'http') !== 0) {
+            $url = $this->baseApiUrl . $url;
+        }
+
+        $url = new Uri($url);
+        if (isset($options['query'])) {
+            foreach ($options['query'] as $key => $value) {
+                $url->addToQuery($key, $value);
+            }
+        }
+
+        $data = isset($options['data']) ? $options['data'] : [];
+        $method = !empty($data) ? 'POST' : 'GET';
+        $headers = isset($options['headers']) ? $options['headers'] : [];
+
+        return $fn($url, $method, $headers, $data);
+    }
 }

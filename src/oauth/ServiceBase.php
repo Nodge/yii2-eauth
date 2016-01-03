@@ -10,9 +10,6 @@
 namespace nodge\eauth\oauth;
 
 use Yii;
-use OAuth\Common\Http\Uri\Uri;
-use OAuth\Common\Http\Client\ClientInterface;
-use OAuth\Common\Token\TokenInterface;
 use OAuth\Common\Storage\TokenStorageInterface;
 use nodge\eauth\EAuth;
 use nodge\eauth\IAuthService;
@@ -44,19 +41,9 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	protected $tokenStorage;
 
 	/**
-	 * @var array HttpClient class. Null means default value from EAuth component config.
-	 */
-	protected $httpClient;
-
-	/**
 	 * @var TokenStorageInterface
 	 */
 	private $_tokenStorage;
-
-	/**
-	 * @var ClientInterface
-	 */
-	private $_httpClient;
 
 	/**
 	 * Initialize the component.
@@ -125,29 +112,6 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
 	}
 
 	/**
-	 * @param array $config
-	 */
-	public function setHttpClient(array $config)
-	{
-		$this->httpClient = ArrayHelper::merge($this->httpClient, $config);
-	}
-
-	/**
-	 * @return ClientInterface
-	 */
-	protected function getHttpClient()
-	{
-		if (!isset($this->_httpClient)) {
-			$config = $this->httpClient;
-			if (!isset($config)) {
-				$config = $this->getComponent()->getHttpClient();
-			}
-			$this->_httpClient = Yii::createObject($config);
-		}
-		return $this->_httpClient;
-	}
-
-	/**
 	 * @return int
 	 */
 	public function getTokenDefaultLifetime()
@@ -204,22 +168,7 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
      */
     protected function request($url, $options, $parseResponse, $fn)
     {
-        if (stripos($url, 'http') !== 0) {
-            $url = $this->baseApiUrl . $url;
-        }
-
-        $url = new Uri($url);
-        if (isset($options['query'])) {
-            foreach ($options['query'] as $key => $value) {
-                $url->addToQuery($key, $value);
-            }
-        }
-
-        $data = isset($options['data']) ? $options['data'] : [];
-        $method = !empty($data) ? 'POST' : 'GET';
-        $headers = isset($options['headers']) ? $options['headers'] : [];
-
-        $response = $fn($url, $method, $headers, $data);
+        $response = parent::request($url, $options, $fn);
 
         if ($parseResponse) {
             $response = $this->parseResponseInternal($response);
