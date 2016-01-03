@@ -307,16 +307,6 @@ abstract class Service extends ServiceBase implements IAuthService
 	}
 
 	/**
-	 * Return any additional headers always needed for this service implementation's API calls.
-	 *
-	 * @return array
-	 */
-	public function getExtraApiHeaders()
-	{
-		return [];
-	}
-
-	/**
 	 * Returns a class constant from ServiceInterface defining the authorization method used for the API
 	 * Header is the sane default.
 	 *

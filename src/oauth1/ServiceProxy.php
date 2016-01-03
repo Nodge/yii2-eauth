@@ -195,4 +195,14 @@ class ServiceProxy extends AbstractService
 
 		return $token;
 	}
+
+    /**
+     * Return any additional headers always needed for this service implementation's API calls.
+     *
+     * @return array
+     */
+    protected function getExtraApiHeaders()
+    {
+        return $this->service->getExtraApiHeaders();
+    }
 }
