@@ -60,7 +60,7 @@ class LinkedinOAuth2Service extends Service
 		$this->attributes['id'] = $info['id'];
 		$this->attributes['name'] = $info['firstName'] . ' ' . $info['lastName'];
 		$this->attributes['url'] = $info['publicProfileUrl'];
-		$this->attributes['email'] = $info['emailAddress'];
+
 		return true;
 	}
 
