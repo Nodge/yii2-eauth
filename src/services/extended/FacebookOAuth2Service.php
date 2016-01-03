@@ -47,6 +47,9 @@ class FacebookOAuth2Service extends \nodge\eauth\services\FacebookOAuth2Service
                 ])
             ]
         ]);
+
+        $this->attributes['photo_url'] = $this->baseApiUrl.$this->getId().'/picture?width=100&height=100';
+
         return true;
     }
 }
