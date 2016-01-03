@@ -1,7 +1,7 @@
 Yii2 EAuth Change Log
 =====================
 
-### dev
+### 2.4.0 (03.01.2016)
 * Fixed error param names for Facebook (#63)
 * Use the latest Graph Api v2.5 for Facebook (#65)
 * Fixed `makeRequest` method (#68)
