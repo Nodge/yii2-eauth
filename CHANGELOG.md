@@ -1,7 +1,7 @@
 Yii2 EAuth Change Log
 =====================
 
-### dev (13.01.2016)
+### 2.4.1 (13.01.2016)
 * Move response parsing from oauth to base service (#71)
 * Get user profile from Steam API (#70)
 
