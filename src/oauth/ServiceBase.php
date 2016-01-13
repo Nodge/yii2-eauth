@@ -153,81 +153,8 @@ abstract class ServiceBase extends \nodge\eauth\ServiceBase implements IAuthServ
         $headers = isset($options['headers']) ? $options['headers'] : [];
         $options['headers'] = array_merge($this->getExtraApiHeaders(), $headers);
 
-        return $this->request($url, $options, $parseResponse, function ($url, $method, $headers, $data) {
-            return $this->getHttpClient()->retrieveResponse($url, $data, $headers, $method);
-        });
+        return parent::makeRequest($url, $options, $parseResponse);
     }
-
-    /**
-     * @param string $url
-     * @param array $options
-     * @param boolean $parseResponse
-     * @param callable $fn
-     * @return mixed
-     * @throws ErrorException
-     */
-    protected function request($url, $options, $parseResponse, $fn)
-    {
-        $response = parent::request($url, $options, $fn);
-
-        if ($parseResponse) {
-            $response = $this->parseResponseInternal($response);
-        }
-
-        return $response;
-    }
-
-	/**
-	 * Parse response and check for errors.
-	 *
-	 * @param string $response
-	 * @return mixed
-	 * @throws ErrorException
-	 */
-	protected function parseResponseInternal($response)
-	{
-		try {
-			$result = $this->parseResponse($response);
-			if (!isset($result)) {
-				throw new ErrorException(Yii::t('eauth', 'Invalid response format.'), 500);
-			}
-
-			$error = $this->fetchResponseError($result);
-			if (isset($error) && !empty($error['message'])) {
-				throw new ErrorException($error['message'], $error['code']);
-			}
-
-			return $result;
-		} catch (\Exception $e) {
-			throw new ErrorException($e->getMessage(), $e->getCode());
-		}
-	}
-
-	/**
-	 * @param string $response
-	 * @return mixed
-	 */
-	protected function parseResponse($response)
-	{
-		return json_decode($response, true);
-	}
-
-	/**
-	 * Returns the error array.
-	 *
-	 * @param array $response
-	 * @return array the error array with 2 keys: code and message. Should be null if no errors.
-	 */
-	protected function fetchResponseError($response)
-	{
-		if (isset($response['error'])) {
-			return [
-				'code' => 500,
-				'message' => 'Unknown error occurred.',
-			];
-		}
-		return null;
-	}
 
 	/**
 	 * @return array|null An array with valid access_token information.

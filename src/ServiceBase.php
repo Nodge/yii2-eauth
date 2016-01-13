@@ -394,13 +394,30 @@ abstract class ServiceBase extends Object implements IAuthService
     }
 
     /**
+     * Returns the public resource.
+     *
+     * @param string $url url to request.
+     * @param array $options HTTP request options. Keys: query, data, headers.
+     * @param boolean $parseResponse Whether to parse response.
+     * @return mixed the response.
+     * @throws ErrorException
+     */
+    public function makeRequest($url, $options = [], $parseResponse = true)
+    {
+        return $this->request($url, $options, $parseResponse, function ($url, $method, $headers, $data) {
+            return $this->getHttpClient()->retrieveResponse($url, $data, $headers, $method);
+        });
+    }
+
+    /**
      * @param string $url
      * @param array $options
+     * @param boolean $parseResponse
      * @param callable $fn
      * @return mixed
      * @throws ErrorException
      */
-    protected function request($url, $options, $fn)
+    protected function request($url, $options, $parseResponse, $fn)
     {
         if (stripos($url, 'http') !== 0) {
             $url = $this->baseApiUrl . $url;
@@ -417,6 +434,64 @@ abstract class ServiceBase extends Object implements IAuthService
         $method = !empty($data) ? 'POST' : 'GET';
         $headers = isset($options['headers']) ? $options['headers'] : [];
 
-        return $fn($url, $method, $headers, $data);
+        $response = $fn($url, $method, $headers, $data);
+
+        if ($parseResponse) {
+            $response = $this->parseResponseInternal($response);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Parse response and check for errors.
+     *
+     * @param string $response
+     * @return mixed
+     * @throws ErrorException
+     */
+    protected function parseResponseInternal($response)
+    {
+        try {
+            $result = $this->parseResponse($response);
+            if (!isset($result)) {
+                throw new ErrorException(Yii::t('eauth', 'Invalid response format.'), 500);
+            }
+
+            $error = $this->fetchResponseError($result);
+            if (isset($error) && !empty($error['message'])) {
+                throw new ErrorException($error['message'], $error['code']);
+            }
+
+            return $result;
+        } catch (\Exception $e) {
+            throw new ErrorException($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * @param string $response
+     * @return mixed
+     */
+    protected function parseResponse($response)
+    {
+        return json_decode($response, true);
+    }
+
+    /**
+     * Returns the error array.
+     *
+     * @param array $response
+     * @return array the error array with 2 keys: code and message. Should be null if no errors.
+     */
+    protected function fetchResponseError($response)
+    {
+        if (isset($response['error'])) {
+            return [
+                'code' => 500,
+                'message' => 'Unknown error occurred.',
+            ];
+        }
+        return null;
     }
 }
