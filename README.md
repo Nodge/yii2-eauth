@@ -188,6 +188,7 @@ Add the following in your config:
 				'steam' => [
 					'class' => 'nodge\eauth\services\SteamOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
+					'apiKey' => '...', // Optional. You can get it here: https://steamcommunity.com/dev/apikey
 				],
 				'instagram' => [
 					// register your app here: https://instagram.com/developer/register/

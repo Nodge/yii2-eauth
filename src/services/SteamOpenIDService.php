@@ -25,16 +25,34 @@ class SteamOpenIDService extends Service
 	protected $jsArguments = ['popup' => ['width' => 990, 'height' => 615]];
 
 	protected $url = 'http://steamcommunity.com/openid/';
+    protected $apiUrl = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/';
+
+    public $apiKey;
 
 	protected function fetchAttributes()
 	{
-		if (isset($this->attributes['id'])) {
-			$urlChunks = explode('/', $this->attributes['id']);
-			if ($count = count($urlChunks)) {
-				$name = $urlChunks[$count - 1];
-				$this->attributes['name'] = $name;
-			}
-		}
+        $chunks = explode('/', $this->attributes['id']);
+        $id = array_pop($chunks);
+
+        $this->attributes['name'] = $id;
+
+        if ($this->apiKey) {
+            $response = $this->makeRequest($this->apiUrl, [
+                'query' => [
+                    'steamids' => $id,
+                    'key' => $this->apiKey,
+                    'format' => 'json'
+                ]
+            ]);
+
+            if (isset($response['response']['players'][0])) {
+                $profile = $response['response']['players'][0];
+
+                $this->attributes = array_merge($this->attributes, $profile);
+                $this->attributes['name'] = $profile['personaname'];
+                $this->attributes['url'] = $profile['profileurl'];
+            }
+        }
 	}
 
 }
