@@ -139,7 +139,8 @@ class QQOauth2Service extends Service
     {
         $info = $this->makeSignedRequest('user/get_user_info');
         $this->attributes['id'] = $this->getOpenId();
-        $this->attributes['name'] = $info['nickname'];
+        $this->attributes['nickname'] = $info['nickname'];
+        $this->attributes['gender'] = $info['gender'] == '男' ? 'M' : 'F';
         return true;
     }
 
