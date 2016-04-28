@@ -101,3 +101,7 @@
 .eauth-service-id-instagram .eauth-service-link:before {
 	background-position: 0 -474px;
 }
+
+.eauth-service-id-weibo .eauth-service-link:before {
+	background-position: 0 -508px;
+}
