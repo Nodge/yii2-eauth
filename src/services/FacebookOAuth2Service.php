@@ -50,14 +50,12 @@ class FacebookOAuth2Service extends Service
                 'fields' => join(',', [
                     'id',
                     'name',
-                    'link',
-					'email',
+                    'link'
                 ])
             ]
         ]);
 
 		$this->attributes['id'] = $info['id'];
-			$this->attributes['id'] = $info['email'];
 		$this->attributes['name'] = $info['name'];
 		$this->attributes['url'] = $info['link'];
 
