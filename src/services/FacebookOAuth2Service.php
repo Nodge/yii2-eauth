@@ -65,7 +65,7 @@ class FacebookOAuth2Service extends Service
         $info = $this->makeSignedRequest('me');
 
 		$this->attributes['id'] = $info['id'];
-		$this->attributes['id'] = $info['email'];
+		$this->attributes['email'] = $info['email'];
 		$this->attributes['name'] = $info['name'];
 		$this->attributes['url'] = $info['link'];
 
