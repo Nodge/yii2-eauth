@@ -9,7 +9,7 @@
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace nodge\eauth\services;
+namespace nodge\eauth\services\extended;
 
 use nodge\eauth\oauth2\Service;
 
@@ -25,7 +25,7 @@ class FacebookOAuth2Service extends Service
 	 * Full list of scopes may be found here:
 	 * https://developers.facebook.com/docs/authentication/permissions/
 	 */
-	const SCOPE_EMAIL = 'email';
+	const SCOPE_EMAIL = 'user_email';
 	const SCOPE_USER_BIRTHDAY = 'user_birthday';
 	const SCOPE_USER_HOMETOWN = 'user_hometown';
 	const SCOPE_USER_LOCATION = 'user_location';
@@ -50,28 +50,30 @@ class FacebookOAuth2Service extends Service
 	];
 	protected $baseApiUrl = 'https://graph.facebook.com/v2.5/';
 
-	protected function fetchAttributes()
-	{
-		$info = $this->makeSignedRequest('me', [
+    protected function fetchAttributes()
+    {
+        $this->attributes = $this->makeSignedRequest('me', [
             'query' => [
                 'fields' => join(',', [
                     'id',
                     'name',
                     'link',
-					'email',
+                    'email',
+                    'verified',
+                    'first_name',
+                    'last_name',
+                    'gender',
+                    'birthday',
+                    'hometown',
+                    'location',
+                    'locale',
+                    'timezone',
+                    'updated_time',
                 ])
             ]
         ]);
-      ////  $info = $this->makeSignedRequest('me');
-
-
-		$this->attributes['id'] = $info['id'];
-		$this->attributes['email'] = $info['email'];
-		$this->attributes['name'] = $info['name'];
-		$this->attributes['url'] = $info['link'];
-
-		return true;
-	}
+        return true;
+    }
 
 	/**
 	 * @return array
