@@ -130,7 +130,13 @@ abstract class ServiceBase extends Object implements IAuthService
 	{
 		parent::init();
 
-		$this->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
+        //Disable start session for anonymous https://github.com/Nodge/yii2-eauth/issues/96
+		if (Yii::$app->session->hasSessionId) {
+            $returnUrl = Yii::$app->getUser()->getReturnUrl();
+        } else {
+            $returnUrl = Url::to();
+        }
+        $this->setRedirectUrl($returnUrl);
 
 		$service = Yii::$app->getRequest()->getQueryParam('service');
 		$cancelUrl = Url::to(['', 'service' => $service], true);
