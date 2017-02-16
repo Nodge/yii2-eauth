@@ -2,14 +2,14 @@
 /**
  * An example of extending the provider class.
  *
- * @author Maxim Zemskov <nodge@yandex.ru>
- * @link http://github.com/Nodge/yii2-eauth/
+ * @author Pyrotech Solutions <developers@pyrotechsolutions.com>
+ * @link http://github.com/PyrotechSolutions/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace nodge\eauth\services\extended;
+namespace ptech\eauth\services\extended;
 
-class FacebookOAuth2Service extends \nodge\eauth\services\FacebookOAuth2Service
+class FacebookOAuth2Service extends \ptech\eauth\services\FacebookOAuth2Service
 {
 
     protected $scopes = [

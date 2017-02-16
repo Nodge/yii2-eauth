@@ -5,12 +5,12 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace nodge\eauth\assets;
+namespace ptech\eauth\assets;
 
 use yii\web\AssetBundle;
 
 /**
- * @author Qiang Xue <qiang.xue@gmail.com>
+ * @author Pyrotech Solutions
  * @since 2.0
  */
 class WidgetAssetBundle extends AssetBundle

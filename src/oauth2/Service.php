@@ -2,12 +2,12 @@
 /**
  * OAuth2 Service class file.
  *
- * @author Maxim Zemskov <nodge@yandex.ru>
- * @link http://github.com/Nodge/yii2-eauth/
+ * @author Pyrotech Solutions <developers@pyrotechsolutions.com>
+ * @link http://github.com/PyrotechSolutions/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace nodge\eauth\oauth2;
+namespace ptech\eauth\oauth2;
 
 use Yii;
 use yii\helpers\Url;
@@ -15,10 +15,10 @@ use OAuth\Common\Exception\Exception as OAuthException;
 use OAuth\Common\Http\Uri\Uri;
 use OAuth\Common\Consumer\Credentials;
 use OAuth\OAuth2\Service\ServiceInterface;
-use nodge\eauth\EAuth;
-use nodge\eauth\ErrorException;
-use nodge\eauth\IAuthService;
-use nodge\eauth\oauth\ServiceBase;
+use ptech\eauth\EAuth;
+use ptech\eauth\ErrorException;
+use ptech\eauth\IAuthService;
+use ptech\eauth\oauth\ServiceBase;
 
 /**
  * EOAuthService is a base class for all OAuth providers.

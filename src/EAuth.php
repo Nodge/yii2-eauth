@@ -2,12 +2,12 @@
 /**
  * EAuth class file.
  *
- * @author Maxim Zemskov <nodge@yandex.ru>
- * @link http://github.com/Nodge/yii2-eauth/
+ * @author Pyrotech Solutions <developers@pyrotechsolutions.com>
+ * @link http://github.com/PyrotechSolutions/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace nodge\eauth;
+namespace ptech\eauth;
 
 use Yii;
 use yii\base\Object;
@@ -45,20 +45,20 @@ class EAuth extends Object
 	/**
 	 * @var string popup redirect view with custom js code
 	 */
-	protected $redirectWidget = '\\nodge\\eauth\\RedirectWidget';
+	protected $redirectWidget = '\\ptech\\eauth\\RedirectWidget';
 
 	/**
 	 * @var array TokenStorage class.
 	 */
 	protected $tokenStorage = [
-		'class' => 'nodge\eauth\oauth\SessionTokenStorage',
+		'class' => 'ptech\eauth\oauth\SessionTokenStorage',
 	];
 
 	/**
 	 * @var array HttpClient class.
 	 */
 	protected $httpClient = [
-		'class' => 'nodge\eauth\oauth\HttpClient',
+		'class' => 'ptech\eauth\oauth\HttpClient',
 //		'useStreamsFallback' => false,
 	];
 

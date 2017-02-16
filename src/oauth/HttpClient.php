@@ -2,12 +2,12 @@
 /**
  * HttpClient class file.
  *
- * @author Maxim Zemskov <nodge@yandex.ru>
- * @link http://github.com/Nodge/yii2-eauth/
+ * @author Pyrotech Solutions
+ * @link http://github.com/PyrotechSolutions/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace nodge\eauth\oauth;
+namespace ptech\eauth\oauth;
 
 use Yii;
 use OAuth\Common\Http\Client\AbstractClient;

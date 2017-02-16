@@ -7,9 +7,9 @@ Supported protocols: OpenID, OAuth 1.0 and OAuth 2.0.
 EAuth is an extension to provide a unified (does not depend on the selected service) method to authenticate the user. The extension itself does not perform login, does not register the user and does not bind the user accounts from different providers.
 
 * [Demo](http://nodge.ru/yii-eauth/demo2/)
-* [Demo project](https://github.com/Nodge/yii2-eauth-demo/)
+* [Demo project](https://github.com/nodge/yii2-eauth-demo/)
 * [Installation](#installation)
-* [Version for yii 1.1](https://github.com/Nodge/yii-eauth/)
+* [Version for yii 1.1](https://github.com/nodge/yii-eauth/)
 
 ### Why own extension and not a third-party service?
 The implementation of the authorization on your own server has several advantages:
@@ -60,9 +60,9 @@ The implementation of the authorization on your own server has several advantage
 
 ### Resources
 
-* [Yii EAuth](https://github.com/Nodge/yii2-eauth)
+* [Yii EAuth](https://github.com/nodge/yii2-eauth)
 * [Demo](http://nodge.ru/yii-eauth/demo2/)
-* [Demo project](https://github.com/Nodge/yii2-eauth-demo/)
+* [Demo project](https://github.com/nodge/yii2-eauth-demo/)
 * [Yii Framework](http://yiiframework.com/)
 * [OpenID](http://openid.net/)
 * [OAuth](http://oauth.net/)
@@ -106,7 +106,7 @@ $ php composer.phar install
 
 ## Demo project
 
-The source code of the [demo](http://nodge.ru/yii-eauth/demo2/) is available [here](https://github.com/Nodge/yii2-eauth-demo/).
+The source code of the [demo](http://nodge.ru/yii-eauth/demo2/) is available [here](https://github.com/nodge/yii2-eauth-demo/).
 
 
 ## Basic setup
@@ -120,7 +120,7 @@ Add the following in your config:
 ...
 	'components' => [
 		'eauth' => [
-			'class' => 'nodge\eauth\EAuth',
+			'class' => 'ptech\eauth\EAuth',
 			'popup' => true, // Use the popup window instead of redirecting.
 			'cache' => false, // Cache component name or false to disable cache. Defaults to 'cache' on production environments.
 			'cacheExpire' => 0, // Cache lifetime. Defaults to 0 - means unlimited.
@@ -131,87 +131,87 @@ Add the following in your config:
 			'services' => [ // You can change the providers and their classes.
 				'google' => [
 					// register your app here: https://code.google.com/apis/console/
-					'class' => 'nodge\eauth\services\GoogleOAuth2Service',
+					'class' => 'ptech\eauth\services\GoogleOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'title' => 'Google',
 				],
 				'twitter' => [
 					// register your app here: https://dev.twitter.com/apps/new
-					'class' => 'nodge\eauth\services\TwitterOAuth1Service',
+					'class' => 'ptech\eauth\services\TwitterOAuth1Service',
 					'key' => '...',
 					'secret' => '...',
 				],
 				'yandex' => [
 					// register your app here: https://oauth.yandex.ru/client/my
-					'class' => 'nodge\eauth\services\YandexOAuth2Service',
+					'class' => 'ptech\eauth\services\YandexOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'title' => 'Yandex',
 				],
 				'facebook' => [
 					// register your app here: https://developers.facebook.com/apps/
-					'class' => 'nodge\eauth\services\FacebookOAuth2Service',
+					'class' => 'ptech\eauth\services\FacebookOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				],
 				'yahoo' => [
-					'class' => 'nodge\eauth\services\YahooOpenIDService',
+					'class' => 'ptech\eauth\services\YahooOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
 				],
 				'linkedin' => [
 					// register your app here: https://www.linkedin.com/secure/developer
-					'class' => 'nodge\eauth\services\LinkedinOAuth1Service',
+					'class' => 'ptech\eauth\services\LinkedinOAuth1Service',
 					'key' => '...',
 					'secret' => '...',
 					'title' => 'LinkedIn (OAuth1)',
 				],
 				'linkedin_oauth2' => [
 					// register your app here: https://www.linkedin.com/secure/developer
-					'class' => 'nodge\eauth\services\LinkedinOAuth2Service',
+					'class' => 'ptech\eauth\services\LinkedinOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'title' => 'LinkedIn (OAuth2)',
 				],
 				'github' => [
 					// register your app here: https://github.com/settings/applications
-					'class' => 'nodge\eauth\services\GitHubOAuth2Service',
+					'class' => 'ptech\eauth\services\GitHubOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				],
 				'live' => [
 					// register your app here: https://account.live.com/developers/applications/index
-					'class' => 'nodge\eauth\services\LiveOAuth2Service',
+					'class' => 'ptech\eauth\services\LiveOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				],
 				'steam' => [
-					'class' => 'nodge\eauth\services\SteamOpenIDService',
+					'class' => 'ptech\eauth\services\SteamOpenIDService',
 					//'realm' => '*.example.org', // your domain, can be with wildcard to authenticate on subdomains.
 					'apiKey' => '...', // Optional. You can get it here: https://steamcommunity.com/dev/apikey
 				],
 				'instagram' => [
 					// register your app here: https://instagram.com/developer/register/
-					'class' => 'nodge\eauth\services\InstagramOAuth2Service',
+					'class' => 'ptech\eauth\services\InstagramOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				],
 				'vkontakte' => [
 					// register your app here: https://vk.com/editapp?act=create&site=1
-					'class' => 'nodge\eauth\services\VKontakteOAuth2Service',
+					'class' => 'ptech\eauth\services\VKontakteOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				],
 				'mailru' => [
 					// register your app here: http://api.mail.ru/sites/my/add
-					'class' => 'nodge\eauth\services\MailruOAuth2Service',
+					'class' => 'ptech\eauth\services\MailruOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 				],
 				'odnoklassniki' => [
 					// register your app here: http://dev.odnoklassniki.ru/wiki/pages/viewpage.action?pageId=13992188
 					// ... or here: http://www.odnoklassniki.ru/dk?st.cmd=appsInfoMyDevList&st._aid=Apps_Info_MyDev
-					'class' => 'nodge\eauth\services\OdnoklassnikiOAuth2Service',
+					'class' => 'ptech\eauth\services\OdnoklassnikiOAuth2Service',
 					'clientId' => '...',
 					'clientSecret' => '...',
 					'clientPublic' => '...',
@@ -244,7 +244,7 @@ Add the following in your config:
 				[
 					'class' => 'yii\log\FileTarget',
 					'logFile' => '@app/runtime/logs/eauth.log',
-					'categories' => ['nodge\eauth\*'],
+					'categories' => ['ptech\eauth\*'],
 					'logVars' => [],
 				],
 			],
@@ -277,7 +277,7 @@ Example from demo project:
 	}
 
 	/**
-	 * @param \nodge\eauth\ServiceBase $service
+	 * @param \ptech\eauth\ServiceBase $service
 	 * @return User
 	 * @throws ErrorException
 	 */
@@ -322,7 +322,7 @@ Or you can disable CSRF validation by yourself.
 				return [
 					'eauth' => [
 						// required to disable csrf validation on OpenID requests
-						'class' => \nodge\eauth\openid\ControllerBehavior::className(),
+						'class' => \ptech\eauth\openid\ControllerBehavior::className(),
 						'only' => ['login'],
 					],
 				];
@@ -338,7 +338,7 @@ Add the following to your Login action:
 	public function actionLogin() {
 		$serviceName = Yii::$app->getRequest()->getQueryParam('service');
 		if (isset($serviceName)) {
-			/** @var $eauth \nodge\eauth\ServiceBase */
+			/** @var $eauth \ptech\eauth\ServiceBase */
 			$eauth = Yii::$app->get('eauth')->getIdentity($serviceName);
 			$eauth->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
 			$eauth->setCancelUrl(Yii::$app->getUrlManager()->createAbsoluteUrl('site/login'));
@@ -358,7 +358,7 @@ Add the following to your Login action:
 					$eauth->cancel();
 				}
 			}
-			catch (\nodge\eauth\ErrorException $e) {
+			catch (\ptech\eauth\ErrorException $e) {
 				// save error to show it later
 				Yii::$app->getSession()->setFlash('error', 'EAuthException: '.$e->getMessage());
 
@@ -384,7 +384,7 @@ Add the following to your Login action:
 ?>
 ...
 <p class="lead">Do you already have an account on one of these sites? Click the logo to log in with it here:</p>
-<?php echo \nodge\eauth\Widget::widget(['action' => 'site/login']); ?>
+<?php echo \ptech\eauth\Widget::widget(['action' => 'site/login']); ?>
 ...
 ```
 
@@ -422,7 +422,7 @@ Example of an API call method:
 
 ```php
 <?php
-	class FacebookOAuth2Service extends \nodge\eauth\services\FacebookOAuth2Service
+	class FacebookOAuth2Service extends \ptech\eauth\services\FacebookOAuth2Service
 	{
 		public function fooApiMethod($bar) {
 			$api_method = 'me'; // ex. for Facebook this results to https://graph.facebook.com/me
@@ -454,7 +454,7 @@ You can save access_token to your database by using custom token storage in your
 ...
 	'components' => [
 		'eauth' => [
-			'class' => 'nodge\eauth\EAuth',
+			'class' => 'ptech\eauth\EAuth',
 			'tokenStorage' => [
 				'class' => '@app\eauth\DatabaseTokenStorage',
 			],
@@ -491,4 +491,4 @@ Available translations can be found in `@eauth/src/messages`.
 
 # License
 
-The extension was released under the [New BSD License](http://www.opensource.org/licenses/bsd-license.php), so you'll find the latest version on [GitHub](https://github.com/Nodge/yii2-eauth).
+The extension was released under the [New BSD License](http://www.opensource.org/licenses/bsd-license.php), so you'll find the latest version on [GitHub](https://github.com/ptech/yii2-eauth).
