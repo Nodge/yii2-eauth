@@ -23,6 +23,7 @@ class VKontakteOAuth2Service extends Service
 {
 
 	const SCOPE_FRIENDS = 'friends';
+	const API_VERSION = '5.57';
 
 	protected $name = 'vkontakte';
 	protected $title = 'VK.com';
@@ -44,14 +45,15 @@ class VKontakteOAuth2Service extends Service
 				'uids' => $tokenData['params']['user_id'],
 				'fields' => '', // uid, first_name and last_name is always available
 				//'fields' => 'nickname, sex, bdate, city, country, timezone, photo, photo_medium, photo_big, photo_rec',
+				'v' => self::API_VERSION,
 			],
 		]);
 
 		$info = $info['response'][0];
 
-		$this->attributes['id'] = $info['uid'];
+		$this->attributes['id'] = $info['id'];
 		$this->attributes['name'] = $info['first_name'] . ' ' . $info['last_name'];
-		$this->attributes['url'] = 'http://vk.com/id' . $info['uid'];
+		$this->attributes['url'] = 'http://vk.com/id' . $info['id'];
 
 		/*if (!empty($info['nickname']))
 			$this->attributes['username'] = $info['nickname'];
