@@ -36,7 +36,14 @@ class FacebookOAuth2Service extends Service
 	protected $type = 'OAuth2';
 	protected $jsArguments = ['popup' => ['width' => 585, 'height' => 290]];
 
-	protected $scopes = [];
+	protected $scopes = [
+
+        self::SCOPE_EMAIL,
+        self::SCOPE_USER_BIRTHDAY,
+        self::SCOPE_USER_HOMETOWN,
+        self::SCOPE_USER_LOCATION,
+        self::SCOPE_USER_PHOTOS,
+    ];
 	protected $providerOptions = [
 		'authorize' => 'https://www.facebook.com/dialog/oauth',
 		'access_token' => 'https://graph.facebook.com/oauth/access_token',
@@ -50,12 +57,16 @@ class FacebookOAuth2Service extends Service
                 'fields' => join(',', [
                     'id',
                     'name',
-                    'link'
+                    'link',
+					'email',
                 ])
             ]
         ]);
+      ////  $info = $this->makeSignedRequest('me');
+
 
 		$this->attributes['id'] = $info['id'];
+		$this->attributes['email'] = $info['email'];
 		$this->attributes['name'] = $info['name'];
 		$this->attributes['url'] = $info['link'];
 
