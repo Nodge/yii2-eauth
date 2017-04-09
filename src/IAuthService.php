@@ -2,12 +2,12 @@
 /**
  * IAuthService interface file.
  *
- * @author Maxim Zemskov <nodge@yandex.ru>
- * @link http://github.com/Nodge/yii-eauth/
+ * @author Pyrotech Solutions <developers@pyrotechsolutions.com>
+ * @link http://github.com/ptech/yii-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace nodge\eauth;
+namespace ptech\eauth;
 
 /**
  * IAuthService is the interface for all service types and providers.

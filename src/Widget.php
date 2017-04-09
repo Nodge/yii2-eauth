@@ -2,12 +2,12 @@
 /**
  * Widget class file.
  *
- * @author Maxim Zemskov <nodge@yandex.ru>
- * @link http://github.com/Nodge/yii2-eauth/
+ * @author Pyrotech Solutions <developers@pyrotechsolutions.com>
+ * @link http://github.com/PyrotechSolutions/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace nodge\eauth;
+namespace ptech\eauth;
 
 use Yii;
 
@@ -49,7 +49,7 @@ class Widget extends \yii\base\Widget
 	 * @var boolean include the CSS file. Default is true.
 	 * If this is set false, you are responsible to explicitly include the necessary CSS file in your page.
 	 */
-	public $assetBundle = 'nodge\\eauth\\assets\\WidgetAssetBundle';
+	public $assetBundle = 'ptech\\eauth\\assets\\WidgetAssetBundle';
 
 	/**
 	 * Initializes the widget.
@@ -62,7 +62,7 @@ class Widget extends \yii\base\Widget
 		parent::init();
 
 		// EAuth component
-		/** @var $component \nodge\eauth\EAuth */
+		/** @var $component \ptech\eauth\EAuth */
 		$component = Yii::$app->get($this->component);
 
 		// Some default properties from component configuration

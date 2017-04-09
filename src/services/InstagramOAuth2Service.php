@@ -5,13 +5,13 @@
  * Register application: https://instagram.com/developer/register/
  *
  * @author PhucPNT. <mail@phucpnt.com>
- * @link http://github.com/Nodge/yii2-eauth/
+ * @link http://github.com/PyrotechSolutions/yii2-eauth/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
-namespace nodge\eauth\services;
+namespace ptech\eauth\services;
 
-use nodge\eauth\oauth2\Service;
+use ptech\eauth\oauth2\Service;
 use OAuth\Common\Token\TokenInterface;
 use OAuth\OAuth2\Service\ServiceInterface;
 
