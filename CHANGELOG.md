@@ -1,6 +1,14 @@
 Yii2 EAuth Change Log
 =====================
 
+### 2.5.0 (10.04.2017)
+* Fix bug with access token expire time in Facebook service (#102)
+* Use the latest Graph Api v2.8 for Facebook 
+* Using version when making VK API call (#92)
+* New authorization and API url for Odnoklassniki service (#73)
+* Added Polish translation (#93)
+* Added Romanian translation (#94)
+
 ### 2.4.1 (13.01.2016)
 * Move response parsing from oauth to base service (#71)
 * Get user profile from Steam API (#70)
