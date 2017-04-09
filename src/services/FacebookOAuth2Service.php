@@ -41,7 +41,7 @@ class FacebookOAuth2Service extends Service
 		'authorize' => 'https://www.facebook.com/dialog/oauth',
 		'access_token' => 'https://graph.facebook.com/oauth/access_token',
 	];
-	protected $baseApiUrl = 'https://graph.facebook.com/v2.5/';
+	protected $baseApiUrl = 'https://graph.facebook.com/v2.8/';
 
 	protected function fetchAttributes()
 	{
