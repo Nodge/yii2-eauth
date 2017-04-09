@@ -61,17 +61,7 @@ class FacebookOAuth2Service extends Service
 
 		return true;
 	}
-
-	/**
-	 * @return array
-	 */
-	public function getAccessTokenArgumentNames()
-	{
-		$names = parent::getAccessTokenArgumentNames();
-		$names['expires_in'] = 'expires';
-		return $names;
-	}
-
+	
 	/**
 	 * @param string $response
 	 * @return array
