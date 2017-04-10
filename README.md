@@ -56,6 +56,7 @@ The implementation of the authorization on your own server has several advantage
 	* VKontake (ru)
 	* Mail.ru (ru)
 	* Odnoklassniki (ru)
+	* QQ (cn)
 
 
 ### Resources
@@ -217,6 +218,12 @@ Add the following in your config:
 					'clientPublic' => '...',
 					'title' => 'Odnoklas.',
 					],
+                'qq' => [
+                    // register your app here: http://connect.qq.com/manage/index
+                    'class' => 'nodge\eauth\services\QQOauth2Service',
+                    'clientId' => '...',
+                    'clientSecret' => '...'
+                ]
 			],
 		],
 		
