@@ -56,6 +56,7 @@ The implementation of the authorization on your own server has several advantage
 	* VKontake (ru)
 	* Mail.ru (ru)
 	* Odnoklassniki (ru)
+        * EVE Online
 
 
 ### Resources
@@ -216,7 +217,13 @@ Add the following in your config:
 					'clientSecret' => '...',
 					'clientPublic' => '...',
 					'title' => 'Odnoklas.',
-					],
+                                ],
+                                'eve' => [
+                                    // Register application: https://developers.eveonline.com/applications
+                                    'class' => 'nodge\eauth\services\EveOnlineOAuth2Service',
+                                    'clientId'      => '...',
+                                    'clientSecret'  => '...'
+                                ],
 			],
 		],
 		
