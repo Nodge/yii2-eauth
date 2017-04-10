@@ -56,6 +56,7 @@ The implementation of the authorization on your own server has several advantage
 	* VKontake (ru)
 	* Mail.ru (ru)
 	* Odnoklassniki (ru)
+	* Weibo (cn)
 
 
 ### Resources
@@ -217,6 +218,12 @@ Add the following in your config:
 					'clientPublic' => '...',
 					'title' => 'Odnoklas.',
 					],
+                'weibo' => [
+                    // register your app here: http://open.weibo.com/webmaster/add
+                    'class' => 'nodge\eauth\services\WeiboOAuth2Service',
+                    'clientId' => '...',
+                    'clientSecret' => '...',
+                ],
 			],
 		],
 		
