@@ -39,7 +39,7 @@ class OdnoklassnikiOAuth2Service extends Service
             'authorize'    => 'https://connect.ok.ru/oauth/authorize',
             'access_token' => 'https://api.ok.ru/oauth/token.do',
         ];
-        protected $baseApiUrl = 'https://api.ok.ru/api/';
+        protected $baseApiUrl = 'https://api.ok.ru/fb.do';
 
 	protected $tokenDefaultLifetime = 1500; // about 25 minutes
 	protected $validateState = false;
