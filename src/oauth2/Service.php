@@ -182,7 +182,7 @@ abstract class Service extends ServiceBase implements IAuthService
 			array_unshift($route, '');
 
 			// Can not use these params in OAuth2 callbacks
-			foreach (['code', 'state', 'redirect_uri'] as $param) {
+			foreach (['code', 'state', 'redirect_uri', 'scope'] as $param) {
 				if (isset($route[$param])) {
 					unset($route[$param]);
 				}
