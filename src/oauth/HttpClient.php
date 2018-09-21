@@ -188,7 +188,7 @@ class HttpClient extends AbstractClient
 		curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $this->extraHeaders);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array_values($this->extraHeaders));
 
 		if ($this->forceSSL3) {
 			curl_setopt($ch, CURLOPT_SSLVERSION, 3);
