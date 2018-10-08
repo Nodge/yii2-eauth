@@ -188,9 +188,8 @@ abstract class Service extends ServiceBase implements IAuthService
 				}
 			}
 
-			$url = Url::to($route, true);
-		}
-
+			$url = Url::to($route, true);		}
+            $url = str_replace('http://', 'https://', $url);
 		return $url;
 	}
 
