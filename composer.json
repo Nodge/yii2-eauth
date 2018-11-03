@@ -21,7 +21,7 @@
 		}
 	},
 	"require": {
-		"php": ">=5.4.0",
+		"php": ">=7.1.0",
 		"lib-curl": "*",
 		"yiisoft/yii2": "*",
 		"lusitanian/oauth": "~0.3.0",
