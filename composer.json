@@ -5,6 +5,7 @@
 	"homepage": "https://github.com/Nodge/yii2-eauth",
 	"type": "yii2-extension",
 	"license": "New BSD License",
+	"version": "2.5.1",
 	"authors": [
 		{
 			"name": "Maxim Zemskov",
