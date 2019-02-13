@@ -1,5 +1,6 @@
 Yii2 EAuth extension
 ====================
+It's updated for php 7.2 Version.
 
 EAuth extension allows to authenticate users with accounts on other websites.
 Supported protocols: OpenID, OAuth 1.0 and OAuth 2.0.
@@ -219,7 +220,7 @@ Add the following in your config:
 					],
 			],
 		],
-		
+
 		'i18n' => [
 			'translations' => [
 				'eauth' => [
