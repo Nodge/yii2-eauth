@@ -10,7 +10,7 @@
 namespace nodge\eauth;
 
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use OAuth\Common\Http\Uri\Uri;
@@ -21,7 +21,7 @@ use OAuth\Common\Http\Client\ClientInterface;
  *
  * @package application.extensions.eauth
  */
-abstract class ServiceBase extends Object implements IAuthService
+abstract class ServiceBase extends BaseObject implements IAuthService
 {
 
 	/**
