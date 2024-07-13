@@ -12,6 +12,8 @@
 namespace nodge\eauth\services;
 
 use nodge\eauth\oauth2\Service;
+use Yii;
+use yii\helpers\Url;
 
 /**
  * Google provider class.
@@ -121,6 +123,10 @@ class GoogleOAuth2Service extends Service
 			$this->attributes['url'] = $info['link'];
 		}
 
+        if (!empty($info['email'])) {
+            $this->attributes['email'] = $info['email'];
+        }
+
 		/*if (!empty($info['gender']))
 			$this->attributes['gender'] = $info['gender'] == 'male' ? 'M' : 'F';
 		
@@ -166,4 +172,26 @@ class GoogleOAuth2Service extends Service
 			return null;
 		}
 	}
+
+    /**
+     * override getCallbackUrl()
+     * basically its just ignoring 'scope' param for Google, as they return full urls now
+     *
+     * @return string
+     */
+    protected function getCallbackUrl()
+    {
+        if (isset($_GET['redirect_uri'])) {
+            $url = $_GET['redirect_uri'];
+        }
+        else {
+            $route = array();
+            array_unshift($route, '');
+            $route['service'] = $_GET['service'];
+
+            $url = Url::to($route, true);
+        }
+
+        return $url;
+    }
 }

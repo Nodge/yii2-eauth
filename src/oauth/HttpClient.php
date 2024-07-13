@@ -154,7 +154,7 @@ class HttpClient extends AbstractClient
 		}
 
 		if (is_array($this->requestBody)) {
-			$this->requestBody = http_build_query($this->requestBody, null, '&');
+			$this->requestBody = http_build_query($this->requestBody, "", '&');
 		}
 	}
 
